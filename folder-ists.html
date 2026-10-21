@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Folder ISTs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tinta: #231942;
+    --tinta-suave: #4A4166;
+    --magenta: #B0174F;
+    --menta: #D3F0E4;
+    --lavanda: #EEEAF8;
+    --amarelo: #FFC94A;
+    --papel: #FFFFFF;
+    --borda: rgba(35, 25, 66, 0.12);
+
+    --t-meta: 9pt;
+    --t-corpo: 10pt;
+    --t-sub: 11.5pt;
+    --t-titulo: 17pt;
+
+    --painel-pad: 9mm;
+  }
+
+  @page { size: A4 landscape; margin: 0; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--papel);
+    color: var(--tinta);
+    font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+    font-size: var(--t-corpo);
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pagina {
+    width: 297mm;
+    height: 210mm;
+    display: grid;
+    grid-template-columns: repeat(3, 99mm);
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+  .pagina:last-child { page-break-after: auto; break-after: auto; }
+
+  .painel {
+    padding: var(--painel-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 4mm;
+    overflow: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    line-height: 1.12;
+  }
+  h2 {
+    font-size: var(--t-titulo);
+    color: var(--magenta);
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    margin-bottom: 1.6mm;
+    font-size: var(--t-sub);
+    font-weight: 600;
+    color: var(--tinta);
+  }
+  p + p { margin-top: 2mm; }
+  strong { font-weight: 700; }
+
+  .lista { list-style: none; display: flex; flex-direction: column; gap: 1.6mm; }
+  .lista li { padding-left: 4.5mm; position: relative; }
+  .lista li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.4em;
+    width: 2mm;
+    height: 2mm;
+    border-radius: 50%;
+    border: 0.5mm solid var(--magenta);
+  }
+
+  .caixa {
+    border-radius: 3mm;
+    padding: 4mm;
+    border: 1px solid var(--borda);
+  }
+  .caixa h3 { margin-bottom: 2mm; }
+  .caixa-menta { background: var(--menta); }
+  .caixa-lavanda { background: var(--lavanda); }
+
+  .meta { font-size: var(--t-meta); color: var(--tinta-suave); line-height: 1.4; }
+
+  /* ---------- Capa ---------- */
+  .capa {
+    background: var(--tinta);
+    color: var(--papel);
+    justify-content: space-between;
+  }
+  .capa .anel { width: 74mm; height: 74mm; align-self: center; margin-top: 4mm; }
+  .capa h1 {
+    font-size: 64pt;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .capa .subtitulo {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 19pt;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--amarelo);
+    margin-top: 2mm;
+  }
+  .capa .chamada { font-size: 11pt; line-height: 1.4; margin-top: 4mm; max-width: 70mm; }
+  .capa .rodape-capa { font-size: var(--t-meta); color: #D9D4EA; }
+
+  /* ---------- Exemplos ---------- */
+  .exemplos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 4mm; }
+  .exemplos div { display: flex; flex-direction: column; }
+  .exemplos b { font-weight: 700; }
+  .exemplos span { font-size: var(--t-meta); color: var(--tinta-suave); }
+
+  /* ---------- Não transmite ---------- */
+  .nao-transmite { display: flex; flex-wrap: wrap; gap: 1.6mm; }
+  .nao-transmite span {
+    background: var(--papel);
+    border: 1px solid var(--borda);
+    border-radius: 2mm;
+    padding: 0.8mm 2.4mm;
+  }
+
+  /* ---------- Mandala ---------- */
+  .mandala { display: grid; grid-template-columns: 30mm 1fr; gap: 4mm; align-items: center; }
+  .mandala svg { width: 30mm; height: 30mm; }
+  .legenda { list-style: none; display: flex; flex-direction: column; gap: 1mm; }
+  .legenda li { display: flex; gap: 2mm; align-items: baseline; line-height: 1.3; }
+  .legenda i {
+    flex: none;
+    width: 2.6mm; height: 2.6mm;
+    border-radius: 50%;
+    transform: translateY(0.3mm);
+  }
+
+  .faixa {
+    background: var(--magenta);
+    color: var(--papel);
+    border-radius: 3mm;
+    padding: 4mm;
+  }
+  .faixa h3 { color: var(--papel); margin-bottom: 1.6mm; }
+
+  /* ---------- Testagem ---------- */
+  .destaque-numero {
+    display: flex; gap: 3mm; align-items: center;
+  }
+  .destaque-numero b {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 24pt; font-weight: 700; line-height: 1; color: var(--magenta);
+    white-space: nowrap;
+  }
+
+  .cura { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .cura h3 { font-size: 10pt; margin-bottom: 1mm; }
+
+  /* ---------- Onde buscar ---------- */
+  .locais { display: flex; flex-direction: column; gap: 2.4mm; }
+  .local { display: grid; grid-template-columns: 7mm 1fr; gap: 2.4mm; align-items: start; }
+  .local svg { width: 7mm; height: 7mm; }
+  .local b { display: block; font-weight: 700; }
+
+  .disque {
+    display: flex; align-items: center; gap: 3mm;
+    background: var(--lavanda);
+    border: 1px solid var(--borda);
+    border-radius: 3mm;
+    padding: 3mm 4mm;
+  }
+  .disque b {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 24pt; font-weight: 700; line-height: 1; color: var(--magenta);
+  }
+
+  .mensagem {
+    margin-top: auto;
+    background: var(--tinta);
+    color: var(--papel);
+    border-radius: 3mm;
+    padding: 5mm;
+  }
+  .mensagem p.grande {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 15pt; font-weight: 700; line-height: 1.15;
+  }
+  .mensagem p.grande span { color: var(--amarelo); }
+  .mensagem p { margin-top: 2mm; }
+
+  .fontes { margin-top: auto; }
+
+  .icone { stroke: var(--magenta); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+
+<!-- ====================== PÁGINA 1: lado de fora ====================== -->
+<!-- Ordem de dobra: [aba interna] [verso] [capa] -->
+<section class="pagina" aria-label="Lado de fora do folder">
+
+  <!-- Aba interna: O que são ISTs -->
+  <article class="painel">
+    <h2>O que são ISTs?</h2>
+    <p>
+      <strong>Infecções Sexualmente Transmissíveis</strong> são causadas por vírus, bactérias
+      ou outros microrganismos. Elas passam de uma pessoa para outra principalmente pelo sexo
+      oral, vaginal ou anal sem camisinha.
+    </p>
+    <p>
+      Muitas ISTs <strong>não dão sintomas</strong>. A pessoa pode estar infectada e transmitir
+      sem saber.
+    </p>
+
+    <div class="caixa caixa-lavanda">
+      <h3>Algumas das mais comuns</h3>
+      <div class="exemplos">
+        <div><b>HIV</b><span>vírus</span></div>
+        <div><b>Sífilis</b><span>bactéria</span></div>
+        <div><b>HPV</b><span>vírus</span></div>
+        <div><b>Gonorreia</b><span>bactéria</span></div>
+        <div><b>Clamídia</b><span>bactéria</span></div>
+        <div><b>Herpes genital</b><span>vírus</span></div>
+        <div><b>Hepatites B e C</b><span>vírus</span></div>
+        <div><b>Tricomoníase</b><span>protozoário</span></div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Sinais de alerta</h3>
+      <p>Corrimento, feridas, bolhas ou verrugas na região genital, e dor ou ardência ao urinar.
+      Notou algo? Procure atendimento e não use remédio por conta própria.</p>
+    </div>
+
+    <p class="meta">
+      Desde 2016, o Ministério da Saúde usa o termo IST no lugar de DST, porque é possível ter
+      e transmitir uma infecção mesmo sem sinais de doença.
+    </p>
+  </article>
+
+  <!-- Verso: Onde buscar + mensagem final -->
+  <article class="painel">
+    <h2>Onde buscar orientação e atendimento</h2>
+    <p>Todos os serviços abaixo são gratuitos pelo SUS. O atendimento é sigiloso, e adolescentes
+    têm direito a privacidade na consulta.</p>
+
+    <div class="locais">
+      <div class="local">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icone" d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path class="icone" d="M12 10v6M9 13h6"/></svg>
+        <div><b>UBS (posto de saúde)</b>Camisinha, testes rápidos, vacinas e consulta.</div>
+      </div>
+      <div class="local">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="icone" cx="12" cy="12" r="8"/><path class="icone" d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+        <div><b>CTA</b>Centro de Testagem e Aconselhamento: teste e conversa com profissional.</div>
+      </div>
+      <div class="local">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle class="icone" cx="12" cy="13" r="8"/><path class="icone" d="M12 9v4l3 2M9 2h6"/></svg>
+        <div><b>UPA ou pronto-socorro</b>Para iniciar a PEP em até 72 horas após uma exposição de risco.</div>
+      </div>
+      <div class="local">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="icone" d="M4 19V8l8-4 8 4v11"/><path class="icone" d="M9 19v-5h6v5M2 19h20"/></svg>
+        <div><b>Na escola</b>Converse com professores, coordenação ou a equipe do Programa Saúde na Escola.</div>
+      </div>
+    </div>
+
+    <div class="disque">
+      <b>136</b>
+      <div><strong>Disque Saúde</strong><br>Ligação gratuita para tirar dúvidas.</div>
+    </div>
+
+    <div class="mensagem">
+      <p class="grande">Informação protege. <span>Camisinha, vacina e teste também.</span></p>
+      <p>Cuidar da saúde sexual não é motivo de vergonha. É respeito por você e por quem está com você.</p>
+    </div>
+  </article>
+
+  <!-- Capa -->
+  <article class="painel capa">
+    <svg class="anel" viewBox="0 0 100 100" aria-hidden="true">
+      <g transform="rotate(-90 50 50)" fill="none" stroke-width="13">
+        <circle cx="50" cy="50" r="40" stroke="#B0174F" stroke-dasharray="29.4 221.9" stroke-dashoffset="0"/>
+        <circle cx="50" cy="50" r="40" stroke="#D3F0E4" stroke-dasharray="29.4 221.9" stroke-dashoffset="-31.42"/>
+        <circle cx="50" cy="50" r="40" stroke="#FFC94A" stroke-dasharray="29.4 221.9" stroke-dashoffset="-62.83"/>
+        <circle cx="50" cy="50" r="40" stroke="#EEEAF8" stroke-dasharray="29.4 221.9" stroke-dashoffset="-94.25"/>
+        <circle cx="50" cy="50" r="40" stroke="#B0174F" stroke-dasharray="29.4 221.9" stroke-dashoffset="-125.66"/>
+        <circle cx="50" cy="50" r="40" stroke="#D3F0E4" stroke-dasharray="29.4 221.9" stroke-dashoffset="-157.08"/>
+        <circle cx="50" cy="50" r="40" stroke="#FFC94A" stroke-dasharray="29.4 221.9" stroke-dashoffset="-188.5"/>
+        <circle cx="50" cy="50" r="40" stroke="#EEEAF8" stroke-dasharray="29.4 221.9" stroke-dashoffset="-219.91"/>
+      </g>
+    </svg>
+
+    <div>
+      <h1>ISTs</h1>
+      <p class="subtitulo">Informação e prevenção</p>
+      <p class="chamada">Conhecer é o primeiro passo para se proteger. Abra e veja como cuidar de você.</p>
+    </div>
+
+    <p class="rodape-capa">Folder de conscientização sobre saúde sexual</p>
+  </article>
+</section>
+
+<!-- ====================== PÁGINA 2: lado de dentro ====================== -->
+<section class="pagina" aria-label="Lado de dentro do folder">
+
+  <!-- Transmissão -->
+  <article class="painel">
+    <h2>Como as ISTs são transmitidas</h2>
+    <ul class="lista">
+      <li><strong>Sexo sem camisinha</strong> (oral, vaginal ou anal) com uma pessoa infectada. É a forma mais comum.</li>
+      <li><strong>Da gestante para o bebê</strong>, na gravidez, no parto ou na amamentação.</li>
+      <li><strong>Compartilhar seringas, agulhas</strong> e outros objetos cortantes.</li>
+      <li><strong>Contato com feridas ou verrugas</strong> na pele e nas mucosas, como no herpes, no HPV e na sífilis.</li>
+      <li><strong>Transfusão de sangue contaminado</strong>, hoje rara no Brasil porque todo sangue doado é testado.</li>
+    </ul>
+
+    <div class="caixa caixa-menta">
+      <h3>Isso não transmite HIV</h3>
+      <div class="nao-transmite">
+        <span>Abraço</span><span>Aperto de mão</span><span>Beijo no rosto</span>
+        <span>Copos e talheres</span><span>Piscina</span><span>Banheiro</span>
+        <span>Suor e lágrima</span><span>Picada de inseto</span>
+      </div>
+    </div>
+
+    <p class="meta">
+      Conviver com quem vive com HIV é seguro. Preconceito também faz mal à saúde: ele afasta as
+      pessoas do teste e do tratamento.
+    </p>
+  </article>
+
+  <!-- Prevenção + preservativo -->
+  <article class="painel">
+    <h2>Formas de prevenção</h2>
+    <p>Não existe um único jeito de se proteger. A <strong>prevenção combinada</strong> junta
+    vários métodos, e cada pessoa escolhe os que fazem sentido para a sua vida.</p>
+
+    <div class="mandala">
+      <svg viewBox="0 0 100 100" role="img" aria-label="Anel da prevenção combinada">
+        <g transform="rotate(-90 50 50)" fill="none" stroke-width="16">
+          <circle cx="50" cy="50" r="38" stroke="#B0174F" stroke-dasharray="27.8 211" stroke-dashoffset="0"/>
+          <circle cx="50" cy="50" r="38" stroke="#231942" stroke-dasharray="27.8 211" stroke-dashoffset="-29.85"/>
+          <circle cx="50" cy="50" r="38" stroke="#2A9D74" stroke-dasharray="27.8 211" stroke-dashoffset="-59.69"/>
+          <circle cx="50" cy="50" r="38" stroke="#C27E00" stroke-dasharray="27.8 211" stroke-dashoffset="-89.54"/>
+          <circle cx="50" cy="50" r="38" stroke="#B0174F" stroke-dasharray="27.8 211" stroke-dashoffset="-119.38"/>
+          <circle cx="50" cy="50" r="38" stroke="#231942" stroke-dasharray="27.8 211" stroke-dashoffset="-149.23"/>
+          <circle cx="50" cy="50" r="38" stroke="#2A9D74" stroke-dasharray="27.8 211" stroke-dashoffset="-179.07"/>
+          <circle cx="50" cy="50" r="38" stroke="#C27E00" stroke-dasharray="27.8 211" stroke-dashoffset="-208.92"/>
+        </g>
+        <text x="50" y="54" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="700" font-size="13" fill="#231942">você</text>
+      </svg>
+      <ul class="legenda">
+        <li><i style="background:#B0174F"></i>Camisinha externa e interna</li>
+        <li><i style="background:#231942"></i>Vacinas contra HPV e hepatite B</li>
+        <li><i style="background:#2A9D74"></i>Testagem regular</li>
+        <li><i style="background:#C27E00"></i>PEP: remédio após exposição de risco</li>
+        <li><i style="background:#B0174F"></i>PrEP: remédio antes, contra o HIV</li>
+        <li><i style="background:#231942"></i>Tratar as ISTs e as parcerias</li>
+        <li><i style="background:#2A9D74"></i>Pré-natal com testes</li>
+        <li><i style="background:#C27E00"></i>Não compartilhar seringas</li>
+      </ul>
+    </div>
+
+    <div class="faixa">
+      <h3>Por que usar camisinha?</h3>
+      <p>É o único método que protege, ao mesmo tempo, contra a maioria das ISTs e contra a
+      gravidez não planejada. É gratuita nas UBS.</p>
+    </div>
+
+    <ul class="lista">
+      <li>Confira a validade e se a embalagem está intacta.</li>
+      <li>Coloque antes de qualquer contato íntimo.</li>
+      <li>Use uma nova a cada relação e nunca duas ao mesmo tempo.</li>
+      <li>Prefira lubrificante à base de água.</li>
+    </ul>
+    <p class="meta">HPV e herpes podem passar pela pele que a camisinha não cobre. Por isso a vacina
+    contra o HPV também é importante.</p>
+  </article>
+
+  <!-- Testagem + consequências -->
+  <article class="painel">
+    <h2>Testagem e diagnóstico</h2>
+    <div class="destaque-numero">
+      <b>30 min</b>
+      <p>Tempo do resultado dos testes rápidos de HIV, sífilis e hepatites B e C. São gratuitos e sigilosos no SUS.</p>
+    </div>
+
+    <div>
+      <h3>Quando fazer o teste</h3>
+      <ul class="lista">
+        <li>Depois de uma relação sem camisinha.</li>
+        <li>Ao começar um novo relacionamento.</li>
+        <li>Na gravidez, junto com a parceria.</li>
+        <li>Pelo menos uma vez por ano, se tem vida sexual ativa.</li>
+      </ul>
+    </div>
+
+    <div class="cura">
+      <div class="caixa caixa-menta">
+        <h3>Têm cura</h3>
+        <p>Sífilis, gonorreia, clamídia, tricomoníase e hepatite C.</p>
+      </div>
+      <div class="caixa caixa-lavanda">
+        <h3>Têm tratamento e controle</h3>
+        <p>HIV, hepatite B, herpes e HPV.</p>
+      </div>
+    </div>
+
+    <div>
+      <h3>Sem tratamento, as ISTs podem causar</h3>
+      <ul class="lista">
+        <li>Infertilidade, por inflamação pélvica (clamídia e gonorreia).</li>
+        <li>Câncer de colo do útero, ânus, pênis e garganta (HPV).</li>
+        <li>Cirrose e câncer de fígado (hepatites B e C).</li>
+        <li>Lesões no coração, no cérebro e nos nervos (sífilis).</li>
+        <li>Aids, quando o HIV não é tratado.</li>
+        <li>Sífilis congênita e outros riscos para o bebê.</li>
+      </ul>
+    </div>
+
+    <p class="meta fontes">Fontes: Ministério da Saúde (gov.br/aids) e Protocolo Clínico e
+    Diretrizes Terapêuticas para Atenção Integral às Pessoas com IST (2022).</p>
+  </article>
+</section>
+
+</body>
+</html>
