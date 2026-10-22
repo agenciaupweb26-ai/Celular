@@ -1,0 +1,798 @@
+<title>ISTs em 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Layout: página de produto escura; o anel 3D fica fixo atrás do conteúdo e muda de papel a cada seção. */
+  :root {
+    color-scheme: dark;
+    --bg: #000000;
+    --tile: #1C1C1E;
+    --tile-2: #2C2C2E;
+    --linha: rgba(245, 245, 247, 0.14);
+    --texto: #F5F5F7;
+    --texto-2: #A1A1A6;
+    --link: #2997FF;
+
+    /* cores de sistema da Apple (modo escuro), uma por segmento do anel */
+    --c0: #FF375F; --c1: #FF9F0A; --c2: #FFD60A; --c3: #30D158;
+    --c4: #64D2FF; --c5: #0A84FF; --c6: #5E5CE6; --c7: #BF5AF2;
+
+    --fonte: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+    --raio: 22px;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--texto);
+    font-family: var(--fonte);
+    font-size: 17px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px); z-index: 10;
+    background: var(--bg);
+  }
+
+  #cena {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 300ms var(--ease-out);
+  }
+  main { position: relative; z-index: 1; }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  /* ---------- Navegação ---------- */
+  .nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid var(--linha);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .nav { background: rgba(0, 0, 0, 0.72); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); }
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 48px; gap: 16px; }
+  .nav strong { font-size: 19px; font-weight: 600; }
+  .nav ul { list-style: none; display: flex; gap: 24px; margin: 0; padding: 0; }
+  .nav a { color: var(--texto-2); text-decoration: none; font-size: 13px; transition: color 150ms var(--ease-out); }
+  .nav a:hover, .nav a[aria-current="true"] { color: var(--texto); }
+  @media (max-width: 720px) { .nav ul li:not(.sempre) { display: none; } }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  /* ---------- Tipografia ---------- */
+  h1, h2, h3 { margin: 0; font-weight: 700; text-wrap: balance; }
+  h1 { font-size: clamp(72px, 15vw, 176px); line-height: 0.92; letter-spacing: -0.05em; }
+  h2 { font-size: clamp(40px, 7vw, 80px); line-height: 1.04; letter-spacing: -0.04em; }
+  h3 { font-size: 21px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600; }
+  .lead { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.4; color: var(--texto-2); font-weight: 500; letter-spacing: -0.015em; max-width: 34ch; }
+  .lead b { color: var(--texto); font-weight: 600; }
+  .nota { font-size: 14px; color: var(--texto-2); max-width: 60ch; }
+  p { margin: 0; }
+
+  /* ---------- Seções ---------- */
+  section { position: relative; padding-block: clamp(96px, 16vh, 168px); }
+  .coluna { display: flex; flex-direction: column; gap: 24px; }
+  .coluna > * { max-width: 540px; }
+  @media (min-width: 900px) { .lado .coluna > * { max-width: 500px; } }
+  section[id] { scroll-margin-top: 48px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 48px; }
+  .tile {
+    background: var(--tile);
+    border-radius: var(--raio);
+    padding: 28px;
+    display: flex; flex-direction: column; gap: 8px;
+    min-width: 0;
+  }
+  .tile p { color: var(--texto-2); }
+  .tile .grande { font-size: 40px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--texto); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-block: clamp(72px, 12vh, 128px) 0; text-align: center; touch-action: pan-y; }
+  .hero .coluna { align-items: center; gap: 20px; }
+  .hero .coluna > *, .final .coluna > * { max-width: none; }
+  .hero .sub {
+    font-size: clamp(28px, 4.4vw, 56px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05;
+    background: linear-gradient(90deg, var(--c0), var(--c1) 55%, var(--c2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .lead { margin-inline: auto; text-align: center; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .botao {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; padding: 0 22px; border-radius: 980px;
+    font: 500 17px/1 var(--fonte);
+    text-decoration: none; cursor: pointer; border: 0;
+    transition: opacity 150ms var(--ease-out);
+  }
+  .botao:hover { opacity: 0.85; }
+  .botao.primario { background: var(--link); color: #fff; }
+  .botao.secundario { background: transparent; color: var(--link); box-shadow: inset 0 0 0 1px var(--link); }
+  .palco { height: clamp(300px, 52vh, 560px); cursor: grab; position: relative; }
+  .palco:active { cursor: grabbing; }
+  .dica { position: absolute; left: 0; right: 0; bottom: 16px; font-size: 13px; color: var(--texto-2); }
+
+  /* ---------- O que são ---------- */
+  .filtros { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font: 500 15px/1 var(--fonte); color: var(--texto);
+    background: var(--tile-2); border: 1px solid transparent;
+    min-height: 44px; padding: 0 18px; border-radius: 980px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: border-color 150ms var(--ease-out), background-color 150ms var(--ease-out);
+  }
+  .chip[aria-pressed="true"] { border-color: var(--texto); background: var(--tile); }
+  .chip i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .ists { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--linha); border-radius: 16px; overflow: hidden; }
+  .ists li { background: var(--tile); padding: 14px 18px; display: flex; justify-content: space-between; gap: 8px; transition: opacity 150ms var(--ease-out); }
+  .ists li span { color: var(--texto-2); font-size: 14px; }
+  .ists li.apagado { opacity: 0.35; }
+
+  .sinais { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .sinais li { background: var(--tile); border-radius: 16px; padding: 16px 18px; font-weight: 500; }
+
+  /* ---------- Mito ou verdade ---------- */
+  .quiz { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 32px; }
+  .carta {
+    text-align: left; font: inherit; color: inherit;
+    background: var(--tile); border: 1px solid transparent; border-radius: var(--raio);
+    padding: 24px; cursor: pointer;
+    display: flex; flex-direction: column; gap: 12px; min-height: 168px;
+    transition: border-color 150ms var(--ease-out);
+  }
+  .carta:hover { border-color: var(--linha); }
+  .carta .frase { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
+  .carta .acao { margin-top: auto; font-size: 14px; color: var(--link); }
+  .carta .resposta { display: flex; flex-direction: column; gap: 4px; }
+  .carta .veredito { font-weight: 700; font-size: 15px; }
+  .carta .veredito.mito { color: var(--c0); }
+  .carta .veredito.verdade { color: var(--c3); }
+  .carta .resposta p { color: var(--texto-2); font-size: 15px; }
+
+  /* ---------- Prevenção ---------- */
+  .metodos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .metodo {
+    width: 100%; text-align: left; font: inherit; color: var(--texto);
+    background: var(--tile); border: 1px solid transparent; border-radius: 16px;
+    min-height: 64px; padding: 12px 16px; cursor: pointer;
+    display: flex; align-items: center; gap: 12px;
+    transition: border-color 150ms var(--ease-out), background-color 150ms var(--ease-out);
+  }
+  .metodo .bolinha { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--cor); flex: none; display: grid; place-items: center; transition: background-color 150ms var(--ease-out); }
+  .metodo .bolinha svg { width: 12px; height: 12px; opacity: 0; transition: opacity 150ms var(--ease-out); }
+  .metodo[aria-pressed="true"] { border-color: var(--cor); background: color-mix(in srgb, var(--cor) 14%, var(--tile)); }
+  .metodo[aria-pressed="true"] .bolinha { background: var(--cor); }
+  .metodo[aria-pressed="true"] .bolinha svg { opacity: 1; }
+  .metodo b { display: block; font-weight: 600; font-size: 16px; }
+  .metodo small { display: block; color: var(--texto-2); font-size: 13px; line-height: 1.3; }
+  .contador { font-size: 15px; color: var(--texto-2); }
+  .contador b { color: var(--texto); }
+
+  /* ---------- Teste ---------- */
+  .relogio { font-size: clamp(96px, 16vw, 200px); font-weight: 700; letter-spacing: -0.06em; line-height: 0.9; font-variant-numeric: tabular-nums; }
+  .relogio small { font-size: 0.32em; letter-spacing: -0.03em; color: var(--texto-2); }
+  .passos { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1px; background: var(--linha); border-radius: 16px; overflow: hidden; }
+  .passos li { background: var(--tile); padding: 14px 18px; }
+  .consequencias { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+  .consequencias li { display: grid; grid-template-columns: minmax(0, 9em) minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--linha); }
+  .consequencias li span:first-child { color: var(--texto-2); }
+
+  /* ---------- Onde buscar ---------- */
+  .numero { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .numero .grande { font-size: 64px; }
+  .copiar { font: 500 15px/1 var(--fonte); color: var(--link); background: transparent; border: 1px solid var(--link); border-radius: 980px; min-height: 44px; padding: 0 18px; cursor: pointer; }
+
+  /* ---------- Final ---------- */
+  .final { text-align: center; padding-bottom: 0; }
+  .final .coluna { align-items: center; }
+  .final .coluna > h2 { max-width: 14ch; }
+  .final .coluna > .lead { max-width: 34ch; }
+  .final .lead { margin-inline: auto; text-align: center; }
+  .final .palco { cursor: default; }
+  footer { padding-block: 32px 48px; border-top: 1px solid var(--linha); }
+  footer p { font-size: 12px; color: var(--texto-2); max-width: 80ch; line-height: 1.5; }
+
+  /* No celular o anel fica atrás do texto, então ele escurece fora da capa e do final. */
+  @media (max-width: 899px) {
+    body[data-cena]:not([data-cena="capa"]):not([data-cena="final"]) #cena { opacity: 0.28; }
+    .metodos, .ists { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+</style>
+
+<canvas id="cena" aria-hidden="true"></canvas>
+
+<nav class="nav" aria-label="Seções">
+  <div class="wrap">
+    <strong>ISTs</strong>
+    <ul>
+      <li><a href="#o-que-sao">O que são</a></li>
+      <li><a href="#transmissao">Transmissão</a></li>
+      <li class="sempre"><a href="#prevencao">Prevenção</a></li>
+      <li><a href="#teste">Teste</a></li>
+      <li><a href="#onde">Onde buscar</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- ================= Capa ================= -->
+  <section class="hero" data-cena="capa" id="capa">
+    <div class="wrap coluna">
+      <h1>ISTs.</h1>
+      <p class="sub">Informação e prevenção.</p>
+      <p class="lead">O que é, como pega, como evitar e onde fazer o teste. Tudo numa página.</p>
+      <div class="acoes">
+        <a class="botao primario" href="#o-que-sao">Começar</a>
+        <a class="botao secundario" href="#prevencao">Montar minha prevenção</a>
+      </div>
+    </div>
+    <div class="palco" id="palco-capa">
+      <p class="dica">Arraste o anel para girar</p>
+    </div>
+  </section>
+
+  <!-- ================= O que são ================= -->
+  <section class="lado" data-cena="microrganismos" id="o-que-sao">
+    <div class="wrap coluna">
+      <h2>O que são ISTs.</h2>
+      <p class="lead">IST é <b>Infecção Sexualmente Transmissível</b>. Quem causa são vírus, bactérias e protozoários. O caminho mais comum é o sexo oral, vaginal ou anal sem camisinha.</p>
+
+      <div class="filtros" role="group" aria-label="Filtrar por causador">
+        <button class="chip" type="button" id="f-todos" data-tipo="todos" aria-pressed="true">Todas</button>
+        <button class="chip" type="button" id="f-virus" data-tipo="virus" aria-pressed="false"><i style="background:var(--c0)"></i>Vírus</button>
+        <button class="chip" type="button" id="f-bacteria" data-tipo="bacteria" aria-pressed="false"><i style="background:var(--c3)"></i>Bactérias</button>
+        <button class="chip" type="button" id="f-protozoario" data-tipo="protozoario" aria-pressed="false"><i style="background:var(--c2)"></i>Protozoários</button>
+      </div>
+
+      <ul class="ists" aria-label="As ISTs mais comuns">
+        <li data-tipo="virus">HIV <span>vírus</span></li>
+        <li data-tipo="bacteria">Sífilis <span>bactéria</span></li>
+        <li data-tipo="virus">HPV <span>vírus</span></li>
+        <li data-tipo="bacteria">Gonorreia <span>bactéria</span></li>
+        <li data-tipo="bacteria">Clamídia <span>bactéria</span></li>
+        <li data-tipo="virus">Herpes genital <span>vírus</span></li>
+        <li data-tipo="virus">Hepatites B e C <span>vírus</span></li>
+        <li data-tipo="protozoario">Tricomoníase <span>protozoário</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="lado" data-cena="silenciosa">
+    <div class="wrap coluna">
+      <h2>Boa parte não dá sintoma nenhum.</h2>
+      <p class="lead">Dá para ficar meses com uma IST, passar para outra pessoa e nem desconfiar. Quando aparece algo, costuma ser assim:</p>
+      <ul class="sinais">
+        <li>Corrimento diferente</li>
+        <li>Ferida ou bolha</li>
+        <li>Verruga na região genital</li>
+        <li>Dor ou ardência ao fazer xixi</li>
+      </ul>
+      <p class="nota">Viu algo assim? Vá ao posto. Pomada e antibiótico por conta própria só escondem o problema. Desde 2016 o Ministério da Saúde fala IST, e não DST: a infecção existe e passa adiante mesmo quando o corpo não dá sinal.</p>
+    </div>
+  </section>
+
+  <!-- ================= Transmissão ================= -->
+  <section data-cena="transmissao" id="transmissao">
+    <div class="wrap">
+      <div class="coluna">
+        <h2>Como se pega.</h2>
+        <p class="lead">Sexo sem camisinha é, de longe, o jeito mais comum. Mas não é o único.</p>
+      </div>
+      <div class="tiles">
+        <div class="tile"><h3>Sexo sem camisinha</h3><p>Oral, vaginal ou anal, com alguém infectado.</p></div>
+        <div class="tile"><h3>Da gestante para o bebê</h3><p>Na gravidez, no parto ou ao amamentar.</p></div>
+        <div class="tile"><h3>Seringa e agulha</h3><p>Compartilhadas, inclusive em tatuagem e piercing sem material descartável.</p></div>
+        <div class="tile"><h3>Ferida ou verruga</h3><p>Contato com a pele e a mucosa. É assim que herpes, HPV e sífilis costumam passar.</p></div>
+        <div class="tile"><h3>Transfusão de sangue</h3><p>Hoje rara no Brasil. Todo sangue doado passa por teste.</p></div>
+      </div>
+
+      <div class="coluna" style="margin-top:96px">
+        <h2>Mito ou verdade?</h2>
+        <p class="lead">Toque em cada frase para ver a resposta.</p>
+      </div>
+      <div class="quiz">
+        <button class="carta" type="button" id="q1" aria-expanded="false">
+          <span class="frase">Beijo no rosto passa HIV.</span>
+          <span class="resposta" hidden><span class="veredito mito">Mito</span><p>Abraço, beijo no rosto e aperto de mão não transmitem HIV.</p></span>
+          <span class="acao">Ver resposta</span>
+        </button>
+        <button class="carta" type="button" id="q2" aria-expanded="false">
+          <span class="frase">Dá para pegar sífilis no sexo oral.</span>
+          <span class="resposta" hidden><span class="veredito verdade">Verdade</span><p>Sexo oral sem proteção também transmite sífilis, gonorreia, herpes e HPV.</p></span>
+          <span class="acao">Ver resposta</span>
+        </button>
+        <button class="carta" type="button" id="q3" aria-expanded="false">
+          <span class="frase">Dividir copo e talher passa HIV.</span>
+          <span class="resposta" hidden><span class="veredito mito">Mito</span><p>Copo, talher, piscina, banheiro, suor e lágrima não transmitem HIV.</p></span>
+          <span class="acao">Ver resposta</span>
+        </button>
+        <button class="carta" type="button" id="q4" aria-expanded="false">
+          <span class="frase">A gestante pode passar sífilis para o bebê.</span>
+          <span class="resposta" hidden><span class="veredito verdade">Verdade</span><p>Por isso o pré-natal inclui teste de sífilis e HIV, para a gestante e a parceria.</p></span>
+          <span class="acao">Ver resposta</span>
+        </button>
+        <button class="carta" type="button" id="q5" aria-expanded="false">
+          <span class="frase">Picada de mosquito passa HIV.</span>
+          <span class="resposta" hidden><span class="veredito mito">Mito</span><p>O HIV não sobrevive nem se multiplica no inseto.</p></span>
+          <span class="acao">Ver resposta</span>
+        </button>
+        <button class="carta" type="button" id="q6" aria-expanded="false">
+          <span class="frase">Quem vive com HIV e se trata pode não transmitir pelo sexo.</span>
+          <span class="resposta" hidden><span class="veredito verdade">Verdade</span><p>Com o vírus indetectável há pelo menos seis meses, o HIV não passa pelo sexo. Indetectável é igual a intransmissível.</p></span>
+          <span class="acao">Ver resposta</span>
+        </button>
+      </div>
+      <p class="nota" style="margin-top:32px">Dá para dividir a casa, a sala de aula e o lanche com quem vive com HIV. O que atrapalha é o preconceito: tem gente que deixa de fazer o teste com medo de ser julgada.</p>
+    </div>
+  </section>
+
+  <!-- ================= Prevenção ================= -->
+  <section class="lado" data-cena="prevencao" id="prevencao">
+    <div class="wrap coluna">
+      <h2>Monte sua prevenção.</h2>
+      <p class="lead">Ninguém precisa ficar com um método só. A <b>prevenção combinada</b> mistura vários. Toque nos que cabem na sua rotina e veja o anel acender.</p>
+
+      <ul class="metodos">
+        <li><button class="metodo" type="button" id="m0" data-i="0" aria-pressed="false" style="--cor:var(--c0)"><span class="bolinha"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#000" stroke-width="2"/></svg></span><span><b>Camisinha</b><small>externa ou interna</small></span></button></li>
+        <li><button class="metodo" type="button" id="m1" data-i="1" aria-pressed="false" style="--cor:var(--c1)"><span class="bolinha"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#000" stroke-width="2"/></svg></span><span><b>Vacina</b><small>HPV e hepatite B</small></span></button></li>
+        <li><button class="metodo" type="button" id="m2" data-i="2" aria-pressed="false" style="--cor:var(--c2)"><span class="bolinha"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#000" stroke-width="2"/></svg></span><span><b>Teste de rotina</b><small>pelo menos uma vez por ano</small></span></button></li>
+        <li><button class="metodo" type="button" id="m3" data-i="3" aria-pressed="false" style="--cor:var(--c3)"><span class="bolinha"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#000" stroke-width="2"/></svg></span><span><b>PrEP</b><small>remédio antes, contra o HIV</small></span></button></li>
+        <li><button class="metodo" type="button" id="m4" data-i="4" aria-pressed="false" style="--cor:var(--c4)"><span class="bolinha"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#000" stroke-width="2"/></svg></span><span><b>PEP</b><small>remédio em até 72 h depois do risco</small></span></button></li>
+        <li><button class="metodo" type="button" id="m5" data-i="5" aria-pressed="false" style="--cor:var(--c5)"><span class="bolinha"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#000" stroke-width="2"/></svg></span><span><b>Tratamento</b><small>da IST e da parceria</small></span></button></li>
+        <li><button class="metodo" type="button" id="m6" data-i="6" aria-pressed="false" style="--cor:var(--c6)"><span class="bolinha"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#000" stroke-width="2"/></svg></span><span><b>Pré-natal</b><small>com testes na gravidez</small></span></button></li>
+        <li><button class="metodo" type="button" id="m7" data-i="7" aria-pressed="false" style="--cor:var(--c7)"><span class="bolinha"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.5 2.5L10 3.5" fill="none" stroke="#000" stroke-width="2"/></svg></span><span><b>Seringa descartável</b><small>nunca compartilhada</small></span></button></li>
+      </ul>
+      <p class="contador" id="contador" aria-live="polite">Toque nos métodos para montar sua combinação.</p>
+    </div>
+  </section>
+
+  <!-- ================= Camisinha ================= -->
+  <section data-cena="camisinha" id="camisinha">
+    <div class="wrap">
+      <div class="coluna">
+        <h2>A camisinha vem primeiro.</h2>
+        <p class="lead">Ela barra a maioria das ISTs e ainda evita gravidez. Nenhum outro método faz as duas coisas. No posto é de graça e sem receita.</p>
+      </div>
+      <div class="tiles">
+        <div class="tile"><h3>Aperte a embalagem</h3><p>Tem que ter ar dentro. Olhe a validade também.</p></div>
+        <div class="tile"><h3>Antes de tudo</h3><p>Coloque antes de qualquer contato.</p></div>
+        <div class="tile"><h3>Uma por relação</h3><p>Duas juntas rasgam com o atrito.</p></div>
+        <div class="tile"><h3>Lubrificante à base de água</h3><p>Óleo e vaselina estragam o látex.</p></div>
+      </div>
+      <p class="nota" style="margin-top:24px">HPV e herpes passam pela pele que a camisinha não cobre. Para o HPV, a vacina resolve essa parte.</p>
+    </div>
+  </section>
+
+  <!-- ================= Teste ================= -->
+  <section class="lado" data-cena="teste" id="teste">
+    <div class="wrap coluna">
+      <p class="relogio" aria-hidden="true"><span id="minutos">30</span><small> min</small></p>
+      <h2>Testagem e diagnóstico.</h2>
+      <p class="lead">Trinta minutos é quanto demora o teste rápido de HIV, sífilis e hepatites B e C. Uma picada no dedo, de graça e com sigilo.</p>
+      <h3>Quando fazer</h3>
+      <ul class="passos">
+        <li>Depois de transar sem camisinha.</li>
+        <li>Antes de dispensar a camisinha num namoro.</li>
+        <li>Na gravidez, junto com a parceria.</li>
+        <li>Uma vez por ano, no mínimo, se você tem vida sexual.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-cena="tratamento">
+    <div class="wrap">
+      <div class="coluna">
+        <h2>Descobrir cedo muda tudo.</h2>
+        <p class="lead">Quase todas têm cura ou controle. O problema é deixar sem tratar.</p>
+      </div>
+      <div class="tiles">
+        <div class="tile"><p class="grande">Têm cura</p><p>Sífilis, gonorreia, clamídia, tricomoníase e hepatite C.</p></div>
+        <div class="tile"><p class="grande">Têm controle</p><p>HIV, hepatite B, herpes e HPV, com tratamento e acompanhamento.</p></div>
+      </div>
+      <div class="coluna" style="margin-top:64px; max-width:720px">
+        <h3>O que acontece se não tratar</h3>
+        <ul class="consequencias">
+          <li><span>Clamídia e gonorreia</span><span>Infertilidade</span></li>
+          <li><span>HPV</span><span>Câncer de colo do útero, ânus, pênis e garganta</span></li>
+          <li><span>Hepatites B e C</span><span>Cirrose e câncer de fígado</span></li>
+          <li><span>Sífilis</span><span>Lesões no coração, no cérebro e nos nervos</span></li>
+          <li><span>Sífilis na gravidez</span><span>Aborto, parto prematuro e sequelas no bebê</span></li>
+          <li><span>HIV</span><span>Aids, quando fica sem remédio</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Onde buscar ================= -->
+  <section data-cena="onde" id="onde">
+    <div class="wrap">
+      <div class="coluna">
+        <h2>Onde buscar orientação e atendimento.</h2>
+        <p class="lead">Tudo de graça pelo SUS. O que você conta na consulta fica entre você e a equipe, e adolescente tem direito a ser atendido com privacidade.</p>
+      </div>
+      <div class="tiles">
+        <div class="tile"><h3>UBS (posto de saúde)</h3><p>Camisinha na hora, teste rápido, vacina e consulta.</p></div>
+        <div class="tile"><h3>CTA</h3><p>Centro de Testagem e Aconselhamento. Você faz o teste e conversa com um profissional sobre o resultado.</p></div>
+        <div class="tile"><h3>UPA ou pronto-socorro</h3><p>Transou sem camisinha ou ela estourou? Vá logo começar a PEP. O prazo é de 72 horas.</p></div>
+        <div class="tile"><h3>Na escola</h3><p>Professores e coordenação podem tirar dúvidas e encaminhar você para o posto.</p></div>
+        <div class="tile">
+          <h3>Disque Saúde</h3>
+          <div class="numero"><span class="grande" id="numero-disque">136</span><button class="copiar" type="button" id="copiar">Copiar número</button></div>
+          <p>Ligação gratuita para tirar dúvidas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Final ================= -->
+  <section class="final" data-cena="final">
+    <div class="wrap coluna">
+      <h2>Informação protege. Camisinha, vacina e teste também.</h2>
+      <p class="lead">Pegar camisinha no posto e fazer teste é rotina de quem se cuida. Faz bem para você e para quem está com você.</p>
+    </div>
+    <div class="palco" id="palco-final" aria-hidden="true"></div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>Fontes: Ministério da Saúde (gov.br/aids) e Protocolo Clínico e Diretrizes Terapêuticas para Atenção Integral às Pessoas com IST (2022). Material educativo de conscientização sobre saúde sexual. Não substitui consulta.</p>
+    </div>
+  </footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+</script>
+
+<!-- Interações da página: funcionam mesmo sem WebGL -->
+<script>
+  (function () {
+    // Mito ou verdade
+    document.querySelectorAll('.carta').forEach(function (carta) {
+      carta.addEventListener('click', function () {
+        var aberta = carta.getAttribute('aria-expanded') === 'true';
+        carta.setAttribute('aria-expanded', String(!aberta));
+        carta.querySelector('.resposta').hidden = aberta;
+        carta.querySelector('.acao').textContent = aberta ? 'Ver resposta' : 'Esconder resposta';
+      });
+    });
+
+    // Copiar o número do Disque Saúde
+    var copiar = document.getElementById('copiar');
+    copiar.addEventListener('click', function () {
+      var feito = function () { copiar.textContent = 'Número copiado'; setTimeout(function () { copiar.textContent = 'Copiar número'; }, 2000); };
+      var selecionar = function () {
+        var r = document.createRange(); r.selectNodeContents(document.getElementById('numero-disque'));
+        var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+        copiar.textContent = 'Número selecionado';
+      };
+      try { navigator.clipboard.writeText('136').then(feito, selecionar); } catch (e) { selecionar(); }
+    });
+  })();
+</script>
+
+<!-- Cena 3D -->
+<script type="module">
+  import * as THREE from 'three';
+  import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+  const canvas = document.getElementById('cena');
+  const reduzir = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const CORES = ['#FF375F', '#FF9F0A', '#FFD60A', '#30D158', '#64D2FF', '#0A84FF', '#5E5CE6', '#BF5AF2'];
+  const CINZA = new THREE.Color('#3A3A3C');
+
+  // Estado da cena, animado pelo GSAP a cada seção
+  const S = { lado: 0, escala: 1, abrir: 0, mono: 0, nuvem: 0, timer: 0, progresso: reduzir ? 1 : 0, ancora: 1 };
+  let ancoraEl = document.getElementById('palco-capa');
+  let destaque = 'todos';
+  const escolhidos = new Array(8).fill(false);
+
+  const CENAS = {
+    capa:           { lado: 0, escala: 0.74,    abrir: 0,    mono: 0, nuvem: 0,   timer: 0, ancora: 1, el: 'palco-capa' },
+    microrganismos: { lado: 1, escala: 0.62, abrir: 0.7,  mono: 0, nuvem: 1,   timer: 0, ancora: 0 },
+    silenciosa:     { lado: 1, escala: 0.55, abrir: 1.1,  mono: 0, nuvem: 0.6, timer: 0, ancora: 0 },
+    transmissao:    { lado: 1, escala: 0.5,  abrir: 1.6,  mono: 0, nuvem: 0.3, timer: 0, ancora: 0 },
+    prevencao:      { lado: 1, escala: 0.95, abrir: 0.18, mono: 1, nuvem: 0,   timer: 0, ancora: 0 },
+    camisinha:      { lado: 1, escala: 0.6,  abrir: 0,    mono: 0, nuvem: 0,   timer: 0, ancora: 0 },
+    teste:          { lado: 1, escala: 0.9,  abrir: 0.08, mono: 0, nuvem: 0,   timer: 1, ancora: 0 },
+    tratamento:     { lado: 1, escala: 0.55, abrir: 0.5,  mono: 0, nuvem: 0,   timer: 0, ancora: 0 },
+    onde:           { lado: 1, escala: 0.5,  abrir: 0.3,  mono: 0, nuvem: 0,   timer: 0, ancora: 0 },
+    final:          { lado: 0, escala: 0.8, abrir: 0,    mono: 0, nuvem: 0,   timer: 0, ancora: 1, el: 'palco-final' },
+  };
+
+  function iniciar() {
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+
+    const scene = new THREE.Scene();
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+    camera.position.set(0, 0, 10);
+    const luz = new THREE.DirectionalLight(0xffffff, 1.4);
+    luz.position.set(3, 5, 6);
+    scene.add(luz);
+
+    // ---------- Anel de 8 segmentos (prevenção combinada) ----------
+    const anel = new THREE.Group();
+    const giro = new THREE.Group();
+    anel.add(giro);
+    scene.add(anel);
+
+    const PASSO = (Math.PI * 2) / 8, FOLGA = 0.04;
+    const geoSeg = new THREE.TorusGeometry(1.5, 0.36, 64, 48, PASSO - FOLGA);
+    const geoTampa = new THREE.CircleGeometry(0.36, 48);
+    const segmentos = CORES.map((hex, i) => {
+      const mat = new THREE.MeshPhysicalMaterial({
+        color: hex, roughness: 0.22, metalness: 0.05,
+        clearcoat: 1, clearcoatRoughness: 0.12,
+        emissive: hex, emissiveIntensity: 0.06,
+        side: THREE.DoubleSide,
+      });
+      const malha = new THREE.Mesh(geoSeg, mat);
+      // tampas planas nas duas pontas do segmento
+      [0, PASSO - FOLGA].forEach((ang) => {
+        const g = new THREE.Group();
+        g.rotation.z = ang;
+        const tampa = new THREE.Mesh(geoTampa, mat);
+        tampa.position.x = 1.5;
+        tampa.rotation.x = Math.PI / 2;
+        g.add(tampa);
+        malha.add(g);
+      });
+      const pivo = new THREE.Group();
+      // segmento 0 começa no topo e os outros seguem em sentido horário, como um relógio
+      malha.rotation.z = Math.PI / 2 - (i + 1) * PASSO + FOLGA / 2;
+      pivo.add(malha);
+      giro.add(pivo);
+      const meio = Math.PI / 2 - (i + 0.5) * PASSO;
+      return { mat, pivo, base: new THREE.Color(hex), dir: new THREE.Vector2(Math.cos(meio), Math.sin(meio)), escolha: 0 };
+    });
+
+    // ---------- Nuvem de microrganismos ----------
+    const nuvem = new THREE.Group();
+    scene.add(nuvem);
+    const TIPOS = [
+      { chave: 'virus',       geo: new THREE.IcosahedronGeometry(0.09, 0),        cor: '#FF375F', n: 70 },
+      { chave: 'bacteria',    geo: new THREE.CapsuleGeometry(0.045, 0.16, 4, 10), cor: '#30D158', n: 50 },
+      { chave: 'protozoario', geo: new THREE.DodecahedronGeometry(0.085, 0),      cor: '#FFD60A', n: 26 },
+    ].map((t) => {
+      const mat = new THREE.MeshStandardMaterial({ color: t.cor, roughness: 0.35, metalness: 0.1, transparent: true, opacity: 0 });
+      const inst = new THREE.InstancedMesh(t.geo, mat, t.n);
+      const itens = Array.from({ length: t.n }, () => {
+        const r = 2.3 + Math.random() * 1.9, a = Math.random() * Math.PI * 2, b = Math.acos(2 * Math.random() - 1);
+        return {
+          pos: new THREE.Vector3(r * Math.sin(b) * Math.cos(a), r * Math.cos(b) * 0.7, r * Math.sin(b) * Math.sin(a) * 0.6),
+          rot: new THREE.Euler(Math.random() * 6, Math.random() * 6, 0),
+          vel: 0.2 + Math.random() * 0.6,
+        };
+      });
+      nuvem.add(inst);
+      return { ...t, mat, inst, itens, vis: 0 };
+    });
+    const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), um = new THREE.Vector3(1, 1, 1);
+
+    // ---------- Tamanho e posição ----------
+    let meiaLargura = 1, meiaAltura = 1, largo = true;
+    function redimensionar() {
+      const w = innerWidth, h = innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      meiaAltura = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
+      meiaLargura = meiaAltura * camera.aspect;
+      largo = w >= 900;
+    }
+    redimensionar();
+    addEventListener('resize', redimensionar);
+
+    function posicaoDaAncora() {
+      if (!ancoraEl) return 0;
+      const r = ancoraEl.getBoundingClientRect();
+      const cy = r.top + r.height / 2;
+      return -((cy / innerHeight) * 2 - 1) * meiaAltura;
+    }
+
+    // ---------- Arrastar para girar e inclinação pelo cursor ----------
+    const arraste = { x: 0, y: 0, vx: 0, vy: 0, ativo: false, px: 0, py: 0 };
+    const inclina = { x: 0, y: 0, alvoX: 0, alvoY: 0 };
+    const palcos = [document.getElementById('palco-capa')];
+    palcos.forEach((p) => {
+      p.addEventListener('pointerdown', (e) => { arraste.ativo = true; arraste.px = e.clientX; arraste.py = e.clientY; p.setPointerCapture(e.pointerId); });
+      p.addEventListener('pointermove', (e) => {
+        if (!arraste.ativo) return;
+        arraste.vy = (e.clientX - arraste.px) * 0.008;
+        arraste.vx = (e.clientY - arraste.py) * 0.008;
+        arraste.y += arraste.vy; arraste.x += arraste.vx;
+        arraste.px = e.clientX; arraste.py = e.clientY;
+      });
+      const soltar = () => { arraste.ativo = false; };
+      p.addEventListener('pointerup', soltar);
+      p.addEventListener('pointercancel', soltar);
+    });
+    if (!reduzir) {
+      addEventListener('pointermove', (e) => {
+        inclina.alvoY = (e.clientX / innerWidth - 0.5) * 0.35;
+        inclina.alvoX = (e.clientY / innerHeight - 0.5) * 0.25;
+      });
+    }
+
+    // ---------- Laço de renderização ----------
+    const relogio = new THREE.Clock();
+    let giroAuto = 0;
+    const cor = new THREE.Color();
+    const minutosEl = document.getElementById('minutos');
+    let ultimoMinuto = -1;
+
+    renderer.setAnimationLoop(() => {
+      const dt = Math.min(relogio.getDelta(), 0.05);
+      const t = relogio.elapsedTime;
+
+      // posição: lado direito no desktop, centro no celular; ou presa a um "palco" da página
+      const xLado = largo ? meiaLargura * 0.48 : 0;
+      const xFixo = S.lado * xLado;
+      const yAncora = posicaoDaAncora();
+      anel.position.set(xFixo * (1 - S.ancora), yAncora * S.ancora, 0);
+      const escalaBase = largo ? 1 : 0.62;
+      anel.scale.setScalar(S.escala * escalaBase);
+      nuvem.position.copy(anel.position);
+
+      // rotação: giro lento + arraste com inércia + inclinação do cursor; no modo relógio fica parado no topo
+      if (!reduzir) giroAuto += dt * 0.25;
+      if (!arraste.ativo) {
+        arraste.vx *= 0.92; arraste.vy *= 0.92;
+        arraste.x += arraste.vx; arraste.y += arraste.vy;
+        arraste.x *= 0.97; arraste.y *= 0.97;
+      }
+      inclina.x += (inclina.alvoX - inclina.x) * 0.06;
+      inclina.y += (inclina.alvoY - inclina.y) * 0.06;
+      const repouso = 1 - S.timer;
+      giro.rotation.set(
+        (0.35 + Math.sin(t * 0.4) * 0.05 * (reduzir ? 0 : 1)) * repouso + inclina.x + arraste.x,
+        (Math.sin(t * 0.3) * 0.25 * (reduzir ? 0 : 1)) * repouso + inclina.y + arraste.y,
+        -giroAuto * repouso
+      );
+
+      // segmentos: abertura, cor, escolhas da prevenção e modo relógio
+      segmentos.forEach((s, i) => {
+        s.escolha += ((escolhidos[i] ? 1 : 0) - s.escolha) * (reduzir ? 1 : 0.12);
+        const aceso = THREE.MathUtils.clamp(S.progresso * 8 - i, 0, 1);
+        let k = 1;
+        k *= 1 - S.mono * (1 - s.escolha);
+        k *= 1 - S.timer * (1 - aceso);
+        cor.copy(CINZA).lerp(s.base, k);
+        s.mat.color.copy(cor);
+        s.mat.emissive.copy(cor);
+        s.mat.emissiveIntensity = 0.06 + 0.35 * s.escolha * S.mono + 0.25 * aceso * S.timer;
+        const d = S.abrir * 0.9 + 0.35 * s.escolha * S.mono;
+        s.pivo.position.set(s.dir.x * d, s.dir.y * d, 0);
+      });
+
+      // microrganismos
+      nuvem.rotation.y += reduzir ? 0 : dt * 0.08;
+      TIPOS.forEach((tp) => {
+        const alvo = S.nuvem * (destaque === 'todos' || destaque === tp.chave ? 1 : 0.12);
+        tp.vis += (alvo - tp.vis) * (reduzir ? 1 : 0.08);
+        tp.mat.opacity = tp.vis;
+        tp.inst.visible = tp.vis > 0.01;
+        if (!tp.inst.visible) return;
+        tp.itens.forEach((it, j) => {
+          if (!reduzir) { it.rot.x += dt * it.vel; it.rot.y += dt * it.vel * 0.7; }
+          q.setFromEuler(it.rot);
+          m4.compose(it.pos, q, um);
+          tp.inst.setMatrixAt(j, m4);
+        });
+        tp.inst.instanceMatrix.needsUpdate = true;
+      });
+
+      // contador de minutos acompanha o anel no modo relógio
+      const minuto = Math.round(S.progresso * 30);
+      if (minuto !== ultimoMinuto) { minutosEl.textContent = minuto; ultimoMinuto = minuto; }
+
+      renderer.render(scene, camera);
+    });
+  }
+
+  // ---------- Troca de cena conforme a rolagem ----------
+  function irPara(nome) {
+    const c = CENAS[nome];
+    if (!c) return;
+    document.body.dataset.cena = nome;
+    document.querySelectorAll('.nav a').forEach((a) => {
+      const sec = document.querySelector(a.getAttribute('href'));
+      a.setAttribute('aria-current', String(sec && sec.dataset.cena === nome));
+    });
+    if (c.el) ancoraEl = document.getElementById(c.el);
+    const alvo = { lado: c.lado, escala: c.escala, abrir: c.abrir, mono: c.mono, nuvem: c.nuvem, timer: c.timer, ancora: c.ancora };
+    if (window.gsap && !reduzir) gsap.to(S, { ...alvo, duration: 1.1, ease: 'power3.out', overwrite: 'auto' });
+    else Object.assign(S, alvo);
+  }
+
+  const secoes = document.querySelectorAll('[data-cena]');
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    secoes.forEach((el) => ScrollTrigger.create({
+      trigger: el, start: 'top 55%', end: 'bottom 45%',
+      onEnter: () => irPara(el.dataset.cena), onEnterBack: () => irPara(el.dataset.cena),
+    }));
+    // o anel vira um relógio de 30 minutos conforme a rolagem
+    if (!reduzir) {
+      ScrollTrigger.create({
+        trigger: '#teste', start: 'top 75%', end: 'center 45%', scrub: 0.6,
+        onUpdate: (self) => { S.progresso = self.progress; },
+      });
+    }
+  } else {
+    const io = new IntersectionObserver((ents) => ents.forEach((e) => e.isIntersecting && irPara(e.target.dataset.cena)), { rootMargin: '-45% 0px -45% 0px' });
+    secoes.forEach((el) => io.observe(el));
+    S.progresso = 1;
+  }
+  irPara('capa');
+
+  // ---------- Filtro de microrganismos ----------
+  document.querySelectorAll('.chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      destaque = chip.dataset.tipo;
+      document.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      document.querySelectorAll('.ists li').forEach((li) => li.classList.toggle('apagado', destaque !== 'todos' && li.dataset.tipo !== destaque));
+    });
+  });
+
+  // ---------- Monte sua prevenção ----------
+  const contador = document.getElementById('contador');
+  function atualizarContador() {
+    const n = escolhidos.filter(Boolean).length;
+    contador.innerHTML = n === 0
+      ? 'Toque nos métodos para montar sua combinação.'
+      : `Sua combinação tem <b>${n} de 8</b> métodos.` + (escolhidos[0] ? '' : ' Que tal incluir a camisinha?');
+  }
+  try {
+    const salvo = JSON.parse(localStorage.getItem('ists-prevencao') || '[]');
+    salvo.forEach((v, i) => { escolhidos[i] = !!v; });
+  } catch (e) { /* sem armazenamento: começa vazio */ }
+  document.querySelectorAll('.metodo').forEach((b) => {
+    const i = +b.dataset.i;
+    b.setAttribute('aria-pressed', String(escolhidos[i]));
+    b.addEventListener('click', () => {
+      escolhidos[i] = !escolhidos[i];
+      b.setAttribute('aria-pressed', String(escolhidos[i]));
+      atualizarContador();
+      try { localStorage.setItem('ists-prevencao', JSON.stringify(escolhidos)); } catch (e) { /* ignora */ }
+    });
+  });
+  atualizarContador();
+
+  try { iniciar(); } catch (e) { canvas.hidden = true; }
+</script>
