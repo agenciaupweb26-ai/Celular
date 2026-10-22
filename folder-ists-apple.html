@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Folder ISTs (Apple)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Versão Apple: mesma linguagem da página 3D. Capa preta como um produto;
+     painéis internos claros (branco e cinza Apple) para imprimir bem. */
+  :root {
+    --branco: #FFFFFF;
+    --tile: #F5F5F7;
+    --preto: #000000;
+    --texto: #1D1D1F;
+    --texto-2: #6E6E73;
+    --azul: #0066CC;
+    --mito: #D70015;
+    --verdade: #248A3D;
+    --c0: #FF375F; --c1: #FF9F0A; --c2: #FFD60A; --c3: #30D158;
+    --c4: #64D2FF; --c5: #0A84FF; --c6: #5E5CE6; --c7: #BF5AF2;
+
+    --fonte: -apple-system, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
+    --t-meta: 9pt;
+    --t-corpo: 9.5pt;
+    --t-sub: 11pt;
+    --t-titulo: 20pt;
+  }
+
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--branco);
+    color: var(--texto);
+    font-family: var(--fonte);
+    font-size: var(--t-corpo);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pagina {
+    width: 297mm; height: 210mm;
+    display: grid;
+    grid-template-columns: repeat(3, 99mm);
+    overflow: hidden;
+    break-after: page;
+  }
+  .pagina:last-child { break-after: auto; }
+
+  .painel {
+    position: relative;
+    padding: 9mm;
+    display: flex; flex-direction: column;
+    gap: 3.6mm;
+    overflow: hidden;
+  }
+
+  h1, h2, h3 { font-weight: 700; }
+  h2 { font-size: var(--t-titulo); line-height: 1.05; letter-spacing: -0.035em; }
+  h3 { font-size: var(--t-sub); line-height: 1.2; letter-spacing: -0.02em; font-weight: 600; margin-bottom: 1.2mm; }
+  strong { font-weight: 600; }
+  .lead { color: var(--texto-2); font-size: 10pt; }
+  .lead strong { color: var(--texto); }
+  .meta { font-size: var(--t-meta); color: var(--texto-2); line-height: 1.4; }
+
+  .tile { background: var(--tile); border-radius: 4mm; padding: 3.6mm 4mm; }
+
+  .linhas { list-style: none; background: var(--tile); border-radius: 4mm; overflow: hidden; }
+  .linhas li { padding: 1.8mm 4mm; border-bottom: 0.25mm solid #E3E3E8; display: flex; justify-content: space-between; gap: 3mm; }
+  .linhas li:last-child { border-bottom: 0; }
+  .linhas li span { color: var(--texto-2); text-align: right; }
+
+  .imagem { display: block; margin-inline: auto; }
+
+  /* ---------- Capa ---------- */
+  .capa { background: var(--preto); color: #F5F5F7; text-align: center; justify-content: space-between; padding-top: 14mm; }
+  .capa h1 { font-size: 72pt; line-height: 0.92; letter-spacing: -0.055em; }
+  .capa .sub { font-size: 19pt; font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; margin-top: 3mm; color: var(--c1); }
+  .capa .chamada { color: #A1A1A6; font-size: 10.5pt; margin-top: 3mm; }
+  .capa .imagem { width: 88mm; margin-bottom: 2mm; }
+  .capa .rodape { color: #A1A1A6; font-size: var(--t-meta); }
+
+  /* ---------- Aba ---------- */
+  .aba .imagem { width: 52mm; margin-block: -3mm -4mm; }
+  .legenda-tipos { display: flex; justify-content: center; gap: 4mm; font-size: var(--t-meta); color: var(--texto-2); }
+  .legenda-tipos i { display: inline-block; width: 2.4mm; height: 2.4mm; border-radius: 50%; margin-right: 1.2mm; transform: translateY(0.2mm); }
+
+  /* ---------- Mito ou verdade ---------- */
+  .quiz { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; }
+  .quiz .tile { padding: 3mm 3.4mm; display: flex; flex-direction: column; gap: 0.8mm; }
+  .quiz b { font-weight: 600; line-height: 1.25; }
+  .quiz .v { font-weight: 700; font-size: var(--t-meta); }
+  .quiz .v.mito { color: var(--mito); }
+  .quiz .v.verdade { color: var(--verdade); }
+
+  /* ---------- Prevenção ---------- */
+  .prev .imagem { width: 46mm; margin-block: -2mm -3mm; }
+  .metodos { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 3mm; }
+  .metodos li { display: flex; gap: 2mm; align-items: baseline; line-height: 1.25; }
+  .metodos i { flex: none; width: 2.8mm; height: 2.8mm; border-radius: 50%; transform: translateY(0.3mm); }
+  .metodos small { display: block; color: var(--texto-2); font-size: var(--t-meta); }
+  .dicas { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+  .dicas li { background: var(--tile); border-radius: 3mm; padding: 2.4mm 3mm; line-height: 1.3; }
+  .dicas b { display: block; font-weight: 600; }
+  .dicas span { color: var(--texto-2); font-size: var(--t-meta); }
+
+  /* ---------- Teste ---------- */
+  .relogio { position: relative; width: 44mm; margin: -2mm auto -3mm; }
+  .relogio img { width: 100%; display: block; }
+  .relogio p { position: absolute; inset: 0; display: flex; align-items: baseline; justify-content: center; padding-top: 19.5mm; gap: 0.6mm; font-size: 17pt; font-weight: 700; letter-spacing: -0.05em; line-height: 1; }
+  .relogio small { font-size: 9pt; color: var(--texto-2); letter-spacing: -0.02em; }
+  .cura { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; }
+  .cura .tile { padding: 3mm 3.4mm; }
+  .cura h3 { font-size: 10pt; margin-bottom: 0.6mm; }
+  .cura p { color: var(--texto-2); font-size: var(--t-meta); line-height: 1.35; }
+
+  /* ---------- Onde buscar ---------- */
+  .locais { list-style: none; display: flex; flex-direction: column; gap: 2mm; }
+  .locais li { background: var(--tile); border-radius: 3mm; padding: 2.6mm 3.4mm; line-height: 1.35; }
+  .locais b { display: block; font-weight: 600; }
+  .locais span { color: var(--texto-2); }
+  .disque { display: flex; align-items: center; gap: 3mm; }
+  .disque b { font-size: 26pt; font-weight: 700; letter-spacing: -0.05em; line-height: 1; color: var(--azul); }
+  .mensagem { margin-top: auto; }
+  .mensagem p.grande { font-size: 15pt; font-weight: 700; letter-spacing: -0.03em; line-height: 1.12; }
+  .mensagem p + p { margin-top: 1.6mm; color: var(--texto-2); }
+
+  .fontes { margin-top: auto; }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1: lado de fora [aba interna] [verso] [capa] ============ -->
+<section class="pagina" aria-label="Lado de fora do folder">
+
+  <article class="painel aba">
+    <h2>O que são ISTs.</h2>
+    <p class="lead">IST é <strong>Infecção Sexualmente Transmissível</strong>. Quem causa são vírus, bactérias e protozoários. O caminho mais comum é o sexo oral, vaginal ou anal sem camisinha.</p>
+
+    <img class="imagem" src="img/anel-micro.png" alt="">
+    <p class="legenda-tipos"><span><i style="background:var(--c0)"></i>vírus</span><span><i style="background:var(--c3)"></i>bactérias</span><span><i style="background:var(--c2)"></i>protozoários</span></p>
+
+    <ul class="linhas">
+      <li>HIV, HPV, herpes, hepatites B e C <span>vírus</span></li>
+      <li>Sífilis, gonorreia, clamídia <span>bactéria</span></li>
+      <li>Tricomoníase <span>protozoário</span></li>
+    </ul>
+
+    <div>
+      <h3>Boa parte não dá sintoma nenhum.</h3>
+      <p>Quando aparece algo: corrimento diferente, ferida, bolha ou verruga na região genital, dor ou ardência ao fazer xixi. Vá ao posto. Pomada e antibiótico por conta própria só escondem o problema.</p>
+    </div>
+  </article>
+
+  <article class="painel">
+    <h2>Onde buscar orientação e atendimento.</h2>
+    <p class="lead">Tudo de graça pelo SUS. O que você conta fica entre você e a equipe, e adolescente tem direito a ser atendido com privacidade.</p>
+
+    <ul class="locais">
+      <li><b>UBS (posto de saúde)</b><span>Camisinha na hora, teste rápido, vacina e consulta.</span></li>
+      <li><b>CTA</b><span>Centro de Testagem e Aconselhamento. Teste e conversa com um profissional.</span></li>
+      <li><b>UPA ou pronto-socorro</b><span>Transou sem camisinha ou ela estourou? Comece a PEP em até 72 horas.</span></li>
+      <li><b>Na escola</b><span>Professores e coordenação tiram dúvidas e encaminham para o posto.</span></li>
+    </ul>
+
+    <div class="disque"><b>136</b><p><strong>Disque Saúde</strong><br>Ligue de graça e tire suas dúvidas.</p></div>
+
+    <div class="mensagem">
+      <p class="grande">Informação protege. Camisinha, vacina e teste também.</p>
+      <p>Pegar camisinha no posto e fazer teste é rotina de quem se cuida. Faz bem para você e para quem está com você.</p>
+    </div>
+  </article>
+
+  <article class="painel capa">
+    <div>
+      <h1>ISTs.</h1>
+      <p class="sub">Informação e prevenção.</p>
+      <p class="chamada">O que é, como pega, como evitar e onde fazer o teste.</p>
+    </div>
+    <img class="imagem" src="img/anel-capa.png" alt="Anel 3D colorido de oito partes, símbolo da prevenção combinada">
+    <p class="rodape">Folder de conscientização sobre saúde sexual</p>
+  </article>
+</section>
+
+<!-- ============ PÁGINA 2: lado de dentro ============ -->
+<section class="pagina" aria-label="Lado de dentro do folder">
+
+  <article class="painel">
+    <h2>Como se pega.</h2>
+    <ul class="linhas">
+      <li><strong>Sexo sem camisinha</strong> <span>oral, vaginal ou anal</span></li>
+      <li><strong>Da gestante para o bebê</strong> <span>gravidez, parto, amamentação</span></li>
+      <li><strong>Seringa e agulha</strong> <span>inclusive tatuagem e piercing</span></li>
+      <li><strong>Ferida ou verruga</strong> <span>herpes, HPV e sífilis</span></li>
+      <li><strong>Transfusão</strong> <span>rara: todo sangue doado é testado</span></li>
+    </ul>
+
+    <h2 style="margin-top:2mm">Mito ou verdade?</h2>
+    <div class="quiz">
+      <div class="tile"><b>Beijo no rosto passa HIV.</b><span class="v mito">Mito</span></div>
+      <div class="tile"><b>Sexo oral passa sífilis.</b><span class="v verdade">Verdade</span></div>
+      <div class="tile"><b>Copo e talher passam HIV.</b><span class="v mito">Mito</span></div>
+      <div class="tile"><b>A gestante pode passar sífilis ao bebê.</b><span class="v verdade">Verdade</span></div>
+      <div class="tile"><b>Picada de mosquito passa HIV.</b><span class="v mito">Mito</span></div>
+      <div class="tile"><b>Indetectável não transmite HIV pelo sexo.</b><span class="v verdade">Verdade</span></div>
+    </div>
+
+    <p class="meta">Dá para dividir a casa, a sala de aula e o lanche com quem vive com HIV. O que atrapalha é o preconceito: tem gente que deixa de fazer o teste com medo de ser julgada.</p>
+  </article>
+
+  <article class="painel prev">
+    <h2>Monte sua prevenção.</h2>
+    <p class="lead">Ninguém precisa ficar com um método só. A <strong>prevenção combinada</strong> mistura vários. Cada cor do anel é um deles.</p>
+
+    <img class="imagem" src="img/anel-prevencao.png" alt="Anel 3D aberto em oito partes coloridas">
+
+    <ul class="metodos">
+      <li><i style="background:var(--c0)"></i><span>Camisinha<small>externa ou interna</small></span></li>
+      <li><i style="background:var(--c1)"></i><span>Vacina<small>HPV e hepatite B</small></span></li>
+      <li><i style="background:var(--c2)"></i><span>Teste de rotina<small>uma vez por ano</small></span></li>
+      <li><i style="background:var(--c3)"></i><span>PrEP<small>remédio antes, contra HIV</small></span></li>
+      <li><i style="background:var(--c4)"></i><span>PEP<small>até 72 h depois do risco</small></span></li>
+      <li><i style="background:var(--c5)"></i><span>Tratamento<small>da IST e da parceria</small></span></li>
+      <li><i style="background:var(--c6)"></i><span>Pré-natal<small>com testes</small></span></li>
+      <li><i style="background:var(--c7)"></i><span>Seringa descartável<small>nunca compartilhada</small></span></li>
+    </ul>
+
+    <div>
+      <h3>A camisinha vem primeiro.</h3>
+      <p>Barra a maioria das ISTs e ainda evita gravidez. No posto é de graça e sem receita.</p>
+    </div>
+    <ul class="dicas">
+      <li><b>Aperte a embalagem</b><span>tem que ter ar dentro</span></li>
+      <li><b>Antes de tudo</b><span>coloque antes de qualquer contato</span></li>
+      <li><b>Uma por relação</b><span>duas juntas rasgam</span></li>
+      <li><b>Lubrificante à base de água</b><span>óleo estraga o látex</span></li>
+    </ul>
+  </article>
+
+  <article class="painel">
+    <h2>Testagem e diagnóstico.</h2>
+    <div class="relogio">
+      <img src="img/anel-relogio.png" alt="">
+      <p>30<small>min</small></p>
+    </div>
+    <p class="lead">É quanto demora o teste rápido de HIV, sífilis e hepatites B e C. Uma picada no dedo, de graça e com sigilo.</p>
+
+    <div>
+      <h3>Quando fazer</h3>
+      <ul class="linhas">
+        <li>Depois de transar sem camisinha</li>
+        <li>Antes de dispensar a camisinha num namoro</li>
+        <li>Na gravidez, junto com a parceria</li>
+        <li>Uma vez por ano, no mínimo</li>
+      </ul>
+    </div>
+
+    <div class="cura">
+      <div class="tile"><h3>Têm cura</h3><p>Sífilis, gonorreia, clamídia, tricomoníase e hepatite C.</p></div>
+      <div class="tile"><h3>Têm controle</h3><p>HIV, hepatite B, herpes e HPV.</p></div>
+    </div>
+
+    <div>
+      <h3>Se não tratar</h3>
+      <p class="meta" style="color:var(--texto)">Infertilidade (clamídia e gonorreia), câncer pelo HPV, cirrose (hepatites), lesões no coração e no cérebro (sífilis), aids (HIV) e sífilis congênita no bebê.</p>
+    </div>
+
+    <p class="meta fontes">Fontes: Ministério da Saúde (gov.br/aids) e PCDT para Atenção Integral às Pessoas com IST (2022).</p>
+  </article>
+</section>
+
+</body>
+</html>
