@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Folder ISTs (zine)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&display=swap" rel="stylesheet">
+<style>
+  /* Versão zine: imita impressão em risografia com três tintas reais da Riso
+     (azul Federal, rosa fluorescente e amarelo) sobre papel offset. */
+  :root {
+    --papel: #FBFAF6;
+    --azul: #2E3F7C;
+    --rosa: #FF48B0;
+    --rosa-tinta: #FFD3EA;
+    --amarelo: #FFE800;
+
+    --t-meta: 9pt;
+    --t-corpo: 10pt;
+    --t-sub: 12pt;
+    --t-titulo: 25pt;
+  }
+
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--papel);
+    color: var(--azul);
+    font-family: "Archivo", sans-serif;
+    font-stretch: 100%;
+    font-size: var(--t-corpo);
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pagina {
+    width: 297mm; height: 210mm;
+    display: grid;
+    grid-template-columns: repeat(3, 99mm);
+    overflow: hidden;
+    break-after: page;
+  }
+  .pagina:last-child { break-after: auto; }
+
+  .painel {
+    position: relative;
+    padding: 9mm;
+    display: flex; flex-direction: column;
+    gap: 3.6mm;
+    overflow: hidden;
+  }
+
+  /* Retícula de pontos, como sai na risografia */
+  .reticula {
+    background-image: radial-gradient(circle, var(--rosa) 0.42mm, transparent 0.46mm);
+    background-size: 1.6mm 1.6mm;
+  }
+
+  h1, h2, h3 { font-weight: 700; line-height: 0.95; }
+  h2 {
+    font-size: var(--t-titulo);
+    font-stretch: 62%;
+    letter-spacing: -0.005em;
+    position: relative;
+    z-index: 1;
+  }
+  h3 { font-size: var(--t-sub); font-stretch: 75%; line-height: 1.1; margin-bottom: 1.6mm; }
+  strong { font-weight: 700; }
+
+  .lista { list-style: none; display: flex; flex-direction: column; gap: 1.6mm; }
+  .lista li { padding-left: 5mm; position: relative; }
+  .lista li::before {
+    content: "";
+    position: absolute; left: 0; top: 0.42em;
+    width: 2.4mm; height: 2.4mm;
+    background: var(--rosa);
+    mix-blend-mode: multiply;
+  }
+
+  .caixa { padding: 4mm; }
+  .caixa-rosa { background: var(--rosa-tinta); }
+  .caixa-amarela { background: var(--amarelo); }
+
+  .meta { font-size: var(--t-meta); line-height: 1.4; }
+
+  /* ---------- Capa ---------- */
+  .capa { justify-content: space-between; padding-top: 12mm; }
+  .capa .bola {
+    position: absolute;
+    width: 104mm; height: 104mm;
+    border-radius: 50%;
+    right: -36mm; top: -18mm;
+  }
+  .capa h1 {
+    position: relative;
+    font-size: 150pt;
+    font-stretch: 62%;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    color: var(--azul);
+    /* rosa levemente fora de registro, como na Riso */
+    text-shadow: 1.6mm 1.2mm 0 var(--rosa);
+    margin-top: 10mm;
+  }
+  .capa .faixa-amarela {
+    position: relative;
+    align-self: flex-start;
+    background: var(--amarelo);
+    font-size: 19pt;
+    font-weight: 700;
+    font-stretch: 75%;
+    line-height: 1;
+    padding: 2.4mm 3mm;
+    transform: rotate(-2deg);
+    margin-top: 6mm;
+  }
+  .capa .chamada {
+    position: relative; margin-top: auto;
+    font-size: 24pt; font-weight: 700; font-stretch: 62%; line-height: 1;
+  }
+  .capa .chamada small { display: block; margin-top: 2.4mm; font-size: 12pt; font-weight: 400; font-stretch: 100%; line-height: 1.4; }
+  .capa .base { display: flex; flex-direction: column; gap: 6mm; }
+  .capa .rodape { position: relative; font-size: var(--t-meta); }
+
+  /* ---------- Aba ---------- */
+  .exemplos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 4mm; }
+  .exemplos div { display: flex; flex-direction: column; line-height: 1.25; }
+  .exemplos b { font-weight: 700; }
+  .exemplos span { font-size: var(--t-meta); }
+
+  /* ---------- Não transmite ---------- */
+  .nao-transmite { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2mm 3mm; }
+  .nao-transmite li { display: flex; gap: 1.6mm; align-items: baseline; }
+  .nao-transmite svg { flex: none; width: 3mm; height: 3mm; transform: translateY(0.4mm); }
+
+  /* ---------- Prevenção ---------- */
+  .metodos { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+  .metodos li {
+    border: 0.5mm solid var(--azul);
+    padding: 1.2mm 2.4mm;
+    line-height: 1.2;
+  }
+  .metodos li b { display: block; font-stretch: 75%; font-size: 11pt; }
+
+  .selo {
+    position: absolute;
+    right: -3mm; top: -8mm;
+    width: 20mm; height: 20mm;
+    color: var(--azul);
+    border-radius: 50%;
+    background: var(--amarelo);
+    display: grid; place-items: center;
+    text-align: center;
+    font-weight: 700; font-stretch: 70%;
+    font-size: 10.5pt; line-height: 1;
+    transform: rotate(10deg);
+  }
+
+  .camisinha {
+    position: relative;
+    background: var(--azul);
+    color: var(--papel);
+    padding: 4mm 4mm 4mm;
+  }
+  .camisinha h3 { font-size: 15pt; font-stretch: 62%; color: var(--amarelo); max-width: 52mm; }
+
+  /* ---------- Testagem ---------- */
+  .tempo { display: flex; gap: 3mm; align-items: center; }
+  .tempo b {
+    font-size: 44pt; font-weight: 700; font-stretch: 62%;
+    line-height: 0.85; white-space: nowrap;
+    text-shadow: 0.8mm 0.6mm 0 var(--rosa);
+  }
+  .cura { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+
+  /* ---------- Onde buscar ---------- */
+  .locais { list-style: none; display: flex; flex-direction: column; gap: 2.4mm; }
+  .locais b { display: block; font-stretch: 75%; font-size: 11pt; }
+
+  .disque { display: flex; align-items: center; gap: 3mm; }
+  .disque b {
+    font-size: 40pt; font-weight: 700; font-stretch: 62%; line-height: 0.85;
+    text-shadow: 0.8mm 0.6mm 0 var(--rosa);
+  }
+
+  .mensagem {
+    margin-top: auto;
+    position: relative;
+    padding: 5mm;
+    background: var(--amarelo);
+  }
+  .mensagem p.grande {
+    font-size: 20pt; font-weight: 700; font-stretch: 62%; line-height: 0.95;
+  }
+  .mensagem p + p { margin-top: 2mm; }
+
+  .fontes { margin-top: auto; }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1: lado de fora [aba interna] [verso] [capa] ============ -->
+<section class="pagina" aria-label="Lado de fora do folder">
+
+  <article class="painel">
+    <h2>O que são ISTs?</h2>
+    <p>IST é <strong>Infecção Sexualmente Transmissível</strong>. Quem causa são vírus, bactérias e
+    protozoários. O caminho mais comum é o sexo oral, vaginal ou anal sem camisinha.</p>
+    <p>Boa parte delas <strong>não dá sintoma nenhum</strong>. Dá para ficar meses com uma IST, passar
+    para outra pessoa e nem desconfiar.</p>
+
+    <div class="caixa caixa-rosa">
+      <h3>As mais comuns</h3>
+      <div class="exemplos">
+        <div><b>HIV</b><span>vírus</span></div>
+        <div><b>Sífilis</b><span>bactéria</span></div>
+        <div><b>HPV</b><span>vírus</span></div>
+        <div><b>Gonorreia</b><span>bactéria</span></div>
+        <div><b>Clamídia</b><span>bactéria</span></div>
+        <div><b>Herpes genital</b><span>vírus</span></div>
+        <div><b>Hepatites B e C</b><span>vírus</span></div>
+        <div><b>Tricomoníase</b><span>protozoário</span></div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Fique de olho</h3>
+      <p>Corrimento diferente, ferida, bolha ou verruga na região genital. Dor ou ardência para fazer
+      xixi. Viu algo assim? Vá ao posto. Pomada e antibiótico por conta própria só escondem o problema.</p>
+    </div>
+
+    <p class="meta">Desde 2016 o Ministério da Saúde fala IST, e não DST. A infecção existe e passa
+    adiante mesmo quando o corpo não dá sinal.</p>
+  </article>
+
+  <article class="painel">
+    <h2>Onde buscar orientação e atendimento</h2>
+    <p>Tudo aqui é de graça pelo SUS, e o que você conta na consulta fica entre você e a equipe.
+    Adolescente tem direito a ser atendido com privacidade.</p>
+
+    <ul class="lista locais">
+      <li><b>UBS (posto de saúde)</b>Camisinha na hora, teste rápido, vacina e consulta.</li>
+      <li><b>CTA</b>Centro de Testagem e Aconselhamento. Você faz o teste e conversa com um profissional sobre o resultado.</li>
+      <li><b>UPA ou pronto-socorro</b>Transou sem camisinha ou ela estourou? Vá logo começar a PEP. O prazo é de 72 horas.</li>
+      <li><b>Na escola</b>Professores e coordenação podem tirar dúvidas e encaminhar você para o posto.</li>
+    </ul>
+
+    <div class="disque">
+      <b>136</b>
+      <p><strong>Disque Saúde</strong><br>Ligue de graça e tire suas dúvidas.</p>
+    </div>
+
+    <div class="mensagem">
+      <p class="grande">Informação protege. Camisinha, vacina e teste também.</p>
+      <p>Pegar camisinha no posto e fazer teste é rotina de quem se cuida. Faz bem para você e para
+      quem está com você.</p>
+    </div>
+  </article>
+
+  <article class="painel capa">
+    <div class="bola reticula" aria-hidden="true"></div>
+    <div>
+      <h1>ISTs</h1>
+      <p class="faixa-amarela">Informação e prevenção</p>
+    </div>
+    <div class="base">
+      <p class="chamada">O que é.<br>Como pega.<br>Como evitar.<br>Onde fazer o teste.<small>Está tudo aqui dentro.</small></p>
+      <p class="rodape">Folder de conscientização sobre saúde sexual</p>
+    </div>
+  </article>
+</section>
+
+<!-- ============ PÁGINA 2: lado de dentro ============ -->
+<section class="pagina" aria-label="Lado de dentro do folder">
+
+  <article class="painel">
+    <h2>Como se pega uma IST</h2>
+    <ul class="lista">
+      <li><strong>Sexo sem camisinha</strong> com alguém infectado, seja oral, vaginal ou anal. É de longe o jeito mais comum.</li>
+      <li><strong>Da gestante para o bebê</strong>, na gravidez, no parto ou ao amamentar.</li>
+      <li><strong>Seringa e agulha compartilhadas</strong>, inclusive em tatuagem e piercing feitos sem material descartável.</li>
+      <li><strong>Contato com ferida ou verruga</strong> na pele e na mucosa. É assim que herpes, HPV e sífilis costumam passar.</li>
+      <li><strong>Transfusão de sangue</strong>, hoje rara no Brasil. Todo sangue doado passa por teste.</li>
+    </ul>
+
+    <div class="caixa caixa-amarela">
+      <h3>Isso não transmite HIV</h3>
+      <ul class="nao-transmite">
+        <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5l2.6 2.6L9 1.8" fill="none" stroke="#2E3F7C" stroke-width="1.8"/></svg>Abraço</li>
+        <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5l2.6 2.6L9 1.8" fill="none" stroke="#2E3F7C" stroke-width="1.8"/></svg>Aperto de mão</li>
+        <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5l2.6 2.6L9 1.8" fill="none" stroke="#2E3F7C" stroke-width="1.8"/></svg>Beijo no rosto</li>
+        <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5l2.6 2.6L9 1.8" fill="none" stroke="#2E3F7C" stroke-width="1.8"/></svg>Copo e talher</li>
+        <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5l2.6 2.6L9 1.8" fill="none" stroke="#2E3F7C" stroke-width="1.8"/></svg>Piscina</li>
+        <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5l2.6 2.6L9 1.8" fill="none" stroke="#2E3F7C" stroke-width="1.8"/></svg>Banheiro</li>
+        <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5l2.6 2.6L9 1.8" fill="none" stroke="#2E3F7C" stroke-width="1.8"/></svg>Suor e lágrima</li>
+        <li><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 5.5l2.6 2.6L9 1.8" fill="none" stroke="#2E3F7C" stroke-width="1.8"/></svg>Picada de inseto</li>
+      </ul>
+    </div>
+
+    <p class="meta">Dá para dividir a casa, a sala de aula e o lanche com quem vive com HIV. O que
+    atrapalha é o preconceito: tem gente que deixa de fazer o teste com medo de ser julgada.</p>
+  </article>
+
+  <article class="painel">
+    <h2>Como se proteger</h2>
+    <p>Ninguém precisa ficar com um método só. A <strong>prevenção combinada</strong> mistura vários,
+    e você monta a combinação que cabe na sua rotina.</p>
+
+    <ul class="metodos">
+      <li><b>Camisinha</b>externa ou interna</li>
+      <li><b>Vacina</b>de HPV e hepatite B</li>
+      <li><b>PrEP</b>remédio antes, contra o HIV</li>
+      <li><b>PEP</b>remédio depois da exposição</li>
+      <li><b>Teste</b>de rotina</li>
+      <li><b>Tratamento</b>da IST e da parceria</li>
+      <li><b>Pré-natal</b>com testes</li>
+      <li><b>Seringa</b>só descartável</li>
+    </ul>
+
+    <div class="camisinha">
+      <p class="selo">Grátis<br>no SUS</p>
+      <h3>Por que a camisinha vem primeiro</h3>
+      <p>Ela barra a maioria das ISTs e ainda evita gravidez. Nenhum outro método faz as duas coisas.
+      No posto é de graça e sem receita.</p>
+    </div>
+
+    <ul class="lista">
+      <li>Olhe a validade e aperte a embalagem: tem que ter ar dentro.</li>
+      <li>Coloque antes de qualquer contato.</li>
+      <li>Uma por relação. Duas juntas rasgam com o atrito.</li>
+      <li>Lubrificante à base de água. Óleo estraga o látex.</li>
+    </ul>
+    <p class="meta">HPV e herpes passam pela pele que a camisinha não cobre. Para o HPV, a vacina
+    resolve essa parte.</p>
+  </article>
+
+  <article class="painel">
+    <h2>Testagem e diagnóstico</h2>
+    <div class="tempo">
+      <b>30 min</b>
+      <p>É quanto demora o teste rápido de HIV, sífilis e hepatites B e C. Uma picada no dedo, de graça
+      e com sigilo.</p>
+    </div>
+
+    <div>
+      <h3>Quando fazer</h3>
+      <ul class="lista">
+        <li>Depois de transar sem camisinha.</li>
+        <li>Antes de dispensar a camisinha num namoro.</li>
+        <li>Na gravidez, junto com a parceria.</li>
+        <li>Uma vez por ano, no mínimo, se você tem vida sexual.</li>
+      </ul>
+    </div>
+
+    <div class="cura">
+      <div class="caixa caixa-rosa">
+        <h3>Têm cura</h3>
+        <p>Sífilis, gonorreia, clamídia, tricomoníase e hepatite C.</p>
+      </div>
+      <div class="caixa caixa-rosa">
+        <h3>Têm tratamento e controle</h3>
+        <p>HIV, hepatite B, herpes e HPV.</p>
+      </div>
+    </div>
+
+    <div>
+      <h3>O que acontece se não tratar</h3>
+      <ul class="lista">
+        <li>Infertilidade (clamídia e gonorreia).</li>
+        <li>Câncer de colo do útero, ânus, pênis e garganta (HPV).</li>
+        <li>Cirrose e câncer de fígado (hepatites B e C).</li>
+        <li>Sífilis no coração, no cérebro e nos nervos.</li>
+        <li>Aids, quando o HIV fica sem remédio.</li>
+        <li>Sífilis congênita: aborto, parto prematuro e sequelas no bebê.</li>
+      </ul>
+    </div>
+
+    <p class="meta fontes">Fontes: Ministério da Saúde (gov.br/aids) e Protocolo Clínico e Diretrizes
+    Terapêuticas para Atenção Integral às Pessoas com IST (2022).</p>
+  </article>
+</section>
+
+</body>
+</html>

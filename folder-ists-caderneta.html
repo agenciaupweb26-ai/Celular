@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Folder ISTs (caderneta)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Versão caderneta: imita o cartão de saúde do posto. Papel amarelo-cartão,
+     tinta de caneta esferográfica azul, carimbo vermelho e campos para preencher. */
+  :root {
+    --papel: #FFFFFF;
+    --cartao: #F3E3A6;
+    --cartao-claro: #FAF1CF;
+    --caneta: #1B2F7A;
+    --texto: #2A2A2A;
+    --carimbo: #B3261E;
+    --linha: #B9AD82;
+
+    --t-meta: 9pt;
+    --t-corpo: 9.75pt;
+    --t-sub: 11pt;
+    --t-titulo: 16pt;
+  }
+
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--papel);
+    color: var(--texto);
+    font-family: "Public Sans", sans-serif;
+    font-size: var(--t-corpo);
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pagina {
+    width: 297mm; height: 210mm;
+    display: grid;
+    grid-template-columns: repeat(3, 99mm);
+    overflow: hidden;
+    break-after: page;
+  }
+  .pagina:last-child { break-after: auto; }
+
+  .painel {
+    position: relative;
+    padding: 9mm;
+    display: flex; flex-direction: column;
+    gap: 3.6mm;
+    overflow: hidden;
+  }
+
+  h1, h2, h3 { color: var(--caneta); line-height: 1.15; }
+  h2 {
+    font-size: var(--t-titulo);
+    font-weight: 700;
+    padding-bottom: 1.6mm;
+    border-bottom: 0.6mm solid var(--caneta);
+  }
+  h3 { font-size: var(--t-sub); font-weight: 600; margin-bottom: 1.2mm; }
+  strong { font-weight: 600; color: var(--caneta); }
+
+  .datilo { font-family: "Courier Prime", monospace; }
+  .meta { font-size: var(--t-meta); line-height: 1.4; color: #4A4740; }
+
+  .lista { list-style: none; display: flex; flex-direction: column; gap: 1.2mm; }
+  .lista li { padding-left: 4mm; position: relative; }
+  .lista li::before {
+    content: "";
+    position: absolute; left: 0.4mm; top: 0.62em;
+    width: 1.6mm; height: 0.5mm;
+    background: var(--caneta);
+  }
+
+  /* Caixinhas de marcar */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 1.2mm; }
+  .checklist li { display: flex; gap: 2mm; align-items: baseline; }
+  .checklist li::before {
+    content: "";
+    flex: none;
+    width: 3mm; height: 3mm;
+    border: 0.35mm solid var(--caneta);
+    transform: translateY(0.5mm);
+  }
+
+  /* Tabelas no estilo da caderneta */
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; padding: 1.2mm 1.6mm; border-bottom: 0.25mm solid var(--linha); }
+  th {
+    font-family: "Courier Prime", monospace;
+    font-weight: 700;
+    font-size: var(--t-meta);
+    color: var(--caneta);
+    border-bottom: 0.4mm solid var(--caneta);
+  }
+  td:first-child { font-weight: 600; color: var(--caneta); white-space: nowrap; }
+  .sem-destaque td:first-child { font-weight: 400; color: inherit; }
+  .tabela { background: var(--cartao-claro); border: 0.25mm solid var(--linha); }
+
+  /* Carimbos */
+  .carimbo {
+    display: inline-block;
+    font-family: "Courier Prime", monospace;
+    font-weight: 700;
+    color: var(--carimbo);
+    border: 0.7mm solid var(--carimbo);
+    outline: 0.3mm solid var(--carimbo);
+    outline-offset: 0.6mm;
+    border-radius: 1.2mm;
+    padding: 0.8mm 2.4mm;
+    line-height: 1.1;
+    text-align: center;
+    letter-spacing: 0.04em;
+    opacity: 0.92;
+  }
+
+  /* Campos para preencher */
+  .campo { display: flex; gap: 2mm; align-items: baseline; font-family: "Courier Prime", monospace; color: var(--caneta); }
+  .campo span { flex: 1; border-bottom: 0.3mm dotted var(--caneta); min-height: 5mm; }
+
+  /* ---------- Capa ---------- */
+  .capa { background: var(--cartao); justify-content: space-between; }
+  .capa .topo { display: flex; justify-content: space-between; align-items: baseline; color: var(--caneta); font-size: var(--t-meta); }
+  .capa h1 {
+    font-size: 86pt;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+  .capa .subtitulo { font-size: 17pt; font-weight: 600; color: var(--caneta); margin-top: 2mm; }
+  .capa .chamada { margin-top: 4mm; max-width: 72mm; font-size: 11pt; }
+  .capa .carimbos { position: relative; height: 34mm; }
+  .capa .carimbos .c1 { position: absolute; left: 2mm; top: 2mm; font-size: 15pt; transform: rotate(-7deg); }
+  .capa .carimbos .c2 { position: absolute; right: 4mm; top: 15mm; font-size: 12pt; transform: rotate(5deg); }
+  .capa .campos { display: flex; flex-direction: column; gap: 2.4mm; }
+
+  /* ---------- Testagem ---------- */
+  .tempo { display: flex; gap: 3mm; align-items: center; }
+  .tempo .carimbo { font-size: 18pt; transform: rotate(-4deg); flex: none; }
+
+  /* ---------- Onde buscar ---------- */
+  .locais dt { font-weight: 700; color: var(--caneta); }
+  .locais dd { margin-bottom: 1.6mm; }
+
+  .anote {
+    border: 0.3mm solid var(--caneta);
+    padding: 3mm 3.6mm;
+    display: flex; flex-direction: column; gap: 2mm;
+    background: var(--cartao-claro);
+  }
+  .anote h3 { margin-bottom: 0; }
+
+  .mensagem {
+    margin-top: auto;
+    border-top: 0.6mm solid var(--caneta);
+    padding-top: 3mm;
+  }
+  .mensagem p.grande { font-size: 14pt; font-weight: 700; line-height: 1.2; color: var(--caneta); }
+  .mensagem p + p { margin-top: 1.6mm; }
+
+  .fontes { margin-top: auto; }
+
+  .camisinha { background: var(--cartao); padding: 3.6mm; position: relative; margin-bottom: 3.2mm; }
+  .camisinha .carimbo { position: absolute; right: 3mm; bottom: -3.6mm; font-size: 9pt; transform: rotate(-5deg); background: var(--cartao); }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1: lado de fora [aba interna] [verso] [capa] ============ -->
+<section class="pagina" aria-label="Lado de fora do folder">
+
+  <article class="painel">
+    <h2>O que são ISTs?</h2>
+    <p>IST é <strong>Infecção Sexualmente Transmissível</strong>. Quem causa são vírus, bactérias e
+    protozoários. O caminho mais comum é o sexo oral, vaginal ou anal sem camisinha.</p>
+    <p>Boa parte delas <strong>não dá sintoma nenhum</strong>. Dá para ficar meses com uma IST, passar
+    para outra pessoa e nem desconfiar.</p>
+
+    <table class="tabela">
+      <thead><tr><th>Infecção</th><th>Causada por</th></tr></thead>
+      <tbody>
+        <tr><td>HIV</td><td>vírus</td></tr>
+        <tr><td>Sífilis</td><td>bactéria</td></tr>
+        <tr><td>HPV</td><td>vírus</td></tr>
+        <tr><td>Gonorreia e clamídia</td><td>bactéria</td></tr>
+        <tr><td>Herpes genital</td><td>vírus</td></tr>
+        <tr><td>Hepatites B e C</td><td>vírus</td></tr>
+        <tr><td>Tricomoníase</td><td>protozoário</td></tr>
+      </tbody>
+    </table>
+
+    <div>
+      <h3>Fique de olho</h3>
+      <p>Corrimento diferente, ferida, bolha ou verruga na região genital. Dor ou ardência para fazer
+      xixi. Viu algo assim? Vá ao posto. Pomada e antibiótico por conta própria só escondem o problema.</p>
+    </div>
+
+    <p class="meta">Desde 2016 o Ministério da Saúde fala IST, e não DST. A infecção existe e passa
+    adiante mesmo quando o corpo não dá sinal.</p>
+  </article>
+
+  <article class="painel">
+    <h2>Onde buscar orientação e atendimento</h2>
+    <p>Tudo aqui é de graça pelo SUS, e o que você conta na consulta fica entre você e a equipe.
+    Adolescente tem direito a ser atendido com privacidade.</p>
+
+    <dl class="locais">
+      <dt>UBS (posto de saúde)</dt><dd>Camisinha na hora, teste rápido, vacina e consulta.</dd>
+      <dt>CTA</dt><dd>Centro de Testagem e Aconselhamento. Você faz o teste e conversa com um profissional sobre o resultado.</dd>
+      <dt>UPA ou pronto-socorro</dt><dd>Transou sem camisinha ou ela estourou? Vá logo começar a PEP. O prazo é de 72 horas.</dd>
+      <dt>Disque Saúde 136</dt><dd>Ligue de graça e tire suas dúvidas.</dd>
+    </dl>
+
+    <div class="anote">
+      <h3>Anote aqui</h3>
+      <p class="campo">UBS perto de casa:<span></span></p>
+      <p class="campo">Meu último teste:<span></span></p>
+      <p class="campo">Próximo teste:<span></span></p>
+    </div>
+
+    <div class="mensagem">
+      <p class="grande">Informação protege. Camisinha, vacina e teste também.</p>
+      <p>Pegar camisinha no posto e fazer teste é rotina de quem se cuida. Faz bem para você e para
+      quem está com você.</p>
+    </div>
+  </article>
+
+  <article class="painel capa">
+    <div class="topo datilo"><span>Cartão de cuidado</span><span>Saúde sexual</span></div>
+
+    <div>
+      <h1>ISTs</h1>
+      <p class="subtitulo">Informação e prevenção</p>
+      <p class="chamada">O que é, como pega, como evitar e onde fazer o teste. Está tudo aqui dentro.</p>
+    </div>
+
+    <div class="carimbos" aria-label="Grátis no SUS. Atendimento sigiloso.">
+      <span class="carimbo c1">GRÁTIS NO SUS</span>
+      <span class="carimbo c2">SIGILOSO</span>
+    </div>
+
+    <div class="campos">
+      <p class="campo">Nome:<span></span></p>
+      <p class="campo">Turma:<span></span></p>
+    </div>
+  </article>
+</section>
+
+<!-- ============ PÁGINA 2: lado de dentro ============ -->
+<section class="pagina" aria-label="Lado de dentro do folder">
+
+  <article class="painel">
+    <h2>Como se pega uma IST</h2>
+    <ul class="lista">
+      <li><strong>Sexo sem camisinha</strong> com alguém infectado, seja oral, vaginal ou anal. É de longe o jeito mais comum.</li>
+      <li><strong>Da gestante para o bebê</strong>, na gravidez, no parto ou ao amamentar.</li>
+      <li><strong>Seringa e agulha compartilhadas</strong>, inclusive em tatuagem e piercing feitos sem material descartável.</li>
+      <li><strong>Contato com ferida ou verruga</strong> na pele e na mucosa. É assim que herpes, HPV e sífilis costumam passar.</li>
+      <li><strong>Transfusão de sangue</strong>, hoje rara no Brasil. Todo sangue doado passa por teste.</li>
+    </ul>
+
+    <table class="tabela sem-destaque">
+      <thead><tr><th colspan="2">Isso não transmite HIV</th></tr></thead>
+      <tbody>
+        <tr><td>Abraço</td><td>Aperto de mão</td></tr>
+        <tr><td>Beijo no rosto</td><td>Copo e talher</td></tr>
+        <tr><td>Piscina</td><td>Banheiro</td></tr>
+        <tr><td>Suor e lágrima</td><td>Picada de inseto</td></tr>
+      </tbody>
+    </table>
+
+    <p class="meta">Dá para dividir a casa, a sala de aula e o lanche com quem vive com HIV. O que
+    atrapalha é o preconceito: tem gente que deixa de fazer o teste com medo de ser julgada.</p>
+  </article>
+
+  <article class="painel">
+    <h2>Como se proteger</h2>
+    <p>Ninguém precisa ficar com um método só. A <strong>prevenção combinada</strong> mistura vários,
+    e você monta a combinação que cabe na sua rotina. Marque o que você já usa:</p>
+
+    <ul class="checklist">
+      <li>Camisinha externa ou interna</li>
+      <li>Vacina contra HPV e hepatite B</li>
+      <li>PrEP: remédio antes, contra o HIV</li>
+      <li>PEP: remédio depois da exposição</li>
+      <li>Teste de rotina</li>
+      <li>Tratamento da IST e da parceria</li>
+      <li>Pré-natal com testes</li>
+      <li>Seringa e agulha só descartáveis</li>
+    </ul>
+
+    <div class="camisinha">
+      <span class="carimbo">SEM RECEITA</span>
+      <h3>Por que a camisinha vem primeiro</h3>
+      <p>Ela barra a maioria das ISTs e ainda evita gravidez. Nenhum outro método faz as duas coisas.
+      No posto é de graça.</p>
+    </div>
+
+    <ul class="lista">
+      <li>Olhe a validade e aperte a embalagem: tem que ter ar dentro.</li>
+      <li>Coloque antes de qualquer contato.</li>
+      <li>Uma por relação. Duas juntas rasgam com o atrito.</li>
+      <li>Lubrificante à base de água. Óleo estraga o látex.</li>
+    </ul>
+    <p class="meta">HPV e herpes passam pela pele que a camisinha não cobre. Para o HPV, a vacina
+    resolve essa parte.</p>
+  </article>
+
+  <article class="painel">
+    <h2>Testagem e diagnóstico</h2>
+    <div class="tempo">
+      <span class="carimbo">30 MIN</span>
+      <p>É quanto demora o teste rápido de HIV, sífilis e hepatites B e C. Uma picada no dedo, de graça
+      e com sigilo.</p>
+    </div>
+
+    <div>
+      <h3>Quando fazer</h3>
+      <ul class="checklist">
+        <li>Depois de transar sem camisinha.</li>
+        <li>Antes de dispensar a camisinha num namoro.</li>
+        <li>Na gravidez, junto com a parceria.</li>
+        <li>Uma vez por ano, no mínimo, se você tem vida sexual.</li>
+      </ul>
+    </div>
+
+    <table class="tabela">
+      <thead><tr><th>Têm cura</th><th>Têm tratamento e controle</th></tr></thead>
+      <tbody>
+        <tr><td style="white-space:normal">Sífilis, gonorreia, clamídia, tricomoníase e hepatite C</td>
+            <td style="font-weight:400;color:inherit">HIV, hepatite B, herpes e HPV</td></tr>
+      </tbody>
+    </table>
+
+    <div>
+      <h3>O que acontece se não tratar</h3>
+      <table>
+        <tbody>
+          <tr><td>Clamídia, gonorreia</td><td>Infertilidade</td></tr>
+          <tr><td>HPV</td><td>Câncer de colo do útero, ânus, pênis e garganta</td></tr>
+          <tr><td>Hepatites B e C</td><td>Cirrose e câncer de fígado</td></tr>
+          <tr><td>Sífilis</td><td>Lesões no coração, no cérebro e nos nervos</td></tr>
+          <tr><td>Sífilis na gravidez</td><td>Aborto, parto prematuro e sequelas no bebê</td></tr>
+          <tr><td>HIV</td><td>Aids</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="meta fontes">Fontes: Ministério da Saúde (gov.br/aids) e Protocolo Clínico e Diretrizes
+    Terapêuticas para Atenção Integral às Pessoas com IST (2022).</p>
+  </article>
+</section>
+
+</body>
+</html>
