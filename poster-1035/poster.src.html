@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <title>Time in Music — 10:35</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0B0C0E;        /* fundo */
-    --paper:#ECE8DF;      /* off-white quente, não branco puro */
+    --ink:#0B0C0E;
+    --paper:#F1ECE2;
     --mute:#8A8C91;
     --line:#2A2C31;
-    --blue:#2F6BFF;       /* um único acento */
+    --blue:#2F6BFF;
+    --pink:#FF4FA3;       /* segundo acento: as luzes do show */
     --W:1080px; --H:1620px; --M:72px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -20,148 +21,181 @@
     width:var(--W);height:var(--H);position:relative;overflow:hidden;
     background:var(--ink);color:var(--paper);
     font-family:"Archivo",sans-serif;
-    padding:var(--M);
-    display:grid;
-    grid-template-rows:auto auto auto 1fr auto;grid-template-columns:minmax(0,1fr);
+    display:flex;flex-direction:column;
   }
-  /* grão sutil de impressão */
   .poster::after{
-    content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:screen;
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.08;mix-blend-mode:overlay;z-index:20;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
   .mono{font-family:"JetBrains Mono",monospace;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
   .mute{color:var(--mute)}
 
-  /* topo */
-  .top{display:flex;justify-content:space-between;align-items:baseline;
-       padding-bottom:20px;border-bottom:1px solid var(--line)}
+  /* ── bloco azul sangrado ── */
+  .stage{background:var(--blue);color:var(--ink);padding:44px var(--M) 76px;position:relative}
+  .top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:18px;border-bottom:2px solid var(--ink)}
+  .kicker{margin-top:30px;display:flex;justify-content:space-between;align-items:flex-end}
+  .kicker h1{font-weight:800;font-stretch:72%;font-size:64px;line-height:.9;text-transform:uppercase;letter-spacing:-.01em}
+  .kicker h1 span{color:var(--paper)}
+  .kicker p{text-align:right;font-weight:500}
 
-  /* título */
-  .kicker{margin-top:40px;display:flex;justify-content:space-between;align-items:flex-end}
-  .kicker h1{
-    font-weight:800;font-stretch:72%;font-size:64px;line-height:.9;letter-spacing:-.01em;text-transform:uppercase;
+  .hero{
+    white-space:nowrap;font-weight:900;font-stretch:62%;
+    font-size:540px;line-height:.78;letter-spacing:-.035em;
+    margin:22px 0 0 -14px;color:var(--ink);
   }
-  .kicker h1 span{color:var(--blue)}
+  .hero .colon{animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:.15}}
 
-  .hero{white-space:nowrap;
-    font-weight:900;font-stretch:62%;
-    font-size:516px;line-height:.78;letter-spacing:-.035em;
-    color:var(--blue);
-    margin:28px 0 0 -14px;
-    font-variant-numeric:tabular-nums;
+  .ruler{margin-top:28px;position:relative;height:50px}
+  .ruler .ticks{position:absolute;left:0;right:0;top:0;height:20px;border-bottom:2px solid var(--ink);
+    background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px calc(100%/24))}
+  .ruler .night{position:absolute;top:22px;height:5px;background:var(--ink)}
+  .ruler .marker{position:absolute;top:-12px;width:6px;height:44px;background:var(--pink);transform:translateX(-50%)}
+  .ruler .labels{position:absolute;top:32px;left:0;right:0;display:flex;justify-content:space-between;font-weight:500}
+  .ruler .tag{position:absolute;top:32px;transform:translateX(-50%);color:var(--paper);font-weight:700}
+
+  /* ── faixa inclinada ── */
+  .band{
+    position:relative;z-index:5;margin:-26px -40px 0;transform:rotate(-3.5deg);
+    background:var(--pink);color:var(--ink);overflow:hidden;
+    border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
   }
+  .band .track{display:flex;width:max-content;animation:marquee 14s linear infinite}
+  .band span{font-weight:900;font-stretch:72%;font-size:56px;line-height:1;text-transform:uppercase;
+    padding:12px 0;white-space:nowrap}
+  .band i{font-style:normal;display:inline-block;margin:0 26px;transform:translateY(-4px)}
+  @keyframes marquee{to{transform:translateX(-50%)}}
 
-  /* régua 24h */
-  .ruler{margin-top:30px;position:relative;height:58px}
-  .ruler .night{position:absolute;top:24px;height:3px;background:var(--mute);opacity:.5}
-  .ruler .ticks{position:absolute;left:0;right:0;top:0;height:22px;border-bottom:1px solid var(--mute);
-    background:repeating-linear-gradient(90deg,var(--mute) 0 1px,transparent 1px calc(100%/24));}
-  .ruler .marker{position:absolute;top:-10px;width:3px;height:42px;background:var(--blue)}
-  .ruler .labels{position:absolute;top:34px;left:0;right:0;display:flex;justify-content:space-between}
-  .ruler .tag{position:absolute;top:34px;transform:translateX(-50%);color:var(--blue)}
+  /* ── fotos ── */
+  .main{padding:0 var(--M) 56px;flex:1;display:flex;flex-direction:column}
+  .photos{margin-top:46px;display:grid;grid-template-columns:7fr 5fr;gap:20px;height:300px;position:relative}
+  .photos figure{position:relative;overflow:hidden;background:var(--ink)}
+  .photos img{width:100%;height:100%;object-fit:cover;display:block;filter:url(#gradmap) contrast(1.1)}
+  .photos figcaption{position:absolute;left:14px;bottom:12px;color:var(--paper);z-index:1;
+    background:var(--ink);padding:4px 8px}
 
-
-  /* faixa de imagens — duotone azul */
-  .photos{margin-top:36px;display:grid;grid-template-columns:7fr 5fr;gap:24px;height:220px}
-  .photos figure{position:relative;overflow:hidden;background:var(--blue)}
-  .photos img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.35) brightness(1.05);mix-blend-mode:multiply}
-  .photos figure::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(transparent,rgba(11,12,14,.85))}
-  .photos figcaption{position:absolute;left:14px;bottom:12px;color:var(--paper);z-index:1}
-
-  /* corpo: 12 colunas */
-  .body{
-    margin-top:40px;
-    display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;row-gap:30px;
-    align-content:start;
+  .sticker{
+    position:absolute;right:-26px;top:-62px;width:150px;height:150px;z-index:6;
+    border-radius:50%;background:var(--paper);color:var(--ink);
+    display:grid;place-items:center;transform:rotate(12deg);
   }
+  .sticker svg{position:absolute;inset:0;animation:spin 18s linear infinite}
+  .sticker b{font-weight:900;font-stretch:62%;font-size:44px;line-height:1;color:var(--blue)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ── corpo ── */
+  .body{margin-top:44px;display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;row-gap:34px;align-content:start}
   .facts{grid-column:1 / span 5;border-top:1px solid var(--line)}
   .facts dl{display:grid;grid-template-columns:120px 1fr}
   .facts dt,.facts dd{padding:11px 0;border-bottom:1px solid var(--line)}
-  .facts dd{font-size:22px;font-weight:500;font-stretch:100%}
+  .facts dd{font-size:22px;font-weight:500}
   .facts dd ol{list-style:none;display:flex;flex-wrap:wrap;gap:4px 18px}
 
   .lyric{grid-column:7 / span 6}
-  .lyric blockquote{
-    font-family:"Instrument Serif",serif;font-style:italic;
-    font-size:62px;line-height:.96;letter-spacing:-.01em;
-  }
-  .lyric blockquote em{font-style:italic;color:var(--blue)}
-  .lyric .pt{margin-top:18px;font-size:20px;line-height:1.4;color:var(--mute)}
+  .lyric blockquote{font-family:"Instrument Serif",serif;font-style:italic;font-size:64px;line-height:.96;letter-spacing:-.01em}
+  .lyric blockquote em{color:var(--blue)}
+  .lyric .pt{margin-top:16px;font-size:20px;line-height:1.4;color:var(--mute)}
   .lyric .pt b{font-weight:500;color:var(--paper)}
 
-  .opinion{grid-column:1 / span 7;font-size:27px;line-height:1.35;font-weight:400;font-stretch:100%;max-width:30ch}
-  .opinion .mono{display:block;margin-bottom:14px}
+  .opinion{grid-column:1 / span 7;font-size:27px;line-height:1.35;max-width:30ch;align-self:end}
+  .opinion .mono{display:block;margin-bottom:12px}
+  .opinion mark{background:none;color:var(--pink)}
 
   .listen{grid-column:9 / span 4;display:flex;gap:18px;align-items:flex-end;justify-self:end}
-  .qr{width:132px;height:132px;background:var(--paper);padding:10px;flex:none}
+  .qr{width:132px;height:132px;background:var(--paper);padding:10px;flex:none;box-shadow:8px 8px 0 var(--pink)}
   .qr svg{width:100%;height:100%;display:block}
   .listen p{line-height:1.5}
 
-  /* rodapé */
-  .foot{margin-top:32px;border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;align-items:flex-end}
-  .foot h2{font-weight:800;font-stretch:72%;font-size:68px;line-height:.9;text-transform:uppercase;letter-spacing:-.01em}
-  .foot h2 span{color:var(--blue)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
+<!-- mapa de cores: sombras = tinta, meios = azul, luzes = rosa -->
+<svg width="0" height="0" style="position:absolute">
+  <filter id="gradmap" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values=".33 .33 .33 0 0  .33 .33 .33 0 0  .33 .33 .33 0 0  0 0 0 1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.04 0.18 1 1"/>
+      <feFuncG type="table" tableValues="0.05 0.42 0.31 0.93"/>
+      <feFuncB type="table" tableValues="0.06 1 0.64 0.89"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
 <main class="poster">
 
-  <header class="top mono">
-    <span>Time in Music <span class="mute">/ Nº 01</span></span>
-    <span class="mute">Good music, better days</span>
-  </header>
+  <section class="stage">
+    <header class="top mono">
+      <span>Time in Music / Nº 01</span>
+      <span>Good music, better days</span>
+    </header>
 
-  <section>
     <div class="kicker">
       <h1>Time in <span>Music</span></h1>
-      <p class="mono mute" style="text-align:right">Tiësto ft. Tate McRae<br>2022 — Dance / Pop</p>
+      <p class="mono">Tiësto ft. Tate McRae<br>2022 — Dance / Pop</p>
     </div>
-    <div class="hero">10:35</div>
+
+    <div class="hero">10<span class="colon">:</span>35</div>
 
     <div class="ruler" aria-hidden="true">
+      <div class="ticks"></div>
       <div class="night" style="left:0;width:25%"></div>
       <div class="night" style="left:75%;width:25%"></div>
-      <div class="ticks"></div>
       <div class="marker" style="left:calc(100% * 22.583 / 24)"></div>
-      <div class="labels mono mute"><span>00</span><span>06</span><span>12</span><span>18</span><span style="visibility:hidden">24</span></div>
+      <div class="labels mono"><span>00</span><span>06</span><span>12</span><span>18</span><span style="visibility:hidden">24</span></div>
       <span class="tag mono" style="left:calc(100% * 22.583 / 24)">22:35</span>
     </div>
+  </section>
+
+  <div class="band" aria-label="Same song. Different time.">
+    <div class="track">
+      <span>Same song<i>✦</i>Different time<i>✦</i>Same song<i>✦</i>Different time<i>✦</i></span>
+      <span>Same song<i>✦</i>Different time<i>✦</i>Same song<i>✦</i>Different time<i>✦</i></span>
+    </div>
+  </div>
+
+  <section class="main">
     <div class="photos">
       <figure><img src="img/casal.png" alt="" style="object-position:50% 15%"><figcaption class="mono">Fig. 1 — The city at night</figcaption></figure>
-      <figure><img src="img/show.png" alt="" style="object-position:50% 30%"><figcaption class="mono">Fig. 2 — Night vibes</figcaption></figure>
+      <figure><img src="img/show.png" alt="" style="object-position:50% 30%"><figcaption class="mono">Fig. 2 — Lights up</figcaption></figure>
+
+      <div class="sticker" aria-label="Night vibes hit different">
+        <svg viewBox="0 0 150 150">
+          <defs><path id="c" d="M75,75 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"/></defs>
+          <text font-family="JetBrains Mono" font-weight="700" font-size="13" letter-spacing="2.6" fill="#0B0C0E">
+            <textPath href="#c">NIGHT VIBES ✦ HIT DIFFERENT ✦ NIGHT VIBES ✦</textPath>
+          </text>
+        </svg>
+        <b>22:35</b>
+      </div>
     </div>
+
+    <section class="body">
+      <div class="facts">
+        <dl>
+          <dt class="mono mute">Artist</dt><dd>Tiësto ft. Tate McRae</dd>
+          <dt class="mono mute">Year</dt><dd>2022</dd>
+          <dt class="mono mute">Time words</dt>
+          <dd><ol><li>10:35</li><li>Night</li><li>Late</li><li>Everyday</li></ol></dd>
+        </dl>
+      </div>
+
+      <figure class="lyric">
+        <blockquote>“Everyday feels like <em>10:35</em>”</blockquote>
+        <figcaption class="pt"><span class="mono" style="font-size:13px">PT —</span> <b>“Todos os dias parecem 10:35”</b></figcaption>
+      </figure>
+
+      <p class="opinion">
+        <span class="mono mute">Our take</span>
+        We love this song because it captures the <mark>excitement of nighttime.</mark>
+      </p>
+
+      <div class="listen">
+        <p class="mono">Scan<br>to listen<br><span class="mute">on Spotify</span></p>
+        <div class="qr">{{QR}}</div>
+      </div>
+    </section>
   </section>
-
-  <section class="body">
-    <div class="facts">
-      <dl>
-        <dt class="mono mute">Artist</dt><dd>Tiësto ft. Tate McRae</dd>
-        <dt class="mono mute">Year</dt><dd>2022</dd>
-        <dt class="mono mute">Time words</dt>
-        <dd><ol><li>10:35</li><li>Night</li><li>Late</li><li>Everyday</li></ol></dd>
-      </dl>
-    </div>
-
-    <figure class="lyric">
-      <blockquote>“Everyday feels like <em>10:35</em>”</blockquote>
-      <figcaption class="pt"><span class="mono" style="font-size:13px">PT —</span> <b>“Todos os dias parecem 10:35”</b></figcaption>
-    </figure>
-
-    <p class="opinion">
-      <span class="mono mute">Our take</span>
-      We love this song because it captures the excitement of nighttime.
-    </p>
-
-    <div class="listen">
-      <p class="mono">Scan<br>to listen<br><span class="mute">on Spotify</span></p>
-      <div class="qr">{{QR}}</div>
-    </div>
-  </section>
-
-  <footer class="foot">
-    <h2>Same song.<br><span>Different time.</span></h2>
-    <span class="mono mute">Tiësto × Tate McRae</span>
-  </footer>
 
 </main>
 </body>
