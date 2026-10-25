@@ -32,7 +32,7 @@ Enviar (Uploads) os arquivos da pasta `img/`:
 - `tiesto-airbeat-one-2017.jpg`: dentro da moldura polaroid
 
 ## 6. QR code
-Enviar `img/qr-spotify.svg` (já tem o logo do Spotify e abre a música). Ou, no Canva: Aplicativos → **QR Code** → colar:
+Enviar `img/spotify-code.png` (Spotify Code oficial, lê no app do Spotify em Buscar → câmera). Alternativa: Aplicativos → **QR Code** → colar:
 `https://open.spotify.com/track/6BePGk3eCan4FqaW2X8Qy3`
 
 ## 7. Créditos (rodapé, Montserrat 12, cinza)
