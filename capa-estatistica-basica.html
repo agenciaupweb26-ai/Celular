@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capa Estatística Básica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 2cm; }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #000000;
+    font-family: "Kalam", "Patrick Hand", "Comic Sans MS", cursive;
+    font-size: 14pt;
+    line-height: 1.35;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Área útil da folha A4 com margens de 2 cm: 17 cm x 25,7 cm */
+  .folha {
+    width: 17cm;
+    height: 25.6cm;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @media screen {
+    body { background: #e9e9e9; padding: 1cm 0; }
+    .folha {
+      background: #fff;
+      width: 21cm;
+      height: 29.7cm;
+      padding: 2cm;
+      box-shadow: 0 0 6px rgba(0,0,0,.2);
+    }
+  }
+
+  .topo { text-align: center; width: 100%; }
+
+  .disciplina {
+    margin: 0;
+    font-size: 16pt;
+    color: #444;
+  }
+
+  h1 {
+    margin: 0.6cm 0 0;
+    text-align: center;
+    color: #1f5fbf;
+    font-size: 48pt;
+    font-weight: 700;
+    line-height: 1.05;
+  }
+  .sublinhado {
+    display: block;
+    width: 12cm;
+    height: 14px;
+    margin: 4px auto 0;
+  }
+
+  .ilustracao { display: block; }
+
+  .frase {
+    margin: 0;
+    max-width: 13cm;
+    text-align: center;
+    font-size: 15pt;
+  }
+
+  .dados {
+    width: 100%;
+    border: 2px solid #333;
+    border-radius: 14px 10px 16px 8px;
+    padding: 0.5cm 0.7cm 0.3cm;
+  }
+  .campo {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.25cm;
+    margin-bottom: 0.45cm;
+  }
+  .campo span { white-space: nowrap; }
+  .campo i {
+    flex: 1;
+    border-bottom: 1.5px dashed #777;
+    height: 1em;
+  }
+  .linha-dupla { display: flex; gap: 0.8cm; }
+  .linha-dupla .campo { flex: 1; }
+</style>
+</head>
+<body>
+<main class="folha">
+
+  <header class="topo">
+    <p class="disciplina">Matemática</p>
+    <h1>Estatística Básica</h1>
+    <svg class="sublinhado" viewBox="0 0 450 14" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M5 8 C 80 4, 160 11, 240 7 S 380 5, 445 8" fill="none" stroke="#1f5fbf" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <!-- Ilustração central -->
+  <svg class="ilustracao" width="15cm" height="10.5cm" viewBox="0 0 600 420" role="img"
+       aria-label="Desenho de um gráfico de barras grande, uma lupa sobre ele, um gráfico de pizza e bonequinhos de palito">
+    <defs>
+      <g id="boneco" fill="none" stroke="#333" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="0" cy="0" r="11" fill="#fff7d6"/>
+        <path d="M0 11 L0.5 44"/>
+        <path d="M-16 22 Q0 27 16 21"/>
+        <path d="M0.5 44 L-12 67"/>
+        <path d="M0.5 44 L13 66"/>
+      </g>
+    </defs>
+
+    <!-- Gráfico de barras grande -->
+    <path d="M110 330 L111 230 L160 231 L159 330" fill="#a8dba0" stroke="#4f9a47" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M190 330 L191 150 L240 149 L239 330" fill="#a9c8f0" stroke="#3f74c2" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M270 330 L271 260 L320 261 L319 330" fill="#f7c58f" stroke="#d98a33" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M350 330 L351 190 L400 191 L399 330" fill="#e9b8d8" stroke="#b5679a" stroke-width="2.6" stroke-linejoin="round"/>
+    <!-- eixos -->
+    <path d="M85 70 Q83 200 86 334 Q260 332 440 335" fill="none" stroke="#333" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M78 80 L85 68 L92 80" fill="none" stroke="#333" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M430 327 L441 335 L430 342" fill="none" stroke="#333" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- linha de tendência -->
+    <path d="M120 205 Q 180 120 215 128 T 300 240 T 380 165" fill="none" stroke="#e05555" stroke-width="2.4" stroke-dasharray="8 6" stroke-linecap="round"/>
+    <circle cx="120" cy="205" r="5" fill="#e05555"/>
+    <circle cx="215" cy="128" r="5" fill="#e05555"/>
+    <circle cx="300" cy="240" r="5" fill="#e05555"/>
+    <circle cx="380" cy="165" r="5" fill="#e05555"/>
+
+    <!-- Gráfico de pizza -->
+    <g transform="translate(510 110)">
+      <path d="M0 0 L0 -62 A62 62 0 0 1 53.7 31 Z" fill="#a9c8f0" stroke="#333" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M0 0 L53.7 31 A62 62 0 0 1 -42 45.6 Z" fill="#f7c58f" stroke="#333" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M0 0 L-42 45.6 A62 62 0 0 1 0 -62 Z" fill="#a8dba0" stroke="#333" stroke-width="2.4" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Lupa sobre a barra azul -->
+    <g transform="translate(240 120)">
+      <path d="M38 40 L82 84" stroke="#8b5a2b" stroke-width="13" stroke-linecap="round" fill="none"/>
+      <circle cx="0" cy="0" r="50" fill="#e3f1fb" fill-opacity=".55" stroke="#333" stroke-width="5.5"/>
+      <path d="M-28 -14 Q-20 -32 0 -36" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+    </g>
+
+    <!-- Bonequinhos -->
+    <use href="#boneco" x="470" y="300"/>
+    <use href="#boneco" x="530" y="296"/>
+    <path d="M440 370 Q500 362 570 372" fill="none" stroke="#9a9a9a" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Sinais soltos -->
+    <text x="40" y="60" font-family="Kalam, cursive" font-size="34" fill="#3f74c2">%</text>
+    <text x="470" y="230" font-family="Kalam, cursive" font-size="30" fill="#d98a33">x̄</text>
+    <text x="30" y="395" font-family="Kalam, cursive" font-size="26" fill="#4f9a47">Σ</text>
+  </svg>
+
+  <p class="frase">Coletar, organizar, analisar e interpretar dados para tomar boas decisões.</p>
+
+  <section class="dados" aria-label="Dados do aluno">
+    <div class="campo"><span>Nome:</span><i></i></div>
+    <div class="linha-dupla">
+      <div class="campo"><span>Turma:</span><i></i></div>
+      <div class="campo"><span>Data:</span><i></i></div>
+    </div>
+    <div class="campo"><span>Professor(a):</span><i></i></div>
+    <div class="campo"><span>Escola:</span><i></i></div>
+  </section>
+
+</main>
+</body>
+</html>
