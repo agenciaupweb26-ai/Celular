@@ -10,6 +10,19 @@
 <style>
   @page { size: A4; margin: 2cm; }
 
+  :root {
+    --azul: #1f5fbf;
+    --azul-claro: #a9c8f0;
+    --verde: #4f9a47;
+    --verde-claro: #a8dba0;
+    --laranja: #d98a33;
+    --laranja-claro: #f7c58f;
+    --rosa: #b5679a;
+    --amarelo: #fff7d6;
+    --vermelho: #e05555;
+    --tinta: #333;
+  }
+
   * { box-sizing: border-box; }
 
   html, body {
@@ -19,7 +32,7 @@
     color: #000000;
     font-family: "Kalam", "Patrick Hand", "Comic Sans MS", cursive;
     font-size: 14pt;
-    line-height: 1.35;
+    line-height: 1.3;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -34,6 +47,7 @@
     flex-direction: column;
     justify-content: space-between;
   }
+  .folha + .folha { break-before: page; }
 
   @media screen {
     body { background: #e9e9e9; padding: 1cm 0; }
@@ -44,12 +58,14 @@
       padding: 2cm;
       box-shadow: 0 0 6px rgba(0,0,0,.2);
     }
+    .folha + .folha { margin-top: 1cm; }
   }
 
+  /* ---------- Títulos ---------- */
   h1 {
     margin: 0;
     text-align: center;
-    color: #1f5fbf;
+    color: var(--azul);
     font-size: 30pt;
     font-weight: 700;
     line-height: 1.1;
@@ -60,69 +76,182 @@
     height: 10px;
     margin: 2px auto 0;
   }
-
   h2 {
     margin: 0 0 0.15cm;
     font-size: 16pt;
     font-weight: 700;
-    color: #1f5fbf;
+    color: var(--azul);
   }
+  p { margin: 0 0 0.12cm; }
+  p:last-child { margin-bottom: 0; }
 
-  .bloco p { margin: 0 0 0.15cm; }
-  .bloco p:last-child { margin-bottom: 0; }
-
-  .termo { font-weight: 700; color: #1f5fbf; }
-
-  .dados-exemplo {
+  .chip {
     display: inline-block;
     padding: 0 0.2cm;
-    background: #fff7d6;
+    background: var(--amarelo);
     border-radius: 6px;
+    white-space: nowrap;
   }
-  .conta { margin-left: 0.4cm; }
+  .termo { font-weight: 700; color: var(--azul); }
   .resposta { color: #c0392b; font-weight: 700; }
+  svg text { font-family: "Kalam", cursive; }
 
-  .com-desenho {
+  /* ---------- Página 1 ---------- */
+  .resultados {
+    display: flex;
+    gap: 0.4cm;
+    margin-top: 0.15cm;
+  }
+  .resultado {
+    flex: 1;
+    padding: 0.15cm 0.3cm 0.2cm;
+    border: 2px solid;
+    font-size: 12.5pt;
+    line-height: 1.25;
+  }
+  .resultado b { display: block; font-size: 14pt; }
+  .resultado .valor {
+    display: block;
+    font-size: 24pt;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 0.1cm;
+  }
+  .r-media   { border-color: var(--verde);   border-radius: 14px 6px 12px 8px; background: #f1faf0; }
+  .r-moda    { border-color: var(--laranja); border-radius: 8px 14px 6px 12px; background: #fff6ec; }
+  .r-mediana { border-color: var(--azul);    border-radius: 12px 8px 14px 6px; background: #eef4fd; }
+  .r-media .valor   { color: var(--verde); }
+  .r-moda .valor    { color: var(--laranja); }
+  .r-mediana .valor { color: var(--azul); }
+
+  .fecho {
+    margin-bottom: 0.2cm;
     display: flex;
     align-items: center;
     gap: 0.6cm;
   }
-  .com-desenho .texto { flex: 1; }
-  .com-desenho svg { flex: none; }
+  .nota {
+    flex: 1;
+    background: #fff3b0;
+    padding: 0.35cm 0.45cm;
+    transform: rotate(-1.2deg);
+    border-radius: 2px 2px 10px 2px;
+    box-shadow: 2px 3px 0 #e3d27a;
+    position: relative;
+  }
+  .nota::before {
+    content: "";
+    position: absolute;
+    top: -0.22cm;
+    left: 50%;
+    width: 1.8cm;
+    height: 0.45cm;
+    margin-left: -0.9cm;
+    background: rgba(169, 200, 240, .75);
+    transform: rotate(2deg);
+  }
+  .nota h2 { color: #8a6d00; }
 
-  ol {
-    margin: 0;
-    padding-left: 0.7cm;
-  }
-  ol li { margin-bottom: 0.2cm; }
-  ol li:last-child { margin-bottom: 0; }
-
-  .linha {
-    display: block;
-    height: 0.75cm;
-    border-bottom: 1.5px dashed #888;
-  }
-  .opcoes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 0.6cm;
-    row-gap: 0.1cm;
-    margin-top: 0.1cm;
-  }
-  .opcoes span {
+  /* ---------- Página 2 ---------- */
+  .identificacao {
     display: flex;
-    gap: 0.2cm;
-    white-space: nowrap;
+    gap: 0.4cm;
+    margin-top: 0.25cm;
+    font-size: 13pt;
   }
-  .opcoes span::after {
+  .identificacao span { display: flex; gap: 0.15cm; white-space: nowrap; }
+  .identificacao span::after {
     content: "";
     flex: 1;
     border-bottom: 1.5px dashed #888;
     margin-bottom: 0.25em;
   }
+  .identificacao .nome { flex: 3; }
+  .identificacao .turma { flex: 1.2; }
+  .identificacao .data { flex: 1.4; }
+
+  .exercicio { display: flex; gap: 0.3cm; }
+  .numero {
+    flex: none;
+    width: 0.85cm;
+    height: 0.85cm;
+    border: 2px solid var(--azul);
+    border-radius: 50% 46% 52% 48%;
+    color: var(--azul);
+    font-weight: 700;
+    text-align: center;
+    line-height: 0.75cm;
+  }
+  .enunciado { flex: 1; }
+
+  .linha {
+    display: block;
+    height: 0.7cm;
+    border-bottom: 1.5px dashed #888;
+  }
+  .lacunas {
+    display: flex;
+    gap: 0.5cm;
+    margin-top: 0.1cm;
+  }
+  .lacunas span, .campo {
+    display: flex;
+    gap: 0.15cm;
+    flex: 1;
+    white-space: nowrap;
+  }
+  .lacunas span::after, .campo::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1.5px dashed #888;
+    margin-bottom: 0.25em;
+  }
+  .campo { margin-top: 0.15cm; }
+
+  table.marcar {
+    border-collapse: collapse;
+    margin-top: 0.1cm;
+    font-size: 13pt;
+  }
+  table.marcar th, table.marcar td {
+    border: 2px solid var(--tinta);
+    padding: 0.02cm 0.35cm;
+  }
+  table.marcar th { background: var(--azul-claro); font-weight: 400; }
+  table.marcar td { background: var(--amarelo); }
+  table.marcar td.caixa { text-align: center; width: 3.4cm; }
+  .quadradinho {
+    display: inline-block;
+    width: 0.45cm;
+    height: 0.45cm;
+    border: 2px solid var(--tinta);
+    border-radius: 3px 5px 2px 4px;
+    background: #fff;
+    vertical-align: middle;
+  }
+
+  .com-grafico {
+    display: flex;
+    gap: 0.4cm;
+    align-items: center;
+  }
+  .com-grafico svg { flex: none; }
+  .perguntas { flex: 1; }
+
+  .gabarito {
+    transform: rotate(180deg);
+    border-top: 1.5px dashed #999;
+    padding-top: 0.12cm;
+    font-size: 10.5pt;
+    line-height: 1.3;
+    color: #555;
+  }
+  .gabarito b { color: #333; }
 </style>
 </head>
 <body>
+
+<!-- ======================= PÁGINA 1 ======================= -->
 <main class="folha">
 
   <header>
@@ -132,87 +261,400 @@
     </svg>
   </header>
 
-  <!-- Exemplo resolvido -->
-  <section class="bloco">
-    <h2>Exemplo resolvido</h2>
-    <p>Livros lidos no ano por 7 alunos: <span class="dados-exemplo">6, 3, 10, 5, 11, 5, 9</span></p>
-    <p class="conta"><b>Em ordem:</b> 3, 5, 5, 6, 9, 10, 11</p>
-    <p class="conta"><b>Média:</b> (3 + 5 + 5 + 6 + 9 + 10 + 11) ÷ 7 = 49 ÷ 7 = <span class="resposta">7</span></p>
-    <p class="conta"><b>Moda:</b> o 5 aparece duas vezes → <span class="resposta">5</span></p>
-    <p class="conta"><b>Mediana:</b> o 4º valor está no meio → <span class="resposta">6</span></p>
-  </section>
+  <!-- Etapas de uma pesquisa -->
+  <section>
+    <h2>As etapas de uma pesquisa</h2>
+    <svg width="17cm" height="3.3cm" viewBox="0 0 680 144" role="img"
+         aria-label="Quatro etapas: perguntar, coletar, organizar e interpretar">
+      <!-- fundos -->
+      <circle cx="85"  cy="58" r="50" fill="#e3eefc"/>
+      <circle cx="265" cy="58" r="50" fill="#e6f5e3"/>
+      <circle cx="445" cy="58" r="50" fill="#fff1df"/>
+      <circle cx="625" cy="58" r="50" fill="#f6e6f0"/>
 
-  <!-- Tabela de frequência + gráfico -->
-  <section class="bloco com-desenho">
-    <div class="texto">
-      <h2>Da tabela para o gráfico</h2>
-      <p>Perguntamos a 16 alunos: <i>"Qual é a sua cor favorita?"</i></p>
-      <p>Cada aluno é contado uma vez na tabela. Depois, cada linha vira uma coluna no gráfico de barras.</p>
-      <p>A cor mais votada é a <span class="termo">moda</span>: <span class="resposta">azul</span>.</p>
-    </div>
-    <svg width="7.6cm" height="4.6cm" viewBox="0 0 310 188" role="img" aria-label="Tabela de frequência com azul 8, verde 5 e laranja 3, ao lado de um gráfico de barras com os mesmos valores">
-      <!-- tabela -->
-      <path d="M6 22 L120 20 L121 166 L5 168 Z" fill="#fff7d6" stroke="none"/>
-      <path d="M6 22 L120 20 L120 56 L6 57 Z" fill="#a9c8f0"/>
-      <g fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M6 22 L120 20 L121 166 L5 168 Z"/>
-        <path d="M74 21 Q75 95 74 167"/>
-        <path d="M6 57 Q63 55 120 56"/>
-        <path d="M5 94 Q63 95 121 93"/>
-        <path d="M5 131 Q63 130 121 131"/>
+      <!-- 1: balão com interrogação -->
+      <path d="M52 30 Q52 20 62 20 L108 20 Q118 20 118 30 L118 70 Q118 80 108 80 L82 80 L64 96 L68 80 L62 80 Q52 80 52 70 Z"
+            fill="#fff" stroke="#333" stroke-width="2.4" stroke-linejoin="round"/>
+      <text x="85" y="66" font-size="38" font-weight="700" text-anchor="middle" fill="#1f5fbf">?</text>
+
+      <!-- 2: prancheta -->
+      <path d="M240 22 L291 21 L292 100 L239 101 Z" fill="#fff" stroke="#333" stroke-width="2.4" stroke-linejoin="round"/>
+      <rect x="253" y="14" width="26" height="13" rx="3" fill="#8b5a2b" stroke="#333" stroke-width="2"/>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4">
+        <path d="M247 44 L252 50 L260 39" stroke="#4f9a47"/>
+        <path d="M247 64 L252 70 L260 59" stroke="#4f9a47"/>
+        <path d="M247 84 L252 90 L260 79" stroke="#4f9a47"/>
+        <path d="M266 46 L284 46 M266 66 L284 66 M266 86 L280 86" stroke="#333"/>
       </g>
-      <g font-family="Kalam, cursive" font-size="15" text-anchor="middle" fill="#000">
-        <text x="40" y="45">Cor</text>
-        <text x="97" y="45">Votos</text>
-        <text x="40" y="82">Azul</text>
-        <text x="97" y="82">8</text>
-        <text x="40" y="119">Verde</text>
-        <text x="97" y="119">5</text>
-        <text x="40" y="156">Laranja</text>
-        <text x="97" y="156">3</text>
-      </g>
-      <!-- seta -->
-      <path d="M132 94 Q146 88 160 94" fill="none" stroke="#e05555" stroke-width="2.2" stroke-linecap="round"/>
-      <path d="M153 88 L161 94 L153 99" fill="none" stroke="#e05555" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- barras: 1 aluno = 17px -->
-      <path d="M190 166 L191 30 L218 31 L217 166" fill="#a9c8f0" stroke="#3f74c2" stroke-width="2.2" stroke-linejoin="round"/>
-      <path d="M232 166 L233 81 L260 82 L259 166" fill="#a8dba0" stroke="#4f9a47" stroke-width="2.2" stroke-linejoin="round"/>
-      <path d="M274 166 L275 115 L302 116 L301 166" fill="#f7c58f" stroke="#d98a33" stroke-width="2.2" stroke-linejoin="round"/>
-      <g font-family="Kalam, cursive" font-size="14" text-anchor="middle" fill="#000">
-        <text x="204" y="24">8</text>
-        <text x="246" y="75">5</text>
-        <text x="288" y="109">3</text>
-      </g>
+
+      <!-- 3: tabela -->
+      <path d="M412 30 L478 29 L479 90 L411 91 Z" fill="#fff7d6"/>
+      <path d="M412 30 L478 29 L478 46 L412 46 Z" fill="#f7c58f"/>
       <g fill="none" stroke="#333" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M178 14 Q177 90 179 168 Q242 167 308 169"/>
-        <path d="M173 20 L178 13 L183 20"/>
+        <path d="M412 30 L478 29 L479 90 L411 91 Z"/>
+        <path d="M445 30 Q446 60 445 91"/>
+        <path d="M412 46 L478 46 M411 61 Q445 62 479 60 M411 76 L479 76"/>
+      </g>
+
+      <!-- 4: barras + lupa -->
+      <path d="M592 92 L593 62 L606 62 L605 92" fill="#a8dba0" stroke="#4f9a47" stroke-width="2"/>
+      <path d="M612 92 L613 40 L626 41 L625 92" fill="#a9c8f0" stroke="#3f74c2" stroke-width="2"/>
+      <path d="M632 92 L633 72 L646 72 L645 92" fill="#f7c58f" stroke="#d98a33" stroke-width="2"/>
+      <path d="M586 93 Q620 92 654 94" fill="none" stroke="#333" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M648 48 L664 64" stroke="#8b5a2b" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="636" cy="36" r="17" fill="#e3f1fb" fill-opacity=".6" stroke="#333" stroke-width="3"/>
+
+      <!-- setas -->
+      <g fill="none" stroke="#e05555" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M143 58 Q175 46 207 58"/><path d="M199 51 L208 58 L199 64"/>
+        <path d="M323 58 Q355 46 387 58"/><path d="M379 51 L388 58 L379 64"/>
+        <path d="M503 58 Q535 46 567 58"/><path d="M559 51 L568 58 L559 64"/>
+      </g>
+
+      <!-- rótulos -->
+      <g font-size="17" text-anchor="middle" fill="#000">
+        <text x="85"  y="132">1. Perguntar</text>
+        <text x="265" y="132">2. Coletar</text>
+        <text x="445" y="132">3. Organizar</text>
+        <text x="625" y="132">4. Interpretar</text>
       </g>
     </svg>
   </section>
 
-  <!-- Exercícios -->
-  <section class="bloco">
-    <h2>Agora é a sua vez</h2>
-    <ol>
-      <li>Gols de um time em 5 jogos: <span class="dados-exemplo">2, 4, 4, 5, 10</span>. Calcule a média, a moda e a mediana.
-        <span class="linha"></span>
-        <span class="linha"></span>
-      </li>
-      <li>Escreva se cada variável é <b>qualitativa</b> ou <b>quantitativa</b>:
-        <div class="opcoes">
-          <span>a) Cor dos olhos</span>
-          <span>b) Peso</span>
-          <span>c) Time do coração</span>
-          <span>d) Número de irmãos</span>
-        </div>
-      </li>
-      <li>Uma escola tem 300 alunos. A diretora entrevistou 40 deles sobre o lanche. Qual é a população e qual é a amostra?
-        <span class="linha"></span>
-        <span class="linha"></span>
-      </li>
-    </ol>
+  <!-- Exemplo resolvido -->
+  <section>
+    <h2>Exemplo resolvido</h2>
+    <p>Livros lidos no ano por 7 alunos: <span class="chip">6, 3, 10, 5, 11, 5, 9</span>. Em ordem:</p>
+    <svg width="17cm" height="3.25cm" viewBox="0 0 680 130" role="img"
+         aria-label="Os valores em ordem: 3, 5, 5, 6, 9, 10, 11. Os dois 5 são a moda e o 6, no meio, é a mediana">
+      <path d="M30 62 Q340 58 650 63" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round"/>
+      <!-- moda -->
+      <text x="205" y="16" font-size="16" text-anchor="middle" fill="#d98a33" font-weight="700">moda</text>
+      <path d="M190 22 L168 32 M220 22 L242 32" fill="none" stroke="#d98a33" stroke-width="2" stroke-linecap="round"/>
+      <!-- mediana -->
+      <circle cx="340" cy="62" r="36" fill="none" stroke="#1f5fbf" stroke-width="2.2" stroke-dasharray="7 5"/>
+      <!-- valores -->
+      <g stroke="#333" stroke-width="2.2">
+        <circle cx="70"  cy="62" r="25" fill="#fff7d6"/>
+        <circle cx="160" cy="62" r="25" fill="#f7c58f"/>
+        <circle cx="250" cy="62" r="25" fill="#f7c58f"/>
+        <circle cx="340" cy="62" r="25" fill="#a9c8f0"/>
+        <circle cx="430" cy="62" r="25" fill="#fff7d6"/>
+        <circle cx="520" cy="62" r="25" fill="#fff7d6"/>
+        <circle cx="610" cy="62" r="25" fill="#fff7d6"/>
+      </g>
+      <g font-size="22" text-anchor="middle" fill="#000">
+        <text x="70"  y="70">3</text>
+        <text x="160" y="70">5</text>
+        <text x="250" y="70">5</text>
+        <text x="340" y="70">6</text>
+        <text x="430" y="70">9</text>
+        <text x="520" y="70">10</text>
+        <text x="610" y="70">11</text>
+      </g>
+      <!-- chaves: 3 antes, 3 depois -->
+      <g fill="none" stroke="#777" stroke-width="2" stroke-linecap="round">
+        <path d="M45 96 Q45 104 55 104 L150 104 Q160 104 160 112 Q160 104 170 104 L265 104 Q275 104 275 96"/>
+        <path d="M405 96 Q405 104 415 104 L510 104 Q520 104 520 112 Q520 104 530 104 L625 104 Q635 104 635 96"/>
+      </g>
+      <text x="160" y="124" font-size="14" text-anchor="middle" fill="#555">3 valores antes</text>
+      <text x="520" y="124" font-size="14" text-anchor="middle" fill="#555">3 valores depois</text>
+      <text x="340" y="118" font-size="16" text-anchor="middle" fill="#1f5fbf" font-weight="700">mediana</text>
+    </svg>
+    <div class="resultados">
+      <div class="resultado r-media">
+        <b>Média</b>
+        (3+5+5+6+9+10+11) ÷ 7 = 49 ÷ 7
+        <span class="valor">7 livros</span>
+      </div>
+      <div class="resultado r-moda">
+        <b>Moda</b>
+        o 5 aparece duas vezes, mais que os outros
+        <span class="valor">5 livros</span>
+      </div>
+      <div class="resultado r-mediana">
+        <b>Mediana</b>
+        o 4º valor, com 3 de cada lado
+        <span class="valor">6 livros</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Da contagem ao gráfico -->
+  <section>
+    <h2>Da contagem ao gráfico</h2>
+    <p>Perguntamos a 16 alunos: <i>"Qual é a sua cor favorita?"</i> e marcamos um risquinho por resposta.</p>
+    <svg width="17cm" height="4.7cm" viewBox="0 0 680 208" role="img"
+         aria-label="Tabela de contagem com azul 8, verde 5 e laranja 3; os mesmos dados num gráfico de barras e num gráfico de setores com 50%, 31% e 19%">
+      <!-- tabela -->
+      <path d="M2 22 L262 20 L263 196 L1 198 Z" fill="#fff7d6"/>
+      <path d="M2 22 L262 20 L262 61 L2 62 Z" fill="#a9c8f0"/>
+      <g fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 22 L262 20 L263 196 L1 198 Z"/>
+        <path d="M88 21 Q89 110 88 197"/>
+        <path d="M200 21 Q201 110 200 197"/>
+        <path d="M2 62 Q130 60 262 61"/>
+        <path d="M1 107 Q130 108 263 106"/>
+        <path d="M1 152 Q130 151 263 152"/>
+      </g>
+      <g font-size="16" fill="#000">
+        <text x="45" y="48" text-anchor="middle">Cor</text>
+        <text x="144" y="48" text-anchor="middle">Contagem</text>
+        <text x="231" y="48" text-anchor="middle">Total</text>
+        <circle cx="18" cy="84" r="6" fill="#a9c8f0" stroke="#3f74c2" stroke-width="1.5"/>
+        <text x="30" y="90">Azul</text>
+        <circle cx="18" cy="129" r="6" fill="#a8dba0" stroke="#4f9a47" stroke-width="1.5"/>
+        <text x="30" y="135">Verde</text>
+        <circle cx="18" cy="174" r="6" fill="#f7c58f" stroke="#d98a33" stroke-width="1.5"/>
+        <text x="30" y="180">Laranja</text>
+        <g text-anchor="middle" font-size="18">
+          <text x="231" y="91">8</text>
+          <text x="231" y="136">5</text>
+          <text x="231" y="181">3</text>
+        </g>
+      </g>
+      <!-- risquinhos -->
+      <g fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round">
+        <!-- azul: 5 + 3 -->
+        <path d="M102 72 L102 96 M110 72 L110 96 M118 72 L118 96 M126 72 L126 96 M96 92 L132 76"/>
+        <path d="M146 72 L146 96 M154 72 L154 96 M162 72 L162 96"/>
+        <!-- verde: 5 -->
+        <path d="M102 117 L102 141 M110 117 L110 141 M118 117 L118 141 M126 117 L126 141 M96 137 L132 121"/>
+        <!-- laranja: 3 -->
+        <path d="M102 162 L102 186 M110 162 L110 186 M118 162 L118 186"/>
+      </g>
+
+      <!-- seta -->
+      <g fill="none" stroke="#e05555" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M274 110 Q290 100 306 110"/><path d="M298 104 L307 110 L298 116"/>
+      </g>
+
+      <!-- barras: 1 aluno = 17 px -->
+      <text x="395" y="14" font-size="14" text-anchor="middle" fill="#666">gráfico de barras</text>
+      <path d="M340 196 L341 60 L370 61 L369 196" fill="#a9c8f0" stroke="#3f74c2" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M384 196 L385 111 L414 112 L413 196" fill="#a8dba0" stroke="#4f9a47" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M428 196 L429 145 L458 146 L457 196" fill="#f7c58f" stroke="#d98a33" stroke-width="2.2" stroke-linejoin="round"/>
+      <g font-size="15" text-anchor="middle" fill="#000">
+        <text x="355" y="53">8</text>
+        <text x="399" y="104">5</text>
+        <text x="443" y="138">3</text>
+      </g>
+      <g fill="none" stroke="#333" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M326 32 Q325 110 327 198 Q395 197 470 199"/>
+        <path d="M321 38 L326 31 L331 38"/>
+      </g>
+
+      <!-- setores: 180°, 112,5°, 67,5° -->
+      <text x="590" y="14" font-size="14" text-anchor="middle" fill="#666">gráfico de setores</text>
+      <g stroke="#333" stroke-width="2.2" stroke-linejoin="round">
+        <path d="M590 115 L590 42 A73 73 0 0 1 590 188 Z" fill="#a9c8f0"/>
+        <path d="M590 115 L590 188 A73 73 0 0 1 522.6 87.1 Z" fill="#a8dba0"/>
+        <path d="M590 115 L522.6 87.1 A73 73 0 0 1 590 42 Z" fill="#f7c58f"/>
+      </g>
+      <g font-size="15" text-anchor="middle" fill="#000">
+        <text x="625" y="120">50%</text>
+        <text x="557" y="142">31%</text>
+        <text x="566" y="86">19%</text>
+      </g>
+    </svg>
+  </section>
+
+  <!-- Dica + mascote -->
+  <section class="fecho">
+    <div class="nota">
+      <h2>Dica</h2>
+      <p>Média, moda e mediana nem sempre dão o mesmo número. Cada uma resume os dados de um jeito, então vale calcular as três!</p>
+    </div>
+    <svg width="4cm" height="3.13cm" viewBox="0 0 184 144" role="img" aria-label="Bonequinho segurando uma lupa diz: os dados contam uma história">
+      <path d="M8 10 Q8 2 16 2 L172 2 Q180 2 180 10 L180 44 Q180 52 172 52 L80 52 L66 66 L68 52 L16 52 Q8 52 8 44 Z"
+            fill="#fff" stroke="#333" stroke-width="2.2" stroke-linejoin="round"/>
+      <text x="94" y="24" font-size="15" text-anchor="middle" fill="#000">Os dados contam</text>
+      <text x="94" y="43" font-size="15" text-anchor="middle" fill="#000">uma história!</text>
+      <g fill="none" stroke="#333" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="60" cy="84" r="12" fill="#fff7d6"/>
+        <path d="M55 82 L55 83 M65 82 L65 83"/>
+        <path d="M55 89 Q60 93 65 89"/>
+        <path d="M60 96 L60.5 124"/>
+        <path d="M42 108 Q50 104 60 106 Q72 104 86 96"/>
+        <path d="M60.5 124 L48 142"/>
+        <path d="M60.5 124 L72 142"/>
+      </g>
+      <path d="M92 92 L86 98" stroke="#8b5a2b" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="102" cy="80" r="14" fill="#e3f1fb" fill-opacity=".7" stroke="#333" stroke-width="3"/>
+    </svg>
   </section>
 
 </main>
+
+<!-- ======================= PÁGINA 2 ======================= -->
+<main class="folha">
+
+  <header>
+    <h1>Hora de Praticar</h1>
+    <svg class="sublinhado" viewBox="0 0 360 10" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 6 C 70 3, 130 8, 190 5 S 300 4, 356 6" fill="none" stroke="#1f5fbf" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <div class="identificacao">
+      <span class="nome">Nome:</span>
+      <span class="turma">Turma:</span>
+      <span class="data">Data:</span>
+    </div>
+  </header>
+
+  <!-- 1 -->
+  <section class="exercicio">
+    <div class="numero">1</div>
+    <div class="enunciado">
+      <p>Gols de um time em 5 jogos: <span class="chip">2, 4, 4, 5, 10</span>. Calcule:</p>
+      <div class="lacunas">
+        <span>Média:</span>
+        <span>Moda:</span>
+        <span>Mediana:</span>
+      </div>
+      <span class="campo">Contas:</span>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="exercicio">
+    <div class="numero">2</div>
+    <div class="enunciado">
+      <p>Marque com um X o tipo de cada variável:</p>
+      <table class="marcar">
+        <thead>
+          <tr><th>Variável</th><th>Qualitativa</th><th>Quantitativa</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cor dos olhos</td><td class="caixa"><span class="quadradinho"></span></td><td class="caixa"><span class="quadradinho"></span></td></tr>
+          <tr><td>Peso</td><td class="caixa"><span class="quadradinho"></span></td><td class="caixa"><span class="quadradinho"></span></td></tr>
+          <tr><td>Time do coração</td><td class="caixa"><span class="quadradinho"></span></td><td class="caixa"><span class="quadradinho"></span></td></tr>
+          <tr><td>Número de irmãos</td><td class="caixa"><span class="quadradinho"></span></td><td class="caixa"><span class="quadradinho"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="exercicio">
+    <div class="numero">3</div>
+    <div class="enunciado">
+      <p>Uma escola tem 300 alunos. A diretora entrevistou 40 deles sobre o lanche.</p>
+      <span class="campo">População:</span>
+      <span class="campo">Amostra:</span>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="exercicio">
+    <div class="numero">4</div>
+    <div class="enunciado">
+      <p>O gráfico de linhas mostra a temperatura ao meio-dia durante uma semana.</p>
+      <div class="com-grafico">
+        <svg width="7.6cm" height="4.4cm" viewBox="0 0 330 190" role="img"
+             aria-label="Gráfico de linhas: segunda 21 graus, terça 25, quarta 19, quinta 24, sexta 26">
+          <!-- grade: 15 a 30 °C, 10 px por grau -->
+          <g stroke="#ddd" stroke-width="1.2">
+            <path d="M44 20 L318 20 M44 70 L318 70 M44 120 L318 120"/>
+          </g>
+          <g font-size="13" text-anchor="end" fill="#555">
+            <text x="38" y="24">30 °C</text>
+            <text x="38" y="74">25 °C</text>
+            <text x="38" y="124">20 °C</text>
+            <text x="38" y="174">15 °C</text>
+          </g>
+          <g fill="none" stroke="#333" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M44 10 Q43 90 45 171 Q180 170 320 172"/>
+          </g>
+          <path d="M75 110 L130 70 L185 130 L240 80 L295 60" fill="none" stroke="#e05555" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+          <g fill="#e05555">
+            <circle cx="75" cy="110" r="5"/>
+            <circle cx="130" cy="70" r="5"/>
+            <circle cx="185" cy="130" r="5"/>
+            <circle cx="240" cy="80" r="5"/>
+            <circle cx="295" cy="60" r="5"/>
+          </g>
+          <g font-size="13" text-anchor="middle" fill="#000">
+            <text x="75" y="100">21</text>
+            <text x="130" y="60">25</text>
+            <text x="185" y="150">19</text>
+            <text x="240" y="70">24</text>
+            <text x="295" y="50">26</text>
+          </g>
+          <g font-size="14" text-anchor="middle" fill="#000">
+            <text x="75" y="188">Seg</text>
+            <text x="130" y="188">Ter</text>
+            <text x="185" y="188">Qua</text>
+            <text x="240" y="188">Qui</text>
+            <text x="295" y="188">Sex</text>
+          </g>
+        </svg>
+        <div class="perguntas">
+          <span class="campo">a) Dia mais quente:</span>
+          <span class="campo">b) Dia mais frio:</span>
+          <span class="campo">c) Temperatura média:</span>
+          <span class="campo"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="exercicio">
+    <div class="numero">5</div>
+    <div class="enunciado">
+      <p>No pictograma, cada carinha vale <b>2 alunos</b>. Meia carinha vale 1 aluno.</p>
+      <div class="com-grafico">
+        <svg width="7.6cm" height="3.6cm" viewBox="0 0 330 156" role="img"
+             aria-label="Pictograma da fruta preferida: maçã 4 carinhas, banana 3 carinhas, uva 2 carinhas e meia">
+          <defs>
+            <g id="carinha">
+              <circle cx="0" cy="0" r="15" stroke="#333" stroke-width="2.2"/>
+              <circle cx="-5" cy="-3" r="1.8" fill="#333"/>
+              <circle cx="5" cy="-3" r="1.8" fill="#333"/>
+              <path d="M-6 5 Q0 10 6 5" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <clipPath id="metade"><rect x="-20" y="-20" width="20" height="40"/></clipPath>
+          </defs>
+          <g font-size="16" fill="#000">
+            <text x="0" y="31">Maçã</text>
+            <text x="0" y="76">Banana</text>
+            <text x="0" y="121">Uva</text>
+          </g>
+          <path d="M74 4 Q73 70 75 136" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round"/>
+          <g fill="#f4b3b3">
+            <use href="#carinha" x="100" y="26"/><use href="#carinha" x="140" y="26"/>
+            <use href="#carinha" x="180" y="26"/><use href="#carinha" x="220" y="26"/>
+          </g>
+          <g fill="#f7e08f">
+            <use href="#carinha" x="100" y="71"/><use href="#carinha" x="140" y="71"/>
+            <use href="#carinha" x="180" y="71"/>
+          </g>
+          <g fill="#cdb8ea">
+            <use href="#carinha" x="100" y="116"/><use href="#carinha" x="140" y="116"/>
+            <g transform="translate(180 116)"><g clip-path="url(#metade)"><use href="#carinha"/></g></g>
+          </g>
+          <g transform="translate(110 148)">
+            <use href="#carinha" transform="scale(.55)" fill="#fff"/>
+          </g>
+          <text x="124" y="153" font-size="13" fill="#555">= 2 alunos</text>
+        </svg>
+        <div class="perguntas">
+          <span class="campo">a) Quantos preferem banana?</span>
+          <span class="campo">b) Quantos responderam?</span>
+          <span class="campo">c) Qual fruta é a moda?</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gabarito de cabeça para baixo -->
+  <footer class="gabarito" aria-label="Gabarito">
+    <b>Gabarito:</b> 1) média 5, moda 4, mediana 4. 2) qualitativa, quantitativa, qualitativa, quantitativa.
+    3) população: os 300 alunos; amostra: os 40 entrevistados. 4) a) sexta b) quarta c) 23 °C.
+    5) a) 6 b) 19 c) maçã.
+  </footer>
+
+</main>
+
 </body>
 </html>
