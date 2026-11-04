@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estatística Básica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 2cm; }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #000000;
+    font-family: "Kalam", "Patrick Hand", "Comic Sans MS", cursive;
+    font-size: 14pt;
+    line-height: 1.35;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Área útil da folha A4 com margens de 2 cm: 17 cm x 25,7 cm */
+  .folha {
+    width: 17cm;
+    height: 25.6cm;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Na tela, simula a folha com as margens */
+  @media screen {
+    body { background: #e9e9e9; padding: 1cm 0; }
+    .folha {
+      background: #fff;
+      width: 21cm;
+      height: 29.7cm;
+      padding: 2cm;
+      box-shadow: 0 0 6px rgba(0,0,0,.2);
+    }
+  }
+
+  h1 {
+    margin: 0;
+    text-align: center;
+    color: #1f5fbf;
+    font-size: 30pt;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .sublinhado {
+    display: block;
+    width: 9cm;
+    height: 10px;
+    margin: 2px auto 0;
+  }
+
+  .bloco { margin: 0; }
+  .bloco p { margin: 0 0 0.25cm; }
+  .bloco p:last-child { margin-bottom: 0; }
+
+  .termo { font-weight: 700; color: #1f5fbf; }
+
+  .com-desenho {
+    display: flex;
+    align-items: center;
+    gap: 0.5cm;
+  }
+  .com-desenho .texto { flex: 1; }
+  .com-desenho svg { flex: none; }
+
+  ul {
+    margin: 0.15cm 0 0;
+    padding-left: 0.6cm;
+    list-style: none;
+  }
+  ul li { margin-bottom: 0.15cm; position: relative; }
+  ul li::before {
+    content: "•";
+    position: absolute;
+    left: -0.5cm;
+    color: #1f5fbf;
+    font-weight: 700;
+  }
+
+  .desenhos-finais {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+  }
+  .desenhos-finais figure { margin: 0; text-align: center; }
+
+  svg .traco {
+    fill: none;
+    stroke: #333;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>
+</head>
+<body>
+<main class="folha">
+
+  <header>
+    <h1>Estatística Básica</h1>
+    <svg class="sublinhado" viewBox="0 0 340 10" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 6 C 60 3, 120 8, 180 5 S 290 4, 336 6" fill="none" stroke="#1f5fbf" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <!-- 1. Conceito -->
+  <section class="bloco">
+    <p>A <span class="termo">Estatística</span> é a ciência que coleta, organiza, analisa e interpreta dados para ajudar na tomada de decisões.</p>
+  </section>
+
+  <!-- 2. População, amostra, variável -->
+  <section class="bloco com-desenho">
+    <div class="texto">
+      <p><span class="termo">População:</span> o grupo inteiro que queremos estudar.</p>
+      <p><span class="termo">Amostra:</span> uma parte da população usada na pesquisa.</p>
+      <p><span class="termo">Variável:</span> a característica pesquisada. Pode ser qualitativa (ex.: cor favorita) ou quantitativa (ex.: idade, altura).</p>
+    </div>
+    <svg width="5.4cm" height="4cm" viewBox="0 0 220 160" role="img" aria-label="Seis bonequinhos de palito; dois deles circulados em vermelho representam a amostra">
+      <defs>
+        <g id="boneco" fill="none" stroke="#333" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="0" cy="0" r="9" fill="#fff7d6"/>
+          <path d="M0 9 L0.5 36"/>
+          <path d="M-13 18 Q0 22 13 17"/>
+          <path d="M0.5 36 L-10 55"/>
+          <path d="M0.5 36 L11 54"/>
+        </g>
+      </defs>
+      <!-- linha de cima -->
+      <use href="#boneco" x="35"  y="22"/>
+      <use href="#boneco" x="110" y="20"/>
+      <use href="#boneco" x="185" y="23"/>
+      <!-- linha de baixo -->
+      <use href="#boneco" x="35"  y="98"/>
+      <use href="#boneco" x="110" y="96"/>
+      <use href="#boneco" x="185" y="99"/>
+      <!-- amostra: 2 bonecos circulados -->
+      <path d="M150 88 C 150 70, 200 66, 214 80 C 222 96, 220 140, 200 156 C 160 160, 92 160, 82 140 C 74 118, 84 92, 110 84 C 125 80, 145 82, 150 88"
+            fill="none" stroke="#e05555" stroke-width="2.2" stroke-dasharray="7 5" stroke-linecap="round"/>
+    </svg>
+  </section>
+
+  <!-- 3. Medidas principais -->
+  <section class="bloco com-desenho">
+    <div class="texto">
+      <p><span class="termo">Medidas principais:</span></p>
+      <ul>
+        <li><b>Média:</b> soma dos valores dividida pela quantidade de valores</li>
+        <li><b>Moda:</b> o valor que mais aparece</li>
+        <li><b>Mediana:</b> o valor do meio, com os dados em ordem</li>
+      </ul>
+    </div>
+    <svg width="4.6cm" height="3.8cm" viewBox="0 0 180 150" role="img" aria-label="Gráfico de barras com três colunas: verde, azul e laranja">
+      <!-- barras -->
+      <path d="M32 128 L33 70 L62 71 L61 128" fill="#a8dba0" stroke="#4f9a47" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M78 128 L79 32 L108 31 L107 128" fill="#a9c8f0" stroke="#3f74c2" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M124 128 L125 88 L154 89 L153 128" fill="#f7c58f" stroke="#d98a33" stroke-width="2.2" stroke-linejoin="round"/>
+      <!-- eixos -->
+      <path class="traco" d="M20 12 Q19 70 21 130 Q95 129 170 131"/>
+      <path class="traco" d="M15 18 L20 11 L25 18"/>
+      <path class="traco" d="M163 125 L170 131 L163 136"/>
+    </svg>
+  </section>
+
+  <!-- 4. Representação dos dados -->
+  <section class="bloco">
+    <p>Os dados podem ser mostrados em <span class="termo">tabelas</span> e <span class="termo">gráficos</span> (de barras, de setores ou de linhas).</p>
+  </section>
+
+  <!-- Desenhos finais -->
+  <section class="desenhos-finais" aria-label="Desenhos: gráfico de pizza, tabela e lupa">
+    <figure>
+      <svg width="3.6cm" height="3.6cm" viewBox="0 0 140 140" role="img" aria-label="Gráfico de pizza com três fatias">
+        <!-- centro (70,70), raio 58 -->
+        <path d="M70 70 L70 12 A58 58 0 0 1 120.2 99 Z" fill="#a9c8f0" stroke="#333" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M70 70 L120.2 99 A58 58 0 0 1 24.6 106 Z" fill="#f7c58f" stroke="#333" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M70 70 L24.6 106 A58 58 0 0 1 70 12 Z" fill="#a8dba0" stroke="#333" stroke-width="2.2" stroke-linejoin="round"/>
+      </svg>
+    </figure>
+
+    <figure>
+      <svg width="4.4cm" height="3.2cm" viewBox="0 0 170 124" role="img" aria-label="Tabela com 2 colunas e 3 linhas">
+        <path d="M12 14 L158 12 L160 112 L11 114 Z" fill="#fff7d6" stroke="#333" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M12 14 L158 12 L158 46 L12 47 Z" fill="#a9c8f0" stroke="none"/>
+        <path class="traco" d="M12 14 L158 12 L160 112 L11 114 Z"/>
+        <path class="traco" d="M85 13 Q86 62 85 113"/>
+        <path class="traco" d="M12 47 Q85 45 159 46"/>
+        <path class="traco" d="M11 80 Q85 81 160 79"/>
+        <text x="48" y="37" font-family="Kalam, cursive" font-size="16" text-anchor="middle" fill="#000">Cor</text>
+        <text x="122" y="37" font-family="Kalam, cursive" font-size="16" text-anchor="middle" fill="#000">Votos</text>
+        <text x="48" y="70" font-family="Kalam, cursive" font-size="16" text-anchor="middle" fill="#000">Azul</text>
+        <text x="122" y="70" font-family="Kalam, cursive" font-size="16" text-anchor="middle" fill="#000">8</text>
+        <text x="48" y="104" font-family="Kalam, cursive" font-size="16" text-anchor="middle" fill="#000">Verde</text>
+        <text x="122" y="104" font-family="Kalam, cursive" font-size="16" text-anchor="middle" fill="#000">5</text>
+      </svg>
+    </figure>
+
+    <figure>
+      <svg width="3.4cm" height="3.4cm" viewBox="0 0 130 130" role="img" aria-label="Lupa">
+        <path d="M80 82 L118 120" stroke="#8b5a2b" stroke-width="11" stroke-linecap="round" fill="none"/>
+        <path d="M80 82 L118 120" stroke="#333" stroke-width="2" stroke-linecap="round" fill="none" opacity=".35"/>
+        <circle cx="52" cy="52" r="38" fill="#e3f1fb" stroke="#333" stroke-width="5"/>
+        <path d="M32 40 Q38 28 52 25" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </figure>
+  </section>
+
+</main>
+</body>
+</html>
