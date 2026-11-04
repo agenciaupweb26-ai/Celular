@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estatística na Prática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 2cm; }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #000000;
+    font-family: "Kalam", "Patrick Hand", "Comic Sans MS", cursive;
+    font-size: 14pt;
+    line-height: 1.35;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Área útil da folha A4 com margens de 2 cm: 17 cm x 25,7 cm */
+  .folha {
+    width: 17cm;
+    height: 25.6cm;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  @media screen {
+    body { background: #e9e9e9; padding: 1cm 0; }
+    .folha {
+      background: #fff;
+      width: 21cm;
+      height: 29.7cm;
+      padding: 2cm;
+      box-shadow: 0 0 6px rgba(0,0,0,.2);
+    }
+  }
+
+  h1 {
+    margin: 0;
+    text-align: center;
+    color: #1f5fbf;
+    font-size: 30pt;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .sublinhado {
+    display: block;
+    width: 9.5cm;
+    height: 10px;
+    margin: 2px auto 0;
+  }
+
+  h2 {
+    margin: 0 0 0.15cm;
+    font-size: 16pt;
+    font-weight: 700;
+    color: #1f5fbf;
+  }
+
+  .bloco p { margin: 0 0 0.15cm; }
+  .bloco p:last-child { margin-bottom: 0; }
+
+  .termo { font-weight: 700; color: #1f5fbf; }
+
+  .dados-exemplo {
+    display: inline-block;
+    padding: 0 0.2cm;
+    background: #fff7d6;
+    border-radius: 6px;
+  }
+  .conta { margin-left: 0.4cm; }
+  .resposta { color: #c0392b; font-weight: 700; }
+
+  .com-desenho {
+    display: flex;
+    align-items: center;
+    gap: 0.6cm;
+  }
+  .com-desenho .texto { flex: 1; }
+  .com-desenho svg { flex: none; }
+
+  ol {
+    margin: 0;
+    padding-left: 0.7cm;
+  }
+  ol li { margin-bottom: 0.2cm; }
+  ol li:last-child { margin-bottom: 0; }
+
+  .linha {
+    display: block;
+    height: 0.75cm;
+    border-bottom: 1.5px dashed #888;
+  }
+  .opcoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.6cm;
+    row-gap: 0.1cm;
+    margin-top: 0.1cm;
+  }
+  .opcoes span {
+    display: flex;
+    gap: 0.2cm;
+    white-space: nowrap;
+  }
+  .opcoes span::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1.5px dashed #888;
+    margin-bottom: 0.25em;
+  }
+</style>
+</head>
+<body>
+<main class="folha">
+
+  <header>
+    <h1>Estatística na Prática</h1>
+    <svg class="sublinhado" viewBox="0 0 360 10" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 6 C 70 3, 130 8, 190 5 S 300 4, 356 6" fill="none" stroke="#1f5fbf" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <!-- Exemplo resolvido -->
+  <section class="bloco">
+    <h2>Exemplo resolvido</h2>
+    <p>Livros lidos no ano por 7 alunos: <span class="dados-exemplo">6, 3, 10, 5, 11, 5, 9</span></p>
+    <p class="conta"><b>Em ordem:</b> 3, 5, 5, 6, 9, 10, 11</p>
+    <p class="conta"><b>Média:</b> (3 + 5 + 5 + 6 + 9 + 10 + 11) ÷ 7 = 49 ÷ 7 = <span class="resposta">7</span></p>
+    <p class="conta"><b>Moda:</b> o 5 aparece duas vezes → <span class="resposta">5</span></p>
+    <p class="conta"><b>Mediana:</b> o 4º valor está no meio → <span class="resposta">6</span></p>
+  </section>
+
+  <!-- Tabela de frequência + gráfico -->
+  <section class="bloco com-desenho">
+    <div class="texto">
+      <h2>Da tabela para o gráfico</h2>
+      <p>Perguntamos a 16 alunos: <i>"Qual é a sua cor favorita?"</i></p>
+      <p>Cada aluno é contado uma vez na tabela. Depois, cada linha vira uma coluna no gráfico de barras.</p>
+      <p>A cor mais votada é a <span class="termo">moda</span>: <span class="resposta">azul</span>.</p>
+    </div>
+    <svg width="7.6cm" height="4.6cm" viewBox="0 0 310 188" role="img" aria-label="Tabela de frequência com azul 8, verde 5 e laranja 3, ao lado de um gráfico de barras com os mesmos valores">
+      <!-- tabela -->
+      <path d="M6 22 L120 20 L121 166 L5 168 Z" fill="#fff7d6" stroke="none"/>
+      <path d="M6 22 L120 20 L120 56 L6 57 Z" fill="#a9c8f0"/>
+      <g fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 22 L120 20 L121 166 L5 168 Z"/>
+        <path d="M74 21 Q75 95 74 167"/>
+        <path d="M6 57 Q63 55 120 56"/>
+        <path d="M5 94 Q63 95 121 93"/>
+        <path d="M5 131 Q63 130 121 131"/>
+      </g>
+      <g font-family="Kalam, cursive" font-size="15" text-anchor="middle" fill="#000">
+        <text x="40" y="45">Cor</text>
+        <text x="97" y="45">Votos</text>
+        <text x="40" y="82">Azul</text>
+        <text x="97" y="82">8</text>
+        <text x="40" y="119">Verde</text>
+        <text x="97" y="119">5</text>
+        <text x="40" y="156">Laranja</text>
+        <text x="97" y="156">3</text>
+      </g>
+      <!-- seta -->
+      <path d="M132 94 Q146 88 160 94" fill="none" stroke="#e05555" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M153 88 L161 94 L153 99" fill="none" stroke="#e05555" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- barras: 1 aluno = 17px -->
+      <path d="M190 166 L191 30 L218 31 L217 166" fill="#a9c8f0" stroke="#3f74c2" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M232 166 L233 81 L260 82 L259 166" fill="#a8dba0" stroke="#4f9a47" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M274 166 L275 115 L302 116 L301 166" fill="#f7c58f" stroke="#d98a33" stroke-width="2.2" stroke-linejoin="round"/>
+      <g font-family="Kalam, cursive" font-size="14" text-anchor="middle" fill="#000">
+        <text x="204" y="24">8</text>
+        <text x="246" y="75">5</text>
+        <text x="288" y="109">3</text>
+      </g>
+      <g fill="none" stroke="#333" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M178 14 Q177 90 179 168 Q242 167 308 169"/>
+        <path d="M173 20 L178 13 L183 20"/>
+      </g>
+    </svg>
+  </section>
+
+  <!-- Exercícios -->
+  <section class="bloco">
+    <h2>Agora é a sua vez</h2>
+    <ol>
+      <li>Gols de um time em 5 jogos: <span class="dados-exemplo">2, 4, 4, 5, 10</span>. Calcule a média, a moda e a mediana.
+        <span class="linha"></span>
+        <span class="linha"></span>
+      </li>
+      <li>Escreva se cada variável é <b>qualitativa</b> ou <b>quantitativa</b>:
+        <div class="opcoes">
+          <span>a) Cor dos olhos</span>
+          <span>b) Peso</span>
+          <span>c) Time do coração</span>
+          <span>d) Número de irmãos</span>
+        </div>
+      </li>
+      <li>Uma escola tem 300 alunos. A diretora entrevistou 40 deles sobre o lanche. Qual é a população e qual é a amostra?
+        <span class="linha"></span>
+        <span class="linha"></span>
+      </li>
+    </ol>
+  </section>
+
+</main>
+</body>
+</html>
