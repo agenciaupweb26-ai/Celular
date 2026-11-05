@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vinhos Brogliato</title>
+<meta name="description" content="Vinhos Brogliato — vinhos de mesa da Serra Gaúcha, feitos em Flores da Cunha (RS) desde 1991.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vinho:#5b1526; --vinho-esc:#3a0c18; --uva:#7a2a48; --ouro:#c9a24a;
+  --papel:#f7f1e6; --papel-2:#efe5d3; --tinta:#2a1b17; --suave:#6e5a50;
+  --folha:#5d6b3a; --linha:rgba(42,27,23,.14);
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:Inter,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--papel);color:var(--tinta);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+.eyebrow{font:600 .75rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ouro)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.05;letter-spacing:-.01em}
+h2{font-size:clamp(2.2rem,5vw,3.4rem);margin:.6rem 0 1rem}
+.lead{font-size:1.1rem;color:var(--suave);max-width:58ch}
+
+/* topo */
+header{position:sticky;top:0;z-index:10;background:rgba(58,12,24,.92);backdrop-filter:blur(8px);color:var(--papel)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:700 1.5rem/1 var(--serif);letter-spacing:.04em;text-decoration:none}
+.logo small{display:block;font:500 .6rem/1 var(--sans);letter-spacing:.3em;color:var(--ouro);margin-top:4px}
+.nav ul{display:flex;gap:28px;list-style:none;font-size:.9rem}
+.nav ul a{text-decoration:none;opacity:.85}.nav ul a:hover{opacity:1;color:var(--ouro)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font:600 .9rem/1 var(--sans);text-decoration:none;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-ouro{background:var(--ouro);color:var(--vinho-esc)}.btn-ouro:hover{background:#d8b45e}
+.btn-linha{border:1.5px solid currentColor}
+@media (max-width:760px){.nav ul{display:none}}
+
+/* hero */
+.hero{position:relative;background:var(--vinho-esc);color:var(--papel);overflow:hidden}
+.hero-inner{position:relative;z-index:2;padding:96px 0 220px;max-width:640px}
+.hero h1{font-size:clamp(3rem,9vw,6.2rem);margin:1rem 0 1.2rem}
+.hero h1 em{font-style:italic;color:var(--ouro);font-weight:500}
+.hero p{font-size:1.15rem;opacity:.85;max-width:46ch;margin-bottom:2rem}
+.hero .acoes{display:flex;flex-wrap:wrap;gap:12px}
+.hero svg.colinas{position:absolute;inset:auto 0 0 0;width:100%;height:auto;z-index:1}
+.sol{position:absolute;right:8%;top:70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#e7c776 0%,#c9a24a 45%,rgba(201,162,74,0) 70%);opacity:.55;z-index:0}
+
+/* faixa */
+.faixa{background:var(--vinho);color:var(--papel)}
+.faixa .wrap{display:grid;grid-template-columns:repeat(3,1fr);text-align:center}
+.faixa div div{padding:28px 12px;border-right:1px solid rgba(247,241,230,.15)}
+.faixa div div:last-child{border:0}
+.faixa b{display:block;font:600 2.4rem/1 var(--serif);color:var(--ouro)}
+.faixa span{font-size:.85rem;opacity:.8}
+@media (max-width:600px){.faixa b{font-size:1.8rem}.faixa span{font-size:.75rem}}
+
+section{padding:96px 0}
+
+/* sobre */
+.sobre{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.sobre p+p{margin-top:1rem}
+.cacho{background:var(--papel-2);border-radius:24px;padding:40px;aspect-ratio:1/1;display:grid;place-items:center}
+@media (max-width:860px){.sobre{grid-template-columns:1fr;gap:40px}.cacho{max-width:420px}}
+
+/* vinhos */
+.vinhos{background:var(--papel-2)}
+.grade{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+.card{background:var(--papel);border:1px solid var(--linha);border-radius:20px;padding:28px 22px 26px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px -20px rgba(58,12,24,.45)}
+.card svg{height:200px;margin-bottom:20px}
+.card .tipo{font:600 .7rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--suave)}
+.card h3{font-size:1.9rem;margin:.4rem 0 .6rem}
+.card p{font-size:.92rem;color:var(--suave)}
+.tag{margin-top:auto;padding-top:16px;font-size:.78rem;font-weight:600;color:var(--vinho)}
+@media (max-width:960px){.grade{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.grade{grid-template-columns:1fr}}
+
+/* garrafão */
+.garrafao{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;background:var(--vinho-esc);color:var(--papel);border-radius:28px;padding:56px}
+.garrafao .lead{color:rgba(247,241,230,.8)}
+.garrafao ul{list-style:none;margin:1.4rem 0 2rem;display:grid;gap:10px}
+.garrafao li{display:flex;gap:12px;align-items:flex-start}
+.garrafao li::before{content:"";flex:none;width:8px;height:8px;margin-top:9px;border-radius:50%;background:var(--ouro)}
+@media (max-width:760px){.garrafao{grid-template-columns:1fr;padding:36px 24px;gap:28px}.garrafao svg{width:140px;margin-inline:auto}}
+
+/* visita */
+.visita{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.bloco{border:1px solid var(--linha);border-radius:20px;padding:32px;background:#fffaf1}
+.bloco h3{font-size:1.6rem;margin-bottom:.8rem}
+.bloco dl{display:grid;gap:14px}
+.bloco dt{font:600 .7rem/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--suave);margin-bottom:4px}
+.bloco dd a{color:var(--vinho);font-weight:600}
+.mapa{border-radius:20px;overflow:hidden;min-height:320px;border:1px solid var(--linha)}
+.mapa iframe{width:100%;height:100%;min-height:320px;border:0}
+@media (max-width:860px){.visita{grid-template-columns:1fr}}
+
+/* rodapé */
+footer{background:var(--vinho-esc);color:rgba(247,241,230,.75);padding:48px 0 32px;font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-end}
+footer .logo{color:var(--papel)}
+.aviso{width:100%;border-top:1px solid rgba(247,241,230,.15);padding-top:20px;margin-top:8px;font-size:.78rem;text-align:center;letter-spacing:.04em}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">BROGLIATO<small>VINHOS · SERRA GAÚCHA</small></a>
+    <ul>
+      <li><a href="#sobre">A vinícola</a></li>
+      <li><a href="#vinhos">Vinhos</a></li>
+      <li><a href="#garrafao">Garrafão</a></li>
+      <li><a href="#visita">Onde estamos</a></li>
+    </ul>
+    <a class="btn btn-ouro" href="tel:+555432926588">Fazer pedido</a>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="sol" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Flores da Cunha · RS · desde 1991</span>
+    <h1>Vinho de colônia, <em>feito com tempo.</em></h1>
+    <p>Bordô, Moscato e Niágara do Travessão Salgado, no coração da Serra Gaúcha — com o sabor da uva e o jeito de fazer de família.</p>
+    <div class="acoes">
+      <a class="btn btn-ouro" href="#vinhos">Conheça os vinhos</a>
+      <a class="btn btn-linha" href="#visita">Como chegar</a>
+    </div>
+  </div>
+  <svg class="colinas" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 150 C220 80 420 90 640 130 S1080 60 1440 110 V260 H0Z" fill="#5b1526"/>
+    <path d="M0 190 C260 130 520 150 760 180 S1200 130 1440 170 V260 H0Z" fill="#7a2a48" opacity=".9"/>
+    <g stroke="#3a0c18" stroke-width="2" opacity=".35" fill="none">
+      <path d="M0 215 C260 165 520 185 760 210 S1200 165 1440 205"/>
+      <path d="M0 232 C260 185 520 205 760 228 S1200 188 1440 224"/>
+      <path d="M0 248 C260 205 520 222 760 244 S1200 208 1440 242"/>
+    </g>
+    <path d="M0 236 C300 220 600 240 900 236 S1300 226 1440 232 V260 H0Z" fill="#f7f1e6"/>
+  </svg>
+</section>
+
+<div class="faixa">
+  <div class="wrap">
+    <div><b>1991</b><span>fundação</span></div>
+    <div><b>4</b><span>rótulos de mesa</span></div>
+    <div><b>RS</b><span>Serra Gaúcha</span></div>
+  </div>
+</div>
+
+<section id="sobre">
+  <div class="wrap sobre">
+    <div class="reveal">
+      <span class="eyebrow">A vinícola</span>
+      <h2>Tradição do interior de Flores da Cunha</h2>
+      <p class="lead">A Indústria de Vinhos Brogliato nasceu em 1991 no Travessão Salgado, interior de Flores da Cunha — município que é referência na produção de vinhos do Brasil.</p>
+      <p>Aqui o vinho segue o ritmo da colheita: uvas da região, elaboração cuidadosa e aquele sabor intenso que lembra a mesa de domingo na colônia italiana. Do Bordô encorpado ao Moscato perfumado, cada garrafa leva o nome da família.</p>
+    </div>
+    <div class="cacho reveal" aria-hidden="true">
+      <svg viewBox="0 0 240 260" width="300">
+        <path d="M120 40 C118 20 128 8 142 4" stroke="#5d6b3a" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M126 34 C150 10 196 14 210 40 C184 46 156 52 126 34Z" fill="#5d6b3a"/>
+        <path d="M168 28 C176 34 186 36 198 36" stroke="#efe5d3" stroke-width="2" fill="none"/>
+        <g fill="#5b1526">
+          <circle cx="92" cy="70" r="20"/><circle cx="132" cy="68" r="20"/><circle cx="170" cy="76" r="18"/>
+          <circle cx="74" cy="106" r="20"/><circle cx="114" cy="104" r="20"/><circle cx="154" cy="108" r="20"/>
+          <circle cx="94" cy="140" r="20"/><circle cx="134" cy="142" r="20"/><circle cx="172" cy="140" r="16"/>
+          <circle cx="112" cy="176" r="20"/><circle cx="150" cy="174" r="18"/>
+          <circle cx="128" cy="208" r="18"/>
+          <circle cx="132" cy="238" r="14"/>
+        </g>
+        <g fill="#7a2a48" opacity=".9">
+          <circle cx="132" cy="68" r="12"/><circle cx="114" cy="104" r="12"/><circle cx="134" cy="142" r="12"/><circle cx="112" cy="176" r="12"/><circle cx="128" cy="208" r="10"/>
+        </g>
+        <g fill="#f7f1e6" opacity=".5">
+          <circle cx="84" cy="62" r="4"/><circle cx="124" cy="60" r="4"/><circle cx="66" cy="98" r="4"/><circle cx="106" cy="96" r="4"/><circle cx="146" cy="100" r="4"/><circle cx="86" cy="132" r="4"/><circle cx="126" cy="134" r="4"/><circle cx="104" cy="168" r="4"/><circle cx="120" cy="200" r="3.5"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="vinhos" class="vinhos">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Nossos vinhos</span>
+      <h2>Para cada mesa, um Brogliato</h2>
+      <p class="lead">Vinhos de mesa da Serra Gaúcha, com qualidade, sabor intenso e tradição.</p>
+    </div>
+    <div class="grade">
+      <!-- Bordô Suave -->
+      <article class="card reveal">
+        <svg viewBox="0 0 80 220" aria-hidden="true"><use href="#garrafa" fill="#4a0f1f"/><rect x="18" y="118" width="44" height="58" rx="3" fill="#f7f1e6"/><text x="40" y="142" text-anchor="middle" font-family="Cormorant Garamond" font-weight="700" font-size="9" fill="#5b1526">BROGLIATO</text><text x="40" y="158" text-anchor="middle" font-family="Inter" font-size="6" fill="#6e5a50">BORDÔ SUAVE</text><rect x="28" y="164" width="24" height="2" fill="#c9a24a"/></svg>
+        <span class="tipo">Tinto · Suave</span>
+        <h3>Bordô Suave</h3>
+        <p>Docinho na medida, cor intensa e aroma marcante de uva. O preferido para acompanhar a refeição em família.</p>
+        <span class="tag">Garrafa e garrafão</span>
+      </article>
+      <!-- Bordô Seco -->
+      <article class="card reveal">
+        <svg viewBox="0 0 80 220" aria-hidden="true"><use href="#garrafa" fill="#2e0a14"/><rect x="18" y="118" width="44" height="58" rx="3" fill="#5b1526"/><text x="40" y="142" text-anchor="middle" font-family="Cormorant Garamond" font-weight="700" font-size="9" fill="#f7f1e6">BROGLIATO</text><text x="40" y="158" text-anchor="middle" font-family="Inter" font-size="6" fill="#efe5d3">BORDÔ SECO</text><rect x="28" y="164" width="24" height="2" fill="#c9a24a"/></svg>
+        <span class="tipo">Tinto · Seco</span>
+        <h3>Bordô Seco</h3>
+        <p>Encorpado e frutado, com final seco. Combina com churrasco, massas e queijos da serra.</p>
+        <span class="tag">Garrafa e garrafão</span>
+      </article>
+      <!-- Moscato -->
+      <article class="card reveal">
+        <svg viewBox="0 0 80 220" aria-hidden="true"><use href="#garrafa" fill="#b9a24e"/><rect x="18" y="118" width="44" height="58" rx="3" fill="#f7f1e6"/><text x="40" y="142" text-anchor="middle" font-family="Cormorant Garamond" font-weight="700" font-size="9" fill="#5b1526">BROGLIATO</text><text x="40" y="158" text-anchor="middle" font-family="Inter" font-size="6" fill="#6e5a50">MOSCATO</text><rect x="28" y="164" width="24" height="2" fill="#c9a24a"/></svg>
+        <span class="tipo">Branco · Aromático</span>
+        <h3>Moscato</h3>
+        <p>Perfumado, leve e refrescante, com notas florais. Perfeito bem gelado em dias quentes.</p>
+        <span class="tag">Garrafa</span>
+      </article>
+      <!-- Niágara Seco -->
+      <article class="card reveal">
+        <svg viewBox="0 0 80 220" aria-hidden="true"><use href="#garrafa" fill="#8c9a52"/><rect x="18" y="118" width="44" height="58" rx="3" fill="#f7f1e6"/><text x="40" y="142" text-anchor="middle" font-family="Cormorant Garamond" font-weight="700" font-size="9" fill="#5b1526">BROGLIATO</text><text x="40" y="158" text-anchor="middle" font-family="Inter" font-size="6" fill="#6e5a50">NIÁGARA SECO</text><rect x="28" y="164" width="24" height="2" fill="#c9a24a"/></svg>
+        <span class="tipo">Branco · Seco</span>
+        <h3>Niágara Seco</h3>
+        <p>O clássico branco de colônia: aroma frutado da uva Niágara e boca seca e fresca.</p>
+        <span class="tag">Garrafão</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="garrafao">
+  <div class="wrap">
+    <div class="garrafao reveal">
+      <svg viewBox="0 0 160 220" width="190" aria-hidden="true">
+        <rect x="64" y="6" width="32" height="20" rx="4" fill="#c9a24a"/>
+        <path d="M66 26 H94 V48 C94 60 150 70 150 120 V196 C150 210 140 216 126 216 H34 C20 216 10 210 10 196 V120 C10 70 66 60 66 48Z" fill="#5b1526" stroke="#7a2a48" stroke-width="3"/>
+        <path d="M26 112 C40 86 60 80 74 76" stroke="#f7f1e6" stroke-width="5" opacity=".25" fill="none" stroke-linecap="round"/>
+        <rect x="34" y="132" width="92" height="52" rx="4" fill="#f7f1e6"/>
+        <text x="80" y="156" text-anchor="middle" font-family="Cormorant Garamond" font-weight="700" font-size="15" fill="#5b1526">BROGLIATO</text>
+        <text x="80" y="172" text-anchor="middle" font-family="Inter" font-size="8" fill="#6e5a50">VINHO DE MESA</text>
+        <path d="M96 40 C130 40 140 60 132 82" stroke="#c9a24a" stroke-width="6" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <span class="eyebrow">Garrafão</span>
+        <h2>O vinho da casa, no tamanho da família</h2>
+        <p class="lead">Nossos vinhos também saem em garrafão — do jeito que a serra sempre bebeu.</p>
+        <ul>
+          <li>Bordô Suave, Bordô Seco e Niágara Seco</li>
+          <li>Traga o casco vazio na próxima compra</li>
+          <li>Atendemos consumidores, mercados e revendas</li>
+        </ul>
+        <a class="btn btn-ouro" href="tel:+555432926588">Ligar: (54) 3292-6588</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visita" style="padding-top:0">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Onde estamos</span>
+      <h2>Venha até a vinícola</h2>
+      <p class="lead">Estamos no interior de Flores da Cunha, entre parreirais e estradas de chão da Serra Gaúcha.</p>
+    </div>
+    <div class="visita">
+      <div class="bloco reveal">
+        <h3>Indústria de Vinhos Brogliato</h3>
+        <dl>
+          <div><dt>Endereço</dt><dd>Travessão Salgado, s/n — Distrito<br>Flores da Cunha · RS · CEP 95270-000</dd></div>
+          <div><dt>Telefone</dt><dd><a href="tel:+555432926588">(54) 3292-6588</a></dd></div>
+          <div><dt>Instagram</dt><dd>@vinhosbrogliato <small style="color:var(--suave)">(confirmar perfil)</small></dd></div>
+          <div><dt>Horário</dt><dd>Ligue antes para confirmar o atendimento</dd></div>
+        </dl>
+        <p style="margin-top:24px"><a class="btn btn-linha" style="color:var(--vinho)" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Travess%C3%A3o+Salgado+Flores+da+Cunha+RS">Abrir no Google Maps</a></p>
+      </div>
+      <div class="mapa reveal">
+        <iframe loading="lazy" title="Mapa: Travessão Salgado, Flores da Cunha" src="https://www.google.com/maps?q=Travess%C3%A3o+Salgado,+Flores+da+Cunha,+RS&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><a class="logo" href="#">BROGLIATO<small>VINHOS · SERRA GAÚCHA</small></a></div>
+    <div>Indústria de Vinhos Brogliato Ltda · CNPJ 94.380.805/0001-51<br>Travessão Salgado · Flores da Cunha · RS</div>
+    <p class="aviso">Aprecie com moderação. Se beber, não dirija. Venda proibida para menores de 18 anos.</p>
+  </div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="garrafa" viewBox="0 0 80 220">
+      <rect x="31" y="2" width="18" height="16" rx="2" fill="#c9a24a"/>
+      <path d="M32 18 H48 V62 C48 78 66 84 66 106 V208 C66 214 62 218 56 218 H24 C18 218 14 214 14 208 V106 C14 84 32 78 32 62Z"/>
+      <path d="M22 110 C22 96 28 90 34 86" stroke="#fff" stroke-width="3" opacity=".22" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
