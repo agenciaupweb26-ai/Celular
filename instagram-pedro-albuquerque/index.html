@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedro Albuquerque · Instagram</title>
+<meta name="description" content="Estudo de perfil no Instagram para o arquiteto Pedro Albuquerque: identidade visual, bio, destaques e grade planejada de 12 posts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cal:#FBF7F0;--areia:#F1E7D7;--areia-2:#E7D9C2;--terracota:#C0603A;--barro:#7E3A20;
+  --sol:#E4A84A;--mata:#2E4636;--azulejo:#285A87;--grafite:#23201D;--concreto:#D3CBBE;
+  --tinta:#2A1E18;--suave:#76665B;--linha:rgba(42,30,24,.14);
+  --serif:"Instrument Serif",Georgia,serif;--sans:Manrope,system-ui,sans-serif;
+  --ui:Inter,-apple-system,"SF Pro Text","Helvetica Neue",Roboto,Arial,sans-serif;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--cal);color:var(--tinta);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+img,svg{display:block}
+
+/* ---------- página de apresentação ---------- */
+.topo{border-bottom:1px solid var(--linha)}
+.topo-in{width:min(1240px,100% - 32px);margin:0 auto;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:10px 0}
+.marca{display:flex;align-items:center;gap:10px;font:700 15px/1 var(--sans);letter-spacing:.01em;text-decoration:none}
+.marca svg{width:30px;height:30px}
+.eyebrow{font:800 11px/1.3 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--terracota)}
+.layout{width:min(1240px,100% - 32px);margin:0 auto;display:grid;grid-template-columns:414px minmax(0,1fr);gap:clamp(40px,6vw,96px);padding:40px 0 96px;align-items:start}
+.stage{position:sticky;top:20px}
+.hint{margin-top:14px;text-align:center;font-size:13px;color:var(--suave)}
+@media (max-width:1000px){.layout{grid-template-columns:minmax(0,1fr);padding-top:28px}.stage{position:static;justify-self:center;width:100%;max-width:414px}}
+
+.doc{min-width:0}
+.intro h1{font:400 clamp(46px,6.2vw,80px)/.95 var(--serif);letter-spacing:-.02em;margin:14px 0 22px}
+.intro h1 em{color:var(--terracota)}
+.lead{font-size:18px;line-height:1.6;color:var(--suave);max-width:58ch}
+.ctrl{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.tg{display:inline-flex;align-items:center;gap:12px;font-weight:700;font-size:15px;cursor:pointer;user-select:none}
+.tg input{position:absolute;opacity:0;pointer-events:none}
+.tg i{width:46px;height:26px;border-radius:99px;background:var(--areia-2);position:relative;transition:background .2s;flex:none}
+.tg i::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+.tg input:checked+i{background:var(--terracota)}
+.tg input:checked+i::after{transform:translateX(20px)}
+.tg input:focus-visible+i{outline:2px solid var(--terracota);outline-offset:3px}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--suave)}
+.legend span::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+
+.doc section{padding:56px 0 8px;margin-top:48px;border-top:1px solid var(--linha)}
+.doc h2{font:400 clamp(34px,4vw,46px)/1 var(--serif);letter-spacing:-.01em;display:flex;align-items:baseline;gap:14px;margin-bottom:24px}
+.doc h2 small{font:800 12px/1 var(--sans);letter-spacing:.2em;color:var(--terracota)}
+.doc h3.k{font:800 11px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--barro);margin:34px 0 14px}
+.big-q{font:400 italic clamp(26px,3vw,38px)/1.18 var(--serif);margin-bottom:28px;max-width:26ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{background:var(--areia);border-radius:18px;padding:22px 22px 24px}
+.card h4{font:800 11px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--barro);margin-bottom:10px}
+.card p{font-size:15px;line-height:1.55}
+
+.brand{display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;background:var(--areia);border-radius:22px;padding:26px}
+.brand svg{width:150px;height:150px}
+.brand p{font-size:15px;line-height:1.6}
+.brand p+p{margin-top:8px;color:var(--suave)}
+@media (max-width:560px){.brand{grid-template-columns:1fr;justify-items:start}.brand svg{width:110px;height:110px}}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:12px}
+.sw{border-radius:16px;overflow:hidden;border:1px solid var(--linha);background:#fff}
+.sw i{display:block;height:78px}
+.sw div{padding:10px 12px 12px;font-size:12.5px;line-height:1.35;color:var(--suave)}
+.sw b{display:block;font-size:14px;color:var(--tinta)}
+.sw code{font:600 12px/1.4 ui-monospace,Menlo,monospace;color:var(--tinta)}
+.types{display:grid}
+.type{display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--linha)}
+.type:first-child{border-top:1px solid var(--linha)}
+.type b{font-size:14px;font-weight:700}
+.type small{display:block;color:var(--suave);font-size:13px;margin-top:2px}
+.type .s{font-size:clamp(26px,3vw,36px);line-height:1.1}
+@media (max-width:560px){.type{grid-template-columns:1fr;gap:6px}}
+.pattern-demo{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.pattern-demo figure{border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--linha)}
+.pattern-demo svg{width:100%;height:auto;aspect-ratio:1}
+.pattern-demo figcaption{padding:10px 12px;font-size:13px;color:var(--suave)}
+
+.bio-doc{display:grid;grid-template-columns:minmax(0,370px) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:760px){.bio-doc{grid-template-columns:minmax(0,1fr)}}
+.bio-card{background:#fff;border:1px solid var(--linha);border-radius:20px;padding:20px;font-family:var(--ui);font-size:14px;line-height:1.42;color:#0c0c0c}
+.bio-card .r{display:flex;align-items:flex-start;gap:8px}
+.bio-card .r+.r{margin-top:2px}
+.bio-card .n{flex:none;width:18px;height:18px;border-radius:50%;background:var(--terracota);color:#fff;font:700 10px/18px var(--sans);text-align:center;margin-top:1px}
+.bio-card .cat{color:#737373}
+.bio-card .lk{color:#00376B;font-weight:600}
+.bio-card .bcount{margin-top:14px;padding-top:12px;border-top:1px solid #efefef;font:600 12px/1 var(--sans);color:var(--suave)}
+.notes{list-style:none;display:grid;gap:14px;counter-reset:n}
+.notes li{display:grid;grid-template-columns:26px 1fr;gap:10px;font-size:15px;line-height:1.5}
+.notes li::before{counter-increment:n;content:counter(n);width:22px;height:22px;border-radius:50%;background:var(--terracota);color:#fff;font:700 11px/22px var(--sans);text-align:center;margin-top:1px}
+.notes b{font-weight:700}
+
+.hl-doc{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.hl-doc div{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;background:var(--areia);border-radius:18px;padding:14px}
+.hl-doc i{width:56px;height:56px;border-radius:50%;background:var(--cal);display:grid;place-items:center;color:var(--barro);border:1px solid var(--linha)}
+.hl-doc i svg{width:26px;height:26px}
+.hl-doc b{display:block;font-size:15px}
+.hl-doc span{font-size:13.5px;line-height:1.45;color:var(--suave)}
+
+.points{list-style:none;display:grid;gap:16px;max-width:64ch}
+.points li{padding-left:22px;position:relative;font-size:16px;line-height:1.55}
+.points li::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;border-radius:2px;background:var(--terracota);transform:rotate(45deg)}
+.mix{display:flex;height:44px;border-radius:12px;overflow:hidden;margin:6px 0 10px}
+.mix span{background:var(--c);color:#fff;font:700 12px/44px var(--sans);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 6px}
+.mix-l{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--suave)}
+.mix-l b{color:var(--tinta)}
+.order{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:8px}
+.order div{background:var(--areia);border-radius:12px;padding:10px 8px;text-align:center;font-size:12px;line-height:1.3;color:var(--suave)}
+.order b{display:block;font:400 26px/1 var(--serif);color:var(--terracota);margin-bottom:4px}
+@media (max-width:600px){.order{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.files{display:flex;flex-wrap:wrap;gap:26px 30px}
+.file-g{min-width:0;max-width:100%}
+.file-g h4{font:700 14px/1.3 var(--sans);margin-bottom:10px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.file-g h4 small{font-weight:600;color:var(--suave);font-size:12.5px}
+.file-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.file-row a{flex:none;width:92px;text-decoration:none;font-size:11.5px;color:var(--suave);text-align:center}
+.file-row img{width:92px;height:115px;object-fit:cover;border-radius:8px;background:var(--areia);border:1px solid var(--linha);margin-bottom:4px}
+.file-row a.reel img{width:65px;height:115px;margin-inline:auto}
+.file-row a:hover img{outline:2px solid var(--terracota);outline-offset:1px}
+.note{margin-top:48px;padding:18px 20px;border-radius:16px;background:var(--areia);font-size:14px;line-height:1.55;color:var(--suave)}
+.note b{color:var(--tinta)}
+
+/* ---------- celular ---------- */
+.phone{width:100%;max-width:414px;height:min(868px,calc(100svh - 72px));min-height:600px;margin:0 auto;border-radius:60px;padding:12px;background:#1C1A18;box-shadow:inset 0 0 0 2px #3a3633,0 50px 90px -40px rgba(80,35,15,.55),0 20px 40px -24px rgba(0,0,0,.4)}
+.screen{position:relative;height:100%;border-radius:48px;overflow:hidden;background:#fff;display:flex;flex-direction:column;font-family:var(--ui);color:#0c0c0c;font-size:14px;line-height:1.35}
+@media (max-width:440px){.phone{border-radius:46px;padding:8px}.screen{border-radius:38px}}
+.sb{height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 28px 0 36px;font:600 15px/1 var(--ui);position:relative}
+.sb::after{content:"";position:absolute;left:50%;top:11px;width:116px;height:33px;border-radius:20px;background:#000;transform:translateX(-50%)}
+.sb .ico{display:flex;gap:5px;align-items:center}
+.ig-top{height:46px;flex:none;display:flex;align-items:center;gap:2px;padding:0 8px}
+.ig-top .u{flex:1;display:flex;align-items:center;gap:4px;font:700 17px/1 var(--ui);letter-spacing:-.01em;padding-left:4px;min-width:0}
+.ig-top .u span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ic{width:38px;height:38px;display:grid;place-items:center;flex:none;border-radius:50%}
+.ic svg{width:24px;height:24px}
+.ic:focus-visible,.thumb:focus-visible,.btn:focus-visible{outline:2px solid #0095F6;outline-offset:-2px}
+.ig-scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;position:relative}
+.ig-scroll::-webkit-scrollbar{display:none}
+.ig-head{padding:4px 16px 0}
+.prow{display:flex;align-items:center;gap:20px}
+.ring{width:90px;height:90px;border-radius:50%;padding:3px;background:conic-gradient(from 200deg,#FEDA75,#FA7E1E,#D62976,#962FBF,#4F5BD5,#FEDA75);flex:none}
+.ring>span{display:block;width:100%;height:100%;border-radius:50%;border:3px solid #fff;overflow:hidden;background:#fff}
+.ring svg{width:100%;height:100%}
+.pinfo{flex:1;min-width:0}
+.pname{font:600 15px/1.2 var(--ui);margin-bottom:8px}
+.stats{display:flex;justify-content:space-between;gap:8px;max-width:236px}
+.stats div{display:flex;flex-direction:column;line-height:1.25}
+.stats b{font-weight:600;font-size:16px}
+.stats span{font-size:13.5px}
+.bio{margin-top:11px;font-size:14px;line-height:1.38}
+.bio .cat{color:#737373}
+.bio .lk{color:#00376B;font-weight:600;display:inline-flex;align-items:center;gap:4px;margin-top:1px}
+.bio .lk svg{width:14px;height:14px}
+.btns{display:grid;grid-template-columns:1fr 1fr 1fr 34px;gap:6px;margin-top:14px}
+.btn{height:34px;border-radius:9px;background:#EFEFEF;font:600 14px/34px var(--ui);text-align:center;display:grid;place-items:center;padding:0}
+.btn svg{width:18px;height:18px}
+.btn.blue{background:#0095F6;color:#fff}
+.hls{display:flex;gap:15px;overflow-x:auto;padding:16px 16px 12px;scrollbar-width:none}
+.hls::-webkit-scrollbar{display:none}
+.hl{flex:none;width:66px;text-align:center;font-size:12px;line-height:1.2}
+.hl i{display:block;width:66px;height:66px;border-radius:50%;border:1px solid #DBDBDB;padding:3px;margin-bottom:6px}
+.hl i span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--areia);color:var(--barro)}
+.hl svg{width:26px;height:26px}
+.tabs{display:flex;border-bottom:1px solid #EFEFEF;position:sticky;top:0;background:#fff;z-index:12}
+.tabs button{flex:1;height:44px;display:grid;place-items:center;color:#8e8e8e;position:relative}
+.tabs button svg{width:24px;height:24px}
+.tabs button[aria-selected=true]{color:#000}
+.tabs button[aria-selected=true]::after{content:"";position:absolute;left:22%;right:22%;bottom:-1px;height:1.5px;background:#000}
+.pane[hidden]{display:none}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}
+.thumb{position:relative;aspect-ratio:3/4;overflow:hidden;background:#eee;cursor:pointer}
+.thumb>.post{position:absolute;top:0;left:-3.333%;width:106.667%;height:100%;aspect-ratio:auto}
+.thumb:hover>.post{filter:brightness(.92)}
+.badge{position:absolute;top:6px;right:6px;width:19px;height:19px;z-index:7;filter:drop-shadow(0 0 2px rgba(0,0,0,.4));color:#fff}
+.badge svg{width:100%;height:100%}
+.pil,.nchip{position:absolute;z-index:8;font:700 9.5px/1 var(--ui);letter-spacing:.02em;border-radius:99px;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s;pointer-events:none}
+.pil{left:5px;bottom:5px;padding:5px 7px;background:var(--c);color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.nchip{left:5px;top:5px;padding:4px 6px;background:#fff;color:#000}
+.show-pil .pil,.show-pil .nchip{opacity:1;transform:none}
+.rgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}
+.rthumb{cursor:pointer}
+.views{position:absolute;left:6px;bottom:6px;z-index:7;display:flex;align-items:center;gap:3px;color:#fff;font:600 12px/1 var(--ui);text-shadow:0 0 3px rgba(0,0,0,.5)}
+.views svg{width:14px;height:14px}
+.empty{padding:56px 32px;text-align:center;color:#737373}
+.empty i{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;border:2px solid #000;margin:0 auto 14px;color:#000}
+.empty i svg{width:30px;height:30px}
+.empty b{display:block;color:#000;font-size:22px;font-weight:800;margin-bottom:6px}
+.end{height:24px}
+.ig-bot{flex:none;height:82px;border-top:1px solid #EFEFEF;display:flex;justify-content:space-around;align-items:flex-start;padding-top:8px;position:relative;background:#fff;z-index:30}
+.ig-bot::after{content:"";position:absolute;bottom:8px;left:50%;width:132px;height:5px;border-radius:3px;background:#000;transform:translateX(-50%)}
+.me{width:28px;height:28px;border-radius:50%;border:2px solid #000;padding:1px}
+.me svg{width:100%;height:100%;border-radius:50%}
+
+/* visualizador de post */
+.viewer{position:absolute;left:0;right:0;top:50px;bottom:82px;background:#fff;z-index:20;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .34s cubic-bezier(.2,.8,.2,1),visibility 0s .34s;visibility:hidden}
+.viewer.open{transform:none;visibility:visible;transition:transform .34s cubic-bezier(.2,.8,.2,1)}
+.vh{height:46px;flex:none;display:flex;align-items:center;gap:4px;padding:0 8px;border-bottom:1px solid #EFEFEF}
+.vh div{display:flex;flex-direction:column;line-height:1.15}
+.vh small{font-size:12px;color:#737373;font-weight:600}
+.vh b{font-size:16px}
+.vb{flex:1;overflow-y:auto;scrollbar-width:none;position:relative;overscroll-behavior:contain}
+.vb::-webkit-scrollbar{display:none}
+.fi{padding-bottom:16px}
+.fi-h{display:flex;align-items:center;gap:10px;padding:8px 4px 8px 12px}
+.fi-h .av{width:34px;height:34px;border-radius:50%;overflow:hidden;flex:none}
+.fi-h .av svg{width:100%;height:100%}
+.fi-h div{flex:1;min-width:0;line-height:1.25}
+.fi-h b{font-size:13.5px;font-weight:600;display:block}
+.fi-h small{font-size:12px;color:#262626}
+.fi-m{position:relative;background:#000}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.sl{flex:0 0 100%;scroll-snap-align:start;position:relative}
+.cnt{position:absolute;top:12px;right:12px;z-index:8;background:rgba(18,18,18,.72);color:#fff;font:600 12px/1 var(--ui);padding:6px 9px;border-radius:99px}
+.navb{position:absolute;top:50%;z-index:10;width:28px;height:28px;margin-top:-14px;border-radius:50%;background:rgba(255,255,255,.88);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.25);color:#000;transition:opacity .2s}
+.navb svg{width:16px;height:16px}
+.navb.prev{left:8px}.navb.next{right:8px}
+.navb[disabled]{opacity:0;pointer-events:none}
+.mute{position:absolute;right:12px;bottom:12px;z-index:8;width:28px;height:28px;border-radius:50%;background:rgba(18,18,18,.72);display:grid;place-items:center;color:#fff}
+.mute svg{width:15px;height:15px}
+.fi-a{display:flex;align-items:center;justify-content:space-between;padding:2px 4px;position:relative}
+.fi-a .l{display:flex}
+.dots{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:4px}
+.dots i{width:6px;height:6px;border-radius:50%;background:#C7C7C7;transition:background .2s}
+.dots i.on{background:#0095F6}
+.likes,.cap,.more-c,.dt{padding:0 12px}
+.likes{font-weight:600;font-size:14px}
+.cap{margin-top:4px;font-size:14px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer;white-space:pre-line}
+.cap.open{display:block}
+.cap .h{color:#00376B}
+.more-c{color:#737373;font-size:14px;margin-top:4px}
+.dt{color:#737373;font-size:12px;margin-top:4px}
+.like.on svg path{fill:#FF3040;stroke:#FF3040}
+.like.on svg{animation:likepop .35s ease}
+@keyframes likepop{50%{transform:scale(1.22)}}
+.bigh{position:absolute;left:50%;top:50%;width:100px;height:100px;margin:-50px 0 0 -50px;z-index:9;opacity:0;pointer-events:none;color:#fff;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+.bigh svg{width:100%;height:100%}
+.bigh.pop{animation:pop .9s ease}
+@keyframes pop{0%{opacity:0;transform:scale(.3)}15%{opacity:1;transform:scale(1.12)}30%{transform:scale(.95)}45%,70%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+
+/* ---------- posts (escalam com a largura: 1cqw = 1% da arte) ---------- */
+.post{--bg:#F1E7D7;--fg:#2A1E18;position:relative;aspect-ratio:4/5;container-type:inline-size;overflow:hidden;background:var(--bg);color:var(--fg);font-family:var(--sans);text-rendering:geometricPrecision}
+.post svg.ill{position:absolute;inset:0;width:100%;height:100%}
+.post::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:var(--grain);background-size:180px;opacity:.11;mix-blend-mode:multiply;z-index:5}
+.ov{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;padding:7.4cqw}
+.reel-box{position:relative;aspect-ratio:9/16;overflow:hidden}
+.reel-box>.post{position:absolute;inset:0;aspect-ratio:auto;width:100%;height:100%}
+.reel-box .ov{padding-top:27cqw;padding-bottom:34cqw}
+.p-lbl{font:800 2.3cqw/1.25 var(--sans);letter-spacing:.24em;text-transform:uppercase}
+.p-ttl{font:400 11cqw/.93 var(--serif);letter-spacing:-.015em}
+.p-ttl em{font-style:italic}
+.p-txt{font:500 3.55cqw/1.42 var(--sans)}
+.p-meta{font:700 2.6cqw/1.3 var(--sans);letter-spacing:.06em}
+.p-top{display:flex;justify-content:space-between;align-items:center;font:700 2.35cqw/1 var(--sans);letter-spacing:.08em;opacity:.72}
+.p-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font:700 2.35cqw/1 var(--sans);letter-spacing:.08em}
+.p-foot svg{width:6cqw;height:6cqw}
+.mt-a{margin-top:auto}
+.p-tag{align-self:flex-start;margin-top:auto;background:rgba(251,247,240,.92);color:var(--tinta);font:700 2.5cqw/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:2cqw 3cqw;border-radius:99px}
+.scrim{position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(transparent,rgba(30,14,6,.62));z-index:1}
+.d-num{font:400 24cqw/.8 var(--serif);margin:7cqw 0 4cqw;letter-spacing:-.03em}
+.d-ttl{font-size:8.6cqw;line-height:1;margin:auto 0 4cqw;max-width:92%}
+.d-txt{max-width:88%;opacity:.86;margin-bottom:9cqw}
+.stat-l{margin-top:5cqw;display:grid}
+.stat-l div{display:grid;grid-template-columns:32cqw 1fr;align-items:center;gap:4cqw;padding:4.4cqw 0;border-top:1px solid currentColor;border-color:rgba(251,247,240,.28)}
+.stat-l b{font:400 15cqw/.9 var(--serif);letter-spacing:-.02em}
+.stat-l span{font:600 3.5cqw/1.35 var(--sans)}
+.list-l{margin-top:5cqw;display:grid;list-style:none}
+.list-l li{display:grid;grid-template-columns:13cqw 1fr;gap:3cqw;padding:3.2cqw 0;border-top:1px solid var(--lc,rgba(42,30,24,.16))}
+.list-l li>b{font:400 8cqw/1 var(--serif);color:var(--ac,#C0603A)}
+.list-l li strong{display:block;font:800 3.7cqw/1.3 var(--sans);margin-bottom:.8cqw}
+.list-l li span{font:500 3.35cqw/1.42 var(--sans);opacity:.85}
+.dl{margin-top:5cqw;display:grid}
+.dl div{display:grid;grid-template-columns:30cqw 1fr;gap:3cqw;padding:3.4cqw 0;border-top:1px solid rgba(42,30,24,.16);font:500 3.5cqw/1.4 var(--sans)}
+.dl dt{font:800 2.3cqw/1.6 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#7E3A20}
+.cta-b{align-self:flex-start;margin-top:6cqw;display:inline-flex;align-items:center;gap:2cqw;padding:3.6cqw 5.4cqw;border-radius:99px;font:800 3.4cqw/1 var(--sans);letter-spacing:.02em}
+.post.ba .antes{clip-path:inset(0 calc(100% - var(--p,50%)) 0 0)}
+.ba-div{position:absolute;top:0;bottom:0;left:var(--p,50%);width:.5cqw;margin-left:-.25cqw;background:#FBF7F0;z-index:2}
+.post.ba .ov{z-index:3}.post.ba .scrim{z-index:2}
+.ba-div i{position:absolute;top:47%;left:50%;width:10cqw;height:10cqw;margin:-5cqw 0 0 -5cqw;border-radius:50%;background:#FBF7F0;display:grid;place-items:center;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.25);color:#2A1E18}
+.ba-div i svg{width:6cqw;height:6cqw}
+.ba-pill{font:800 2.4cqw/1 var(--sans);letter-spacing:.2em;padding:2.2cqw 3.4cqw;border-radius:99px}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;z-index:9;cursor:ew-resize;margin:0;touch-action:pan-y}
+.anim .draw>*{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.6s cubic-bezier(.5,0,.2,1) forwards}
+.anim .draw>*:nth-child(2n){animation-delay:.25s}
+.anim .draw>*:nth-child(3n){animation-delay:.5s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.anim .draw>*{animation:none;stroke-dashoffset:0}.viewer{transition:none}}
+
+/* modo exportação (gera os JPGs) */
+body.export{background:#fff}
+body.export>*:not(#stage){display:none}
+#stage{position:absolute;left:0;top:0}
+#stage>.post{width:100%;height:100%;aspect-ratio:auto}
+#stage>.reel-box{width:100%;height:100%}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo-in">
+    <span class="marca" id="marcaTopo">Pedro Albuquerque · Arquitetura</span>
+    <span class="eyebrow">Estudo de perfil · Instagram</span>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="stage">
+    <div class="phone" id="phone">
+      <div class="screen">
+        <div class="sb">
+          <span>9:41</span>
+          <span class="ico" aria-hidden="true">
+            <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0zM3.4 6.8a6.6 6.6 0 0 1 9.2 0l-1.4 1.4a4.6 4.6 0 0 0-6.4 0zM1.1 4.5a9.8 9.8 0 0 1 13.8 0l-1.4 1.4a7.8 7.8 0 0 0-11 0z"/></svg>
+            <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2"/><path d="M25 4.5v4a2 2 0 0 0 0-4z" opacity=".45"/></svg>
+          </span>
+        </div>
+        <div class="ig-top">
+          <button class="ic" aria-label="Voltar" data-ic="back"></button>
+          <div class="u"><span>pedroalbuquerque.arq</span></div>
+          <button class="ic" aria-label="Notificações" data-ic="bell"></button>
+          <button class="ic" aria-label="Mais opções" data-ic="more"></button>
+        </div>
+        <div class="ig-scroll" id="scroll">
+          <section class="ig-head">
+            <div class="prow">
+              <div class="ring"><span id="avatar"></span></div>
+              <div class="pinfo">
+                <div class="pname">Pedro Albuquerque | Arquiteto</div>
+                <div class="stats">
+                  <div><b>12</b><span>posts</span></div>
+                  <div><b>8.426</b><span>seguidores</span></div>
+                  <div><b>391</b><span>seguindo</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="bio" id="bio"></div>
+            <div class="btns">
+              <button class="btn blue" id="follow">Seguir</button>
+              <button class="btn">Mensagem</button>
+              <button class="btn">Contato</button>
+              <button class="btn" aria-label="Sugestões de contas" data-ic="addp"></button>
+            </div>
+          </section>
+          <div class="hls" id="hls"></div>
+          <nav class="tabs" role="tablist">
+            <button role="tab" aria-selected="true" aria-label="Posts" data-tab="grid" data-ic="grid"></button>
+            <button role="tab" aria-selected="false" aria-label="Reels" data-tab="reels" data-ic="reel"></button>
+            <button role="tab" aria-selected="false" aria-label="Marcados" data-tab="tags" data-ic="tag"></button>
+          </nav>
+          <div class="pane grid" data-pane="grid" id="grid"></div>
+          <div class="pane rgrid" data-pane="reels" id="rgrid" hidden></div>
+          <div class="pane" data-pane="tags" hidden>
+            <div class="empty"><i data-ic="tag"></i><b>Fotos e vídeos de Pedro</b>Quando as pessoas marcarem Pedro em fotos e vídeos, eles aparecerão aqui.</div>
+          </div>
+          <div class="end"></div>
+        </div>
+        <nav class="ig-bot" aria-label="Navegação do app">
+          <button class="ic" aria-label="Início" data-ic="home"></button>
+          <button class="ic" aria-label="Reels" data-ic="reel"></button>
+          <button class="ic" aria-label="Mensagens" data-ic="send"></button>
+          <button class="ic" aria-label="Pesquisar" data-ic="search"></button>
+          <button class="ic" aria-label="Perfil"><span class="me" id="me"></span></button>
+        </nav>
+        <div class="viewer" id="viewer" aria-hidden="true">
+          <div class="vh">
+            <button class="ic" id="vclose" aria-label="Voltar ao perfil" data-ic="back"></button>
+            <div><small>PEDROALBUQUERQUE.ARQ</small><b>Posts</b></div>
+          </div>
+          <div class="vb" id="vb"></div>
+        </div>
+      </div>
+    </div>
+    <p class="hint">Toque num post para abrir · arraste os carrosséis</p>
+  </div>
+
+  <article class="doc">
+    <section class="intro" style="border:0;margin:0;padding-top:8px">
+      <p class="eyebrow">Arquitetura · Recife, PE</p>
+      <h1>Pedro Albuquerque<br><em>luz, sombra e cobogó.</em></h1>
+      <p class="lead">Um perfil desenhado para fazer o que um bom portfólio faz: mostrar quem é o Pedro em três segundos e transformar quem chega em cliente. A identidade nasce do cobogó, o bloco vazado inventado no Recife, e da luz do Nordeste.</p>
+      <div class="ctrl">
+        <label class="tg"><input type="checkbox" id="tgPil"><i></i>Mostrar pilares na grade</label>
+        <div class="legend" id="legend"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2><small>01</small>Posicionamento</h2>
+      <p class="big-q">“Casas tropicais contemporâneas para quem quer morar com luz natural, vento e sombra boa.”</p>
+      <div class="cards">
+        <div class="card"><h4>Para quem</h4><p>Casais de 30 a 50 anos que estão construindo ou reformando no Recife e no litoral de Pernambuco. Na consultoria online, gente do Brasil inteiro.</p></div>
+        <div class="card"><h4>Como fala</h4><p>Próximo e didático. Explica o porquê de cada decisão, sem “arquitetês”. Primeira pessoa, frases curtas, sempre com um exemplo de obra real.</p></div>
+        <div class="card"><h4>O que vende</h4><p>Projetos residenciais e de interiores. A consultoria online de 90 minutos é a porta de entrada para quem ainda não está pronto para um projeto completo.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2><small>02</small>Identidade visual</h2>
+      <div class="brand">
+        <span id="markBig"></span>
+        <div>
+          <p><b>O arco com o sol é o símbolo do Pedro:</b> a porta, a sombra e a luz que entra por ela. É simples o bastante para ler no círculo pequeno da foto de perfil e nas capas dos destaques.</p>
+          <p>Para o perfil pessoal, a foto de rosto costuma converter mais. Quando houver ensaio, troque por um retrato do Pedro diante de um arco e deixe o símbolo para destaques, site e assinatura dos posts.</p>
+        </div>
+      </div>
+      <h3 class="k">Paleta</h3>
+      <div class="swatches" id="swatches"></div>
+      <h3 class="k">Tipografia</h3>
+      <div class="types">
+        <div class="type"><div><b>Instrument Serif</b><small>Títulos e citações</small></div><div class="s" style="font-family:var(--serif)">Casa boa é a que <em>respira.</em></div></div>
+        <div class="type"><div><b>Manrope</b><small>Textos, rótulos, legendas</small></div><div class="s" style="font:600 clamp(18px,2vw,22px)/1.4 var(--sans)">Um plano claro para reformar sem errar.</div></div>
+        <div class="type"><div><b>Caveat</b><small>Só nas anotações de croqui</small></div><div class="s" style="font-family:Caveat,cursive;color:var(--terracota)">luz poente ↘ cobogó 20×20</div></div>
+      </div>
+      <h3 class="k">Padrão cobogó</h3>
+      <div class="pattern-demo" id="patterns"></div>
+    </section>
+
+    <section>
+      <h2><small>03</small>Bio, linha a linha</h2>
+      <div class="bio-doc">
+        <div class="bio-card" id="bioCard"></div>
+        <ol class="notes">
+          <li><span><b>Nome com palavra-chave.</b> O campo nome entra na busca do Instagram: com “Arquiteto” ali, o perfil aparece para quem procura arquiteto.</span></li>
+          <li><span><b>Categoria profissional</b> ativada, para reforçar a área sem gastar caracteres da bio.</span></li>
+          <li><span><b>A promessa</b> em uma linha. É o que diferencia o Pedro de qualquer outro arquiteto.</span></li>
+          <li><span><b>Nicho e praça.</b> Projeto presencial no Recife, consultoria para o Brasil inteiro.</span></li>
+          <li><span><b>O que ele vende</b>, sem rodeio.</span></li>
+          <li><span><b>Chamada para ação</b> apontando para o link logo abaixo.</span></li>
+          <li><span><b>Link direto para o agendamento</b>, não para a home do site. Um clique a menos é um cliente a mais.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <h2><small>04</small>Destaques</h2>
+      <div class="hl-doc" id="hlDoc"></div>
+    </section>
+
+    <section>
+      <h2><small>05</small>Grade planejada</h2>
+      <ul class="points">
+        <li><b>Três fixados contam a história inteira:</b> quem é (Prazer, sou o Pedro), o que faz (Casa Jaqueira) e como contratar (Consultoria).</li>
+        <li><b>Nenhuma cor se repete lado a lado.</b> Terracota, areia, mata, sol e azulejo se alternam para a grade respirar como uma boa casa.</li>
+        <li><b>Arte em 4:5 (1080 × 1350 px) com respiro lateral.</b> A grade do Instagram mostra os posts em 3:4 e corta as bordas, então nada importante fica nelas.</li>
+        <li><b>Reels com capa própria em 9:16</b> e título no miolo da tela, longe dos botões e da legenda.</li>
+        <li><b>Até 5 hashtags por post</b>, específicas do nicho, em vez de listas genéricas.</li>
+      </ul>
+      <h3 class="k">Pilares de conteúdo</h3>
+      <div class="mix" id="mix"></div>
+      <div class="mix-l" id="mixL"></div>
+      <h3 class="k">Ordem de publicação</h3>
+      <p style="max-width:62ch;margin-bottom:12px">A grade se lê de cima para baixo, mas se publica de baixo para cima. Comece pelo post <b>12</b> e siga até o <b>04</b>; os três de cima entram por último e são fixados. Ritmo sugerido: 3 posts por semana (terça, quinta e domingo) e stories diários de obra.</p>
+      <div class="order" id="order"></div>
+    </section>
+
+    <section>
+      <h2><small>06</small>Arquivos prontos para postar</h2>
+      <p style="max-width:62ch;margin-bottom:22px;color:var(--suave)">Todas as artes em JPG: posts e carrosséis em 1080 × 1350 px, capas de Reels em 1080 × 1920 px. Clique para abrir em tamanho real. As legendas estão em <code>README.md</code>.</p>
+      <div class="files" id="files"></div>
+      <p class="note"><b>Antes de publicar:</b> número de seguidores, curtidas, o depoimento de “Marina e Rafael” e o domínio do link são fictícios, só para apresentação. Troque pelos dados reais do Pedro e confirme cada projeto com ele.</p>
+    </section>
+  </article>
+</div>
+
+<script>
+/* ============ utilidades ============ */
+let _u=0;const uid=()=>'u'+(++_u);
+const pad=n=>String(n).padStart(2,'0');
+const fmt=n=>n.toLocaleString('pt-BR');
+const C={cal:'#FBF7F0',areia:'#F1E7D7',areia2:'#E7D9C2',terracota:'#C0603A',barro:'#7E3A20',sol:'#E4A84A',mata:'#2E4636',azulejo:'#285A87',grafite:'#23201D',concreto:'#D3CBBE',tinta:'#2A1E18'};
+const HANDLE='pedroalbuquerque.arq';
+
+/* estrela de quatro pontas com lados côncavos */
+const star=(cx,cy,r)=>`M${cx} ${cy-r}A${r} ${r} 0 0 0 ${cx+r} ${cy}A${r} ${r} 0 0 0 ${cx} ${cy+r}A${r} ${r} 0 0 0 ${cx-r} ${cy}A${r} ${r} 0 0 0 ${cx} ${cy-r}Z`;
+/* bloco de cobogó: quadrado com estrela no centro e quartos de círculo nos cantos (evenodd) */
+function cobogo(x,y,s,r=.36,q=.22){r*=s;q*=s;const cx=x+s/2,cy=y+s/2;
+  return `M${x} ${y}h${s}v${s}h${-s}Z`
+  +star(cx,cy,r)
+  +`M${x} ${y}h${q}A${q} ${q} 0 0 1 ${x} ${y+q}Z`
+  +`M${x+s} ${y}v${q}A${q} ${q} 0 0 1 ${x+s-q} ${y}Z`
+  +`M${x+s} ${y+s}h${-q}A${q} ${q} 0 0 1 ${x+s} ${y+s-q}Z`
+  +`M${x} ${y+s}v${-q}A${q} ${q} 0 0 1 ${x+q} ${y+s}Z`;}
+/* só os vazados (para a luz projetada) */
+function cobogoHoles(s,r=.36,q=.22){r*=s;q*=s;const c=s/2;
+  return star(c,c,r)
+  +[[0,0],[s,0],[s,s],[0,s]].map(([x,y])=>`M${x-q} ${y}a${q} ${q} 0 1 0 ${2*q} 0a${q} ${q} 0 1 0 ${-2*q} 0Z`).join('');}
+/* copa de árvore de croqui */
+function scallop(cx,cy,r,n){let d='';const rr=(r*Math.PI/n*1.18).toFixed(1);
+  for(let i=0;i<=n;i++){const a=i/n*2*Math.PI-Math.PI/2,x=(cx+r*Math.cos(a)).toFixed(1),y=(cy+r*Math.sin(a)).toFixed(1);d+=i?`A${rr} ${rr} 0 0 1 ${x} ${y}`:`M${x} ${y}`;}return d+'Z';}
+const svg=(body,defs='')=>`<svg class="ill" viewBox="0 0 1080 1350" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>${defs}</defs>${body}</svg>`;
+const blocks=(id,x,y,s,fill,g=6)=>`<pattern id="${id}" x="${x}" y="${y}" width="${s}" height="${s}" patternUnits="userSpaceOnUse"><path d="${cobogo(g/2,g/2,s-g)}" fill="${fill}" fill-rule="evenodd"/></pattern>`;
+
+/* símbolo: arco + sol */
+const MARK=(bg=C.terracota)=>`<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="${bg}"/><path d="M32 76V50a18 18 0 0 1 36 0v26" fill="none" stroke="#FBF0DE" stroke-width="5"/><circle cx="50" cy="55" r="8.5" fill="#F2C27A"/><path d="M24 76h52" stroke="#FBF0DE" stroke-width="5" stroke-linecap="round"/></svg>`;
+const ARCH=(c='currentColor')=>`<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M12 33V19a8 8 0 0 1 16 0v14" fill="none" stroke="${c}" stroke-width="2.6"/><circle cx="20" cy="22" r="3.6" fill="${c}"/><path d="M7 33h26" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/></svg>`;
+
+/* ============ ícones da interface ============ */
+const S=(d,w=1.9)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const IC={
+  back:S('<path d="M15 4.5 7.5 12l7.5 7.5"/>'),
+  bell:S('<path d="M6 9.5a6 6 0 0 1 12 0c0 5.5 2.4 7 2.4 7H3.6S6 15 6 9.5zM10 19.8a2.1 2.1 0 0 0 4 0"/>'),
+  more:S('<circle cx="5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="19" cy="12" r="1.3" fill="currentColor"/>'),
+  addp:S('<circle cx="9" cy="8" r="4"/><path d="M2.5 20.5c.9-3.8 3.4-5.8 6.5-5.8s5.6 2 6.5 5.8M19 8v6M16 11h6"/>'),
+  grid:S('<rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>'),
+  reel:S('<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M3 8.5h18M9.2 3l3 5.5M15 3l3 5.5"/><path d="M10.2 12.2v5.6l4.8-2.8z" fill="currentColor"/>'),
+  tag:S('<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M6.8 21c.9-2.9 2.8-4.4 5.2-4.4s4.3 1.5 5.2 4.4"/>'),
+  home:S('<path d="M3.5 10.5 12 3.5l8.5 7V20.5h-5.5v-6h-6v6H3.5z"/>'),
+  search:S('<circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/>'),
+  send:S('<path d="M21.5 3 10.4 13.6M21.5 3 15 21l-4.6-7.4L3 9.2z"/>'),
+  heart:S('<path d="M12 20.3S3.5 15.4 3.5 9.4A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.5 2.6c0 6-8.5 10.9-8.5 10.9z"/>'),
+  heartF:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3S3.5 15.4 3.5 9.4A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.5 2.6c0 6-8.5 10.9-8.5 10.9z" fill="currentColor"/></svg>',
+  comment:S('<path d="M20.7 11.6a8.6 8.6 0 0 1-12.8 7.5L3.3 20.6l1.5-4.6a8.6 8.6 0 1 1 15.9-4.4z"/>'),
+  save:S('<path d="M18.5 20.5 12 15.4l-6.5 5.1V4.3c0-.5.4-.8.8-.8h11.4c.4 0 .8.3.8.8z"/>'),
+  link:S('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.1 1.1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.1-1.1"/>'),
+  next:S('<path d="m9 5 7 7-7 7"/>',2.6),
+  prev:S('<path d="m15 5-7 7 7 7"/>',2.6),
+  mute:S('<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4zM16 9.5l5 5M21 9.5l-5 5"/>'),
+  play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg>',
+  carW:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.2h10.6A2.4 2.4 0 0 1 21 5.6v10.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><rect x="3" y="7" width="14" height="14" rx="2.4" fill="currentColor"/></svg>',
+  reelW:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M8 2.5h8A5.5 5.5 0 0 1 21.5 8v8a5.5 5.5 0 0 1-5.5 5.5H8A5.5 5.5 0 0 1 2.5 16V8A5.5 5.5 0 0 1 8 2.5zM4.6 9.2v6.8A3.4 3.4 0 0 0 8 19.4h8a3.4 3.4 0 0 0 3.4-3.4V9.2zm.2-2h3.7L6.9 4.6a3.4 3.4 0 0 0-2.1 2.6zm5.9 0h4.7l-1.7-2.6H9zm6.9 0h2.6a3.4 3.4 0 0 0-2.4-2.5h-1.9zM10 11.3v6l5-3z"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.6 2.6 21.4 9.4l-1.7 1.1-2.4-.3-3.6 3.6.6 4.5-1.6 1.6-4-4-5.4 5.4-1.3-1.3 5.4-5.4-4-4 1.6-1.6 4.5.6 3.6-3.6-.3-2.4z"/></svg>',
+  arrows:S('<path d="m9 7-5 5 5 5M15 7l5 5-5 5"/>',2.4),
+};
+document.querySelectorAll('[data-ic]').forEach(el=>el.innerHTML=IC[el.dataset.ic]);
+
+/* ============ ilustrações (1080 × 1350) ============ */
+const ILL={
+jaqueira(){const g=uid();return svg(`
+<rect width="1080" height="1350" fill="url(#${g}s)"/>
+<circle cx="800" cy="360" r="235" fill="#F2B866" opacity=".16"/>
+<circle cx="800" cy="360" r="138" fill="#EFAE5C"/>
+<rect y="1036" width="1080" height="314" fill="#D7BB92"/>
+<path d="M455 1036H605L705 1350H355Z" fill="#E6D1AE"/>
+<path d="M130 1036H930L1080 1140V1176H230Z" fill="#6B2E17" opacity=".14"/>
+<path d="M200 1036h160l46 96H160z" fill="#F6C77A" opacity=".28"/>
+<path d="M700 1036h160l50 96H662z" fill="#F6C77A" opacity=".2"/>
+<path d="M66 1036c8-50-14-86-46-108 38 12 64 52 66 108zM100 1036c-4-64 6-104 30-136-10 46-12 84-6 136zM122 1036c16-48 44-76 86-88-30 22-52 50-62 88z" fill="#5E7A50"/>
+<rect x="130" y="560" width="800" height="476" fill="#C0603A"/>
+<rect x="130" y="602" width="800" height="84" fill="#4A1F12"/>
+<rect x="130" y="602" width="800" height="84" fill="url(#${g}c)"/>
+<path d="M200 1036V830a80 80 0 0 1 160 0v206z" fill="url(#${g}l)"/>
+<path d="M232 1036v-90h96v90z" fill="#B85A30" opacity=".35"/>
+<path d="M450 1036V830a80 80 0 0 1 160 0v206z" fill="#4A1F12"/>
+<path d="M472 1036V842a58 58 0 0 1 116 0v194z" fill="#8A4A2A"/>
+<path d="M530 1036V784a58 58 0 0 1 58 58v194z" fill="#6E3820"/>
+<circle cx="518" cy="946" r="5" fill="#EBCBA4"/>
+<path d="M700 1036V830a80 80 0 0 1 160 0v206z" fill="url(#${g}l)"/>
+<path d="M700 1036V830a80 80 0 0 1 160 0v206z" fill="url(#${g}c2)"/>
+<rect x="130" y="560" width="800" height="476" fill="url(#${g}f)"/>
+<path d="M130 564H930V602L130 652Z" fill="#3A1408" opacity=".18"/>
+<rect x="90" y="514" width="880" height="50" fill="#7E3A20"/>
+<rect x="90" y="514" width="880" height="9" fill="#A65532"/>
+<path d="M914 1036c10-120-6-214 22-334l28 6c-22 112-8 210-14 328z" fill="#47301F"/>
+<path d="M934 790c-36-44-86-60-150-58M946 724c26-52 66-78 126-90" fill="none" stroke="#47301F" stroke-width="16" stroke-linecap="round"/>
+<circle cx="1010" cy="470" r="190" fill="#22382A"/>
+<circle cx="930" cy="372" r="140" fill="#3B5A44"/>
+<circle cx="858" cy="540" r="118" fill="#2E4636"/>
+<circle cx="1080" cy="650" r="150" fill="#2E4636"/>
+<circle cx="788" cy="462" r="78" fill="#3B5A44"/>
+<g fill="#4F6B45"><circle cx="900" cy="300" r="30"/><circle cx="980" cy="380" r="22"/><circle cx="830" cy="430" r="20"/><circle cx="1040" cy="520" r="26"/><circle cx="900" cy="560" r="18"/></g>
+<ellipse cx="930" cy="838" rx="15" ry="22" fill="#A3AE5A"/><ellipse cx="952" cy="902" rx="13" ry="19" fill="#93A04E"/><ellipse cx="922" cy="960" rx="12" ry="17" fill="#A3AE5A"/>
+`,`
+<linearGradient id="${g}s" x1="0" y1="0" x2="0" y2="1036" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F8ECD8"/><stop offset="1" stop-color="#F0D0A4"/></linearGradient>
+<linearGradient id="${g}l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7CD84"/><stop offset="1" stop-color="#E08A45"/></linearGradient>
+<linearGradient id="${g}f" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2A0E05" stop-opacity="0"/><stop offset="1" stop-color="#2A0E05" stop-opacity=".22"/></linearGradient>
+${blocks(g+'c',130,602,42,'#E7C4A0',4)}${blocks(g+'c2',700,750,40,'#C9774C',4)}`);},
+
+luz(){const g=uid(),h=cobogoHoles(110);
+const br=`<path d="M700 862c-8-70 16-140-6-232M702 772c34-34 80-48 112-92M698 694c-34-26-62-70-72-116M704 640c20-30 24-62 48-92" fill="none" stroke-width="5" stroke-linecap="round"/>`
+ +[[812,676,-35],[784,702,-20],[760,726,15],[626,574,62],[648,612,40],[670,652,22],[752,548,-50],[736,582,-30],[716,610,-5],[724,520,-70],[690,700,10],[660,560,80]].map(([x,y,a])=>`<ellipse cx="${x}" cy="${y}" rx="24" ry="9" transform="rotate(${a} ${x} ${y})" stroke="none"/>`).join('');
+return svg(`
+<rect width="1080" height="904" fill="url(#${g}w)"/>
+<rect y="900" width="1080" height="450" fill="url(#${g}f)"/>
+<rect y="894" width="1080" height="12" fill="#4A2412" opacity=".45"/>
+<g mask="url(#${g}m)">
+ <path d="M90 410L730 340L930 900H250Z" fill="#F7CF8E" opacity=".3" filter="url(#${g}b)"/>
+ <path d="M90 410L730 340L930 900H250Z" fill="url(#${g}pw)"/>
+ <path d="M250 906H930L1150 1350H330Z" fill="#F2C27A" opacity=".22" filter="url(#${g}b)"/>
+ <path d="M250 906H930L1150 1350H330Z" fill="url(#${g}pf)"/>
+</g>
+<g opacity=".2" transform="translate(150 -36) skewX(-14)" fill="#2A1206" stroke="#2A1206">${br}</g>
+<ellipse cx="780" cy="1196" rx="270" ry="24" fill="#24100A" opacity=".35"/>
+<rect x="582" y="1068" width="24" height="122" fill="#341709"/>
+<rect x="944" y="1068" width="24" height="122" fill="#341709"/>
+<path d="M548 1040H1012L994 1020H566Z" fill="#7A4428"/>
+<rect x="548" y="1040" width="464" height="32" fill="#4A2414"/>
+<path d="M676 1020c-34-12-44-66-28-104 12-28 32-38 32-58h40c0 20 20 30 32 58 16 38 6 92-28 104z" fill="#EADCC5"/>
+<path d="M720 858c0 20 20 30 32 58 16 38 6 92-28 104h-22c24-14 32-64 20-104-8-28-20-38-20-58z" fill="#CDB89A"/>
+<g fill="#4F6B45" stroke="#3B2618">${br}</g>
+`,`
+<linearGradient id="${g}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A4429"/><stop offset="1" stop-color="#C38658"/></linearGradient>
+<linearGradient id="${g}f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9B5E3D"/><stop offset="1" stop-color="#5A2F1B"/></linearGradient>
+<pattern id="${g}pw" width="110" height="110" patternUnits="userSpaceOnUse" patternTransform="rotate(-7) skewX(-20)"><path d="${h}" fill="#FFE6B6"/></pattern>
+<pattern id="${g}pf" width="110" height="110" patternUnits="userSpaceOnUse" patternTransform="translate(250 906) skewX(-40) scale(1 .52)"><path d="${h}" fill="#FFDFA6"/></pattern>
+<radialGradient id="${g}r" gradientUnits="userSpaceOnUse" cx="560" cy="740" r="560"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<mask id="${g}m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1350"><rect width="1080" height="1350" fill="url(#${g}r)"/></mask>
+<filter id="${g}b" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="26"/></filter>`);},
+
+escada(){const g=uid();let sh='',st='';
+for(let i=0;i<10;i++){const x=140+62*i,y=1120-95*i;
+ sh+=`<path d="M${x+20} ${y+34}H${x+300}L${x+372} ${y+126}H${x+92}Z"/>`;
+ st+=`<path d="M${x} ${y}H${x+300}L${x+318} ${y-14}H${x+18}Z" fill="#D2814F"/><rect x="${x}" y="${y}" width="300" height="34" fill="#A4522E"/><rect x="${x}" y="${y+27}" width="300" height="7" fill="#7E3A20" opacity=".55"/>`;}
+const lv=[[-38,'#3B5A44'],[-24,'#6F8A5C'],[-10,'#4F6B45'],[4,'#3B5A44'],[18,'#6F8A5C'],[32,'#4F6B45']].map(([a,c])=>`<ellipse cx="915" cy="880" rx="24" ry="168" transform="rotate(${a} 915 1052)" fill="${c}"/>`).join('');
+return svg(`
+<rect width="1080" height="1350" fill="#D3CBBE"/>
+<rect width="1080" height="1180" fill="url(#${g}t)"/>
+<rect width="1080" height="1180" fill="url(#${g}k)"/>
+<g fill="#4D453B" opacity=".17">${sh}</g>
+<g opacity=".14" fill="#4D453B" transform="translate(60 40) skewX(-10)">${lv.replace(/fill="#[0-9A-F]+"/g,'')}</g>
+<rect y="1180" width="1080" height="170" fill="#B3AA9C"/>
+<rect y="1180" width="1080" height="5" fill="#8C8376" opacity=".55"/>
+<ellipse cx="560" cy="1300" rx="420" ry="26" fill="#8C8376" opacity=".25"/>
+${st}
+${lv}
+<path d="M842 1062h146l-16 128H858z" fill="#B65A35"/>
+<rect x="832" y="1046" width="166" height="20" rx="4" fill="#C9693F"/>
+`,`
+<pattern id="${g}t" width="180" height="90" patternUnits="userSpaceOnUse"><rect y="88" width="180" height="2" fill="#6E6458" opacity=".16"/><circle cx="45" cy="45" r="5" fill="#8E8579" opacity=".5"/><circle cx="135" cy="45" r="5" fill="#8E8579" opacity=".5"/></pattern>
+<radialGradient id="${g}k" gradientUnits="userSpaceOnUse" cx="380" cy="-80" r="980"><stop offset="0" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`);},
+
+croqui(){const g=uid();
+const band=Array.from({length:16},(_,i)=>`<rect x="${222+i*40}" y="676" width="30" height="30"/>`).join('');
+const rays=Array.from({length:8},(_,i)=>{const a=i*Math.PI/4;return `M${(860+74*Math.cos(a)).toFixed(1)} ${(300+74*Math.sin(a)).toFixed(1)}L${(860+104*Math.cos(a)).toFixed(1)} ${(300+104*Math.sin(a)).toFixed(1)}`}).join('');
+return svg(`
+<rect x="-300" y="-700" width="1680" height="2750" fill="#23201D"/>
+<rect x="-300" y="-700" width="1680" height="2750" fill="url(#${g}g)"/>
+<g transform="translate(0 60)">
+<g class="draw" fill="none" stroke="#EFE4D2" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+ <path pathLength="1" d="M60 1000H1020"/>
+ <path pathLength="1" d="M200 1000V660H880V1000"/>
+ <path pathLength="1" d="M160 640H920V660H160Z"/>
+ <path pathLength="1" d="M270 1000V840a70 70 0 0 1 140 0V1000M470 1000V840a70 70 0 0 1 140 0V1000M670 1000V840a70 70 0 0 1 140 0V1000"/>
+ <path pathLength="1" d="M500 1000V862a40 40 0 0 1 80 0V1000"/>
+ <path pathLength="1" d="M128 1000C132 900 120 820 134 736M154 1000C156 900 148 820 160 736"/>
+ <path pathLength="1" d="${scallop(146,612,128,15)}"/>
+ <circle pathLength="1" cx="860" cy="300" r="54"/>
+ <path pathLength="1" d="${rays}"/>
+</g>
+<g fill="none" stroke="#EFE4D2" stroke-width="1.6" opacity=".65">${band}</g>
+<g stroke="#EFE4D2" stroke-width="1.4" opacity=".35">${[0,1,2].map(k=>{const x=270+k*200;return Array.from({length:6},(_,i)=>`<path d="M${x+8} ${1000-i*26}l${Math.min(124,40+i*26)} ${-Math.min(124,40+i*26)}"/>`).join('')}).join('')}</g>
+<g stroke="#E4A84A" stroke-width="2.6" fill="none" stroke-linecap="round">
+ <path d="M812 344 652 548" stroke-dasharray="12 12"/>
+ <path d="m652 548 5-24M652 548l22-11"/>
+ <path d="M960 660V1000M948 660h24M948 1000h24"/>
+ <path d="M640 676c20-40 44-62 76-72"/>
+</g>
+<g fill="#E4A84A" font-family="Caveat, cursive" font-weight="600" font-size="48">
+ <text x="736" y="500" transform="rotate(-8 736 500)">luz poente</text>
+ <text x="726" y="606">cobogó 20×20</text>
+ <text transform="translate(1004 942) rotate(-90)">pé-direito 5,20</text>
+</g>
+<text x="880" y="1050" text-anchor="end" fill="#EFE4D2" opacity=".5" font-family="Manrope, sans-serif" font-weight="700" font-size="20" letter-spacing="4">FACHADA FRONTAL · ESC. 1:100</text>
+</g>
+`,`<pattern id="${g}g" width="54" height="54" patternUnits="userSpaceOnUse"><path d="M54 0H0V54" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>`);},
+
+varanda(){const g=uid();
+const bz=[[855,680],[700,980],[400,1000],[255,712]];
+const B=t=>{const u=1-t;return[0,1].map(k=>u*u*u*bz[0][k]+3*u*u*t*bz[1][k]+3*u*t*t*bz[2][k]+t*t*t*bz[3][k]);};
+let fr='';for(let t=.06;t<.95;t+=.042){const[x,y]=B(t);fr+=`M${x.toFixed(1)} ${(y-4).toFixed(1)}l${(-2).toFixed(1)} 40`;}
+let fl='';for(let x=60;x<1080;x+=120){fl+=`M${x} 980L${(540+(x-540)*1.77).toFixed(1)} 1350`;}
+const leaf=(x,y,a,c,s=1)=>`<g transform="translate(${x} ${y}) rotate(${a}) scale(${s})"><path d="M0 0C-60-40-70-150 0-200C70-150 60-40 0 0Z" fill="${c}"/><path d="M0-6V-188" stroke="#1F3326" stroke-width="3" opacity=".4"/></g>`;
+return svg(`
+<rect width="1080" height="980" fill="url(#${g}az)"/>
+<path d="M0 0H1080V130L0 290Z" fill="#14233A" opacity=".2"/>
+<path d="M0 290L1080 130V420L0 640Z" fill="#FFF6E0" opacity=".16"/>
+<rect y="966" width="1080" height="16" fill="#285A87"/>
+<rect y="980" width="1080" height="370" fill="#B9673F"/>
+<path d="${fl}M0 1036H1080M0 1112H1080M0 1206H1080M0 1324H1080" stroke="#8F4A2A" stroke-width="3" opacity=".55"/>
+<ellipse cx="560" cy="1190" rx="330" ry="40" fill="#4A1C0C" opacity=".28"/>
+<g stroke="#6B4A33" stroke-width="3.2" fill="none"><path d="M34 340 240 640M34 340 248 672M34 340 256 704M1004 300 838 612M1004 300 846 644M1004 300 854 676"/></g>
+<circle cx="34" cy="340" r="9" fill="#3A2A20"/><circle cx="1004" cy="300" r="9" fill="#3A2A20"/>
+<path d="M240 640C400 920 690 900 838 612L855 680C700 980 400 1000 255 712Z" fill="url(#${g}st)"/>
+<path d="M240 640C400 920 690 900 838 612L855 680C700 980 400 1000 255 712Z" fill="url(#${g}sh)"/>
+<path d="${fr}" stroke="#F1E2C9" stroke-width="5" stroke-linecap="round"/>
+${leaf(960,1050,-28,'#3B5A44',1.25)}${leaf(1000,1050,8,'#2E4636',1.4)}${leaf(940,1060,-62,'#4F6B45',1.05)}${leaf(1030,1060,40,'#6F8A5C',1.1)}${leaf(985,1060,-6,'#4F6B45',.95)}
+<path d="M884 1040h170l-18 190H902z" fill="#A4522E"/><rect x="872" y="1030" width="194" height="22" rx="5" fill="#C0603A"/>
+`,`
+<pattern id="${g}az" width="135" height="135" patternUnits="userSpaceOnUse">
+ <rect width="135" height="135" fill="#F3EFE6"/>
+ ${[[0,0],[135,0],[135,135],[0,135]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="46" fill="#285A87"/><circle cx="${x}" cy="${y}" r="24" fill="#F3EFE6"/><circle cx="${x}" cy="${y}" r="9" fill="#285A87"/>`).join('')}
+ <path d="${star(67.5,67.5,44)}" fill="#285A87"/>
+ <circle cx="67.5" cy="67.5" r="7" fill="#F3EFE6"/>
+ ${[[67.5,0],[0,67.5],[135,67.5],[67.5,135]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#285A87"/>`).join('')}
+ <path d="M0 0H135V135" fill="none" stroke="#000" stroke-opacity=".09" stroke-width="2"/>
+</pattern>
+<pattern id="${g}st" width="168" height="168" patternUnits="userSpaceOnUse" patternTransform="rotate(58)"><rect width="42" height="168" fill="#C0603A"/><rect x="42" width="20" height="168" fill="#F1E2C9"/><rect x="62" width="44" height="168" fill="#E4A84A"/><rect x="106" width="16" height="168" fill="#F1E2C9"/><rect x="122" width="46" height="168" fill="#2E4636"/></pattern>
+<linearGradient id="${g}sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#2A0E05" stop-opacity=".35"/></linearGradient>`);},
+
+/* sala em perspectiva de um ponto (fuga em 540,590) */
+_room(c){return `<path d="M0 0H1080V94L910 250H170L0 94Z" fill="${c.teto}"/>
+<path d="M0 94 170 250V930L0 1086Z" fill="${c.esq}"/>
+<path d="M1080 94 910 250V930L1080 1086Z" fill="${c.dir}"/>
+<rect x="170" y="250" width="740" height="680" fill="${c.fundo}"/>
+<path d="M170 930H910L1080 1086V1350H0V1086Z" fill="${c.piso}"/>`;},
+_floor(step,col,op){let d='';for(let x=170+step;x<910;x+=step)d+=`M${x} 930L${(540+(x-540)*2.235).toFixed(1)} 1350`;return `<path d="${d}" stroke="${col}" stroke-opacity="${op}" stroke-width="2.5"/>`;},
+antes(){const g=uid();
+const hz=[966,1014,1078,1166,1296].map(y=>{const xl=y<1086?170-(y-930)*170/156:0;return `M${xl.toFixed(1)} ${y}H${(1080-xl).toFixed(1)}`;}).join('');
+return svg(`${this._room({teto:'#BDB8B0',esq:'#9C978F',dir:'#A6A199',fundo:'#B3AEA6',piso:'#8C877F'})}
+${this._floor(92.5,'#6F6A62',.6)}<path d="${hz}" stroke="#6F6A62" stroke-opacity=".6" stroke-width="2.5"/>
+<rect x="465" y="425" width="150" height="150" fill="#8E8981"/><rect x="475" y="435" width="130" height="130" fill="#D2CFC9"/>
+<path d="M540 435V565M475 500H605" stroke="#8E8981" stroke-width="6"/><path d="M475 468H605M475 532H605" stroke="#6E6961" stroke-width="2" opacity=".55"/>
+<ellipse cx="760" cy="430" rx="70" ry="42" fill="#97928A" opacity=".55"/><ellipse cx="300" cy="360" rx="50" ry="30" fill="#A5A098" opacity=".6"/>
+<rect x="210" y="690" width="200" height="240" fill="#7D786F"/><path d="M210 770H410M310 690V930" stroke="#67625A" stroke-width="3"/><circle cx="296" cy="730" r="5" fill="#5A554E"/><circle cx="324" cy="730" r="5" fill="#5A554E"/>
+<path d="M540 0V318" stroke="#5E5A54" stroke-width="3"/><circle cx="540" cy="338" r="60" fill="#fff" opacity=".07"/><circle cx="540" cy="338" r="18" fill="#ECE8DC"/>
+<rect x="690" y="842" width="150" height="88" fill="#857F77"/><rect x="700" y="852" width="130" height="10" fill="#6E6961"/>`);},
+depois(){const g=uid();
+let ce='';for(let x=170+37;x<910;x+=37)ce+=`M${x} 250L${(540+(x-540)*1.735).toFixed(1)} 0`;
+const pl=(x,y,a,c,s)=>`<ellipse cx="${x}" cy="${y-110*s}" rx="${30*s}" ry="${115*s}" transform="rotate(${a} ${x} ${y})" fill="${c}"/>`;
+return svg(`${this._room({teto:'#F2E6D4',esq:'#DDC6A8',dir:'#E7D4BA',fundo:'#EFE1CB',piso:'#B57B4F'})}
+<path d="${ce}" stroke="#D2B48C" stroke-width="5" opacity=".7"/>
+${this._floor(46,'#8F5A35',.45)}
+<path d="M352 930V470a188 188 0 0 1 376 0V930Z" fill="#CDB08A"/>
+<path d="M372 930V474a168 168 0 0 1 336 0V930Z" fill="url(#${g}sky)"/>
+<g clip-path="url(#${g}a)">
+ <circle cx="618" cy="560" r="48" fill="#FBE6B8"/>
+ <ellipse cx="540" cy="860" rx="300" ry="90" fill="#A9B985"/>
+ <circle cx="420" cy="760" r="96" fill="#6F8A5C"/><circle cx="660" cy="790" r="110" fill="#4F6B45"/><circle cx="540" cy="720" r="70" fill="#3B5A44"/>
+ <rect x="360" y="880" width="360" height="60" fill="#8DA36A"/>
+</g>
+<path d="M372 930H708L812 1238H272Z" fill="#F6D6A0" opacity=".34"/>
+<path d="M300 1040H780L860 1240H220Z" fill="#E8DAC2"/>
+<path d="M322 1054H758L828 1226H252Z" fill="none" stroke="#C0603A" stroke-width="10"/>
+<rect x="744" y="890" width="196" height="150" rx="44" fill="#C0603A"/>
+<rect x="726" y="1006" width="232" height="84" rx="30" fill="#A94F2E"/>
+<rect x="748" y="1088" width="11" height="48" fill="#4A2414"/><rect x="924" y="1088" width="11" height="48" fill="#4A2414"/>
+${pl(250,1004,-34,'#4F6B45',1)}${pl(250,1004,-12,'#6F8A5C',1.15)}${pl(250,1004,10,'#3B5A44',1.05)}${pl(250,1004,30,'#6F8A5C',.9)}
+<path d="M200 1004h100l-12 110h-76z" fill="#C0603A"/>
+<path d="M540 0V330" stroke="#3A2A20" stroke-width="3"/>
+<ellipse cx="540" cy="430" rx="190" ry="80" fill="#F7D79E" opacity=".3"/>
+<path d="M478 384a62 62 0 0 1 124 0Z" fill="#C0603A"/><rect x="478" y="380" width="124" height="7" fill="#7E3A20"/>
+`,`<linearGradient id="${g}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7E2BA"/><stop offset="1" stop-color="#EFC98F"/></linearGradient>
+<clipPath id="${g}a"><path d="M372 930V474a168 168 0 0 1 336 0V930Z"/></clipPath>`);},
+
+cobogo(){const g=uid();return svg(`
+<rect width="1080" height="1350" fill="#2E4636"/>
+<circle cx="770" cy="1010" r="620" fill="url(#${g}r)"/>
+<rect x="360" y="600" width="760" height="800" fill="url(#${g}d)"/>
+<rect x="360" y="600" width="760" height="800" fill="url(#${g}p)"/>
+`,`<radialGradient id="${g}r"><stop offset="0" stop-color="#F8CD86"/><stop offset=".4" stop-color="#E4A84A" stop-opacity=".8"/><stop offset="1" stop-color="#E4A84A" stop-opacity="0"/></radialGradient>
+${blocks(g+'d',374,614,212,'#A8936F',8)}${blocks(g+'p',360,600,212,'#EFE4D2',8)}`);},
+
+respira(){const g=uid();return svg(`
+<rect width="1080" height="1350" fill="#C0603A"/>
+<rect width="1080" height="1350" fill="url(#${g}p)" mask="url(#${g}m)"/>
+`,`${blocks(g+'p',-30,-30,180,'#AD5130',6)}
+<linearGradient id="${g}l" x1="0" y1="0" x2="0" y2="1"><stop offset=".25" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient>
+<mask id="${g}m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1350"><rect width="1080" height="1350" fill="url(#${g}l)"/></mask>`);},
+
+prazer(){const g=uid();const A='M590 1350V800a225 225 0 0 1 450 0V1350Z';return svg(`
+<rect width="1080" height="1350" fill="#F1E7D7"/>
+<path d="M556 1350V800a259 259 0 0 1 518 0V1350" fill="none" stroke="#C0603A" stroke-width="2.5" opacity=".45"/>
+<path d="${A}" fill="url(#${g}a)"/>
+<g clip-path="url(#${g}c)">
+ <circle cx="815" cy="900" r="84" fill="#F8DDA6"/>
+ <path d="M590 1090c90-40 170-50 260-30s140 10 190-20V1350H590Z" fill="#A24E2C"/>
+ <rect x="590" y="1170" width="450" height="200" fill="url(#${g}p)"/>
+</g>`,`<linearGradient id="${g}a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDB862"/><stop offset="1" stop-color="#C0603A"/></linearGradient>
+<clipPath id="${g}c"><path d="${A}"/></clipPath>${blocks(g+'p',590,1170,90,'#7E3A20',4)}`);},
+
+consultoria(){const g=uid();const A='M640 1350V880a230 230 0 0 1 460 0V1350Z';return svg(`
+<rect width="1080" height="1350" fill="#2E4636"/>
+<g clip-path="url(#${g}c)"><rect x="600" y="600" width="600" height="800" fill="url(#${g}p)"/></g>
+<path d="M610 1350V880a260 260 0 0 1 520 0V1350" fill="none" stroke="#E4A84A" stroke-width="3" opacity=".75"/>`,
+`<clipPath id="${g}c"><path d="${A}"/></clipPath>${blocks(g+'p',640,650,115,'#3B5A45',6)}`);},
+};
+
+/* ============ composições de post ============ */
+const P=(bg,inner,cls='',fg)=>`<div class="post ${cls}" style="--bg:${bg}${fg?';--fg:'+fg:''}">${inner}</div>`;
+const hdr=(n,t)=>`<div class="p-top"><span>@${HANDLE}</span><span>${pad(n)} / ${pad(t)}</span></div>`;
+const foot=(n,t)=>`<div class="p-foot"><span>${ARCH()}</span><span>${n<t?'arraste →':'salve ✦'}</span></div>`;
+const tagged=(ill,tag)=>()=>P(C.areia,ill()+`<div class="ov"><span class="p-tag">${tag}</span></div>`);
+
+const T={
+dica:o=>P(o.bg||C.cal,`<div class="ov">${hdr(o.n,o.t)}
+  <div class="d-num" style="color:${o.ac||C.terracota}">${o.num}</div>
+  <h3 class="p-ttl d-ttl">${o.titulo}</h3><p class="p-txt d-txt">${o.texto}</p>${foot(o.n,o.t)}</div>`,'',o.fg),
+lista:o=>P(o.bg||C.cal,`<div class="ov" style="--ac:${o.ac||C.terracota};--lc:${o.lc||'rgba(42,30,24,.16)'}">${hdr(o.n,o.t)}
+  <p class="p-lbl" style="margin-top:8cqw;color:${o.ac||C.terracota}">${o.lbl}</p>
+  <h3 class="p-ttl" style="font-size:9.4cqw;margin-top:2.4cqw">${o.titulo}</h3>
+  <ol class="list-l">${o.itens.map(([k,t,d])=>`<li><b>${k}</b><div><strong>${t}</strong><span>${d}</span></div></li>`).join('')}</ol>${foot(o.n,o.t)}</div>`,'',o.fg),
+cta:o=>P(o.bg,`<div class="ov">${hdr(o.n,o.t)}
+  <p class="p-lbl" style="margin-top:auto;color:${o.ac}">${o.lbl}</p>
+  <h3 class="p-ttl" style="font-size:12cqw;margin-top:3cqw">${o.titulo}</h3>
+  <p class="p-txt" style="margin-top:4cqw;max-width:86%;opacity:.88">${o.texto}</p>
+  <span class="cta-b" style="background:${o.btnBg};color:${o.btnFg}">${o.botao}</span>
+  <div class="p-foot" style="margin-top:9cqw"><span>${ARCH()}</span><span>@${HANDLE}</span></div></div>`,'',o.fg),
+};
+
+/* ---------- capas ---------- */
+const COVER={
+prazer:()=>P(C.areia,ILL.prazer()+`<div class="ov">
+  <p class="p-lbl" style="color:${C.terracota}">Olá, muito prazer</p>
+  <h2 class="p-ttl" style="font-size:16.5cqw;margin-top:6cqw;color:${C.tinta}">Prazer,<br>sou o <em style="color:${C.terracota}">Pedro.</em></h2>
+  <p class="p-txt" style="max-width:44cqw;margin-top:6cqw">Arquiteto no Recife. Desenho casas que respiram, com luz, sombra e cobogó.</p>
+  <div class="p-foot"><span>@${HANDLE}</span><span style="color:#FBF0DE;margin-right:4cqw">arraste →</span></div></div>`),
+jaqueira:()=>P(C.areia,ILL.jaqueira()+`<div class="ov" style="color:${C.barro}">
+  <p class="p-lbl">Projeto · Residencial</p>
+  <h2 class="p-ttl" style="font-size:13cqw;margin-top:3cqw">Casa<br><em>Jaqueira</em></h2>
+  <p class="p-meta" style="margin-top:3.4cqw">RECIFE, PE · 420 M² · 2026</p></div>`),
+consultoria:()=>P(C.mata,ILL.consultoria()+`<div class="ov" style="color:${C.cal}">
+  <p class="p-lbl" style="color:${C.sol}">Consultoria online · 90 min</p>
+  <h2 class="p-ttl" style="font-size:12.6cqw;margin-top:5cqw">Sua casa com<br><em>olhar de</em><br>arquiteto.</h2>
+  <p class="p-txt" style="max-width:46cqw;margin-top:auto;opacity:.88">Um plano claro para reformar sem desperdiçar dinheiro.</p>
+  <span class="cta-b" style="background:${C.sol};color:${C.grafite};margin-top:5cqw">Agende pelo link da bio →</span></div>`),
+luz:()=>P('#7A4429',ILL.luz()+`<div class="ov" style="color:${C.cal}">
+  <p class="p-lbl" style="color:#F2C27A">Reels · Luz natural</p>
+  <h2 class="p-ttl" style="font-size:9.6cqw;margin-top:3cqw">A luz é o material<br>mais barato da <em>obra.</em></h2></div>`),
+erros:()=>P(C.cal,`<div class="ov">
+  <div style="position:absolute;right:-4cqw;top:-14cqw;font:400 118cqw/1 var(--serif);color:${C.terracota};letter-spacing:-.04em">5</div>
+  <p class="p-lbl" style="color:${C.terracota};position:relative">Dica de arquiteto</p>
+  <h2 class="p-ttl" style="font-size:11.4cqw;margin-top:auto;position:relative">erros que<br>deixam sua<br>sala <em style="color:${C.terracota}">escura.</em></h2>
+  <div class="p-foot" style="margin-top:6cqw"><span>@${HANDLE}</span><span>arraste →</span></div></div>`),
+varanda:()=>P('#B9673F',ILL.varanda()+`<div class="scrim" style="height:34%"></div><div class="ov" style="color:${C.cal}">
+  <p class="p-lbl mt-a" style="color:#F6D7A8">Projeto · Apto Boa Viagem</p>
+  <h2 class="p-ttl" style="font-size:11cqw;margin-top:2.6cqw">Varanda<br>com <em>rede.</em></h2></div>`),
+respira:()=>P(C.terracota,ILL.respira()+`<div class="ov" style="color:${C.cal}">
+  <p class="p-lbl" style="opacity:.8">Manifesto</p>
+  <h2 class="p-ttl" style="font-size:17.5cqw;margin-top:8cqw;line-height:.9">Casa boa<br>é a que<br><em>respira.</em></h2>
+  <p class="p-meta mt-a" style="opacity:.85">— PEDRO ALBUQUERQUE</p></div>`),
+antes:(p='50%')=>P('#8C877F',`${ILL.depois()}${ILL.antes().replace('class="ill"','class="ill antes"')}
+  <div class="ba-div"><i>${IC.arrows}</i></div><div class="scrim" style="height:36%"></div>
+  <div class="ov" style="color:${C.cal}">
+   <div style="display:flex;justify-content:space-between;margin-top:7cqw"><span class="ba-pill" style="background:rgba(35,32,29,.78)">ANTES</span><span class="ba-pill" style="background:${C.terracota}">DEPOIS</span></div>
+   <p class="p-lbl mt-a" style="text-align:center;color:#F6D7A8">Apto Boa Viagem</p>
+   <h2 class="p-ttl" style="font-size:12cqw;margin-top:2.4cqw;text-align:center">Antes <em>×</em> depois</h2></div>`,'ba').replace('style="--bg','style="--p:'+p+';--bg'),
+croqui:()=>P(C.grafite,ILL.croqui()+`<div class="ov" style="color:${C.cal}">
+  <p class="p-lbl" style="color:${C.sol}">Reels · Processo</p>
+  <h2 class="p-ttl" style="font-size:11cqw;margin-top:2.6cqw">Do croqui<br>à <em>obra.</em></h2></div>`,'croqui'),
+cobogo:()=>P(C.mata,ILL.cobogo()+`<div class="ov" style="color:${C.cal}">
+  <p class="p-lbl" style="color:${C.sol}">Guia · Salve para depois</p>
+  <h2 class="p-ttl" style="font-size:11cqw;margin-top:3.4cqw">Cobogó:<br>3 jeitos de usar<br><em>em casa.</em></h2>
+  <p class="p-meta mt-a" style="max-width:34cqw;opacity:.8">INVENÇÃO PERNAMBUCANA · RECIFE, 1929</p></div>`),
+escada:()=>P(C.concreto,ILL.escada()+`<div class="ov" style="color:${C.grafite}">
+  <p class="p-lbl" style="color:${C.barro}">Reels · Casa Maracaípe</p>
+  <h2 class="p-ttl" style="font-size:10cqw;margin-top:3cqw">Escada como<br><em>escultura.</em></h2></div>`),
+depoimento:()=>P('#F3E7D6',`<div class="ov">
+  <div style="font:400 44cqw/.7 var(--serif);color:${C.terracota};height:22cqw;margin-top:2cqw">“</div>
+  <p class="p-ttl" style="font-size:8cqw;line-height:1.08;margin-top:6cqw">O Pedro entendeu a nossa rotina antes de desenhar a <em style="color:${C.terracota}">primeira parede.</em></p>
+  <div class="mt-a" style="display:flex;align-items:center;gap:3.4cqw">
+   <span style="width:12cqw;height:12cqw;border-radius:50%;background:${C.mata};color:${C.cal};display:grid;place-items:center;font:700 3.2cqw/1 var(--sans)">M&amp;R</span>
+   <div><b style="display:block;font:800 3.6cqw/1.3 var(--sans)">Marina e Rafael</b><span class="p-meta" style="opacity:.7">CASA JAQUEIRA · RECIFE</span></div>
+  </div></div>`),
+};
+
+/* ============ os 12 posts (ordem da grade) ============ */
+const PIL={
+  projeto:{nome:'Projetos',cor:C.terracota,desc:'portfólio: casas, interiores, antes e depois'},
+  educa:{nome:'Educativo',cor:'#C98A2B',desc:'dicas que se salvam e se compartilham'},
+  conexao:{nome:'Conexão',cor:C.mata,desc:'quem é o Pedro e no que ele acredita'},
+  conversao:{nome:'Conversão',cor:C.azulejo,desc:'oferta e prova social'},
+  bastidor:{nome:'Bastidores',cor:C.grafite,desc:'croqui, obra e processo'},
+};
+const POSTS=[
+{id:'prazer',curto:'Apresentação',pin:1,tipo:'carrossel',pilar:'conexao',curtidas:912,coment:186,data:'8 de outubro',local:'Recife, Pernambuco',
+ alt:'Carrossel de apresentação: Prazer, sou o Pedro',
+ slides:[COVER.prazer,
+  ()=>P(C.terracota,`<div class="ov" style="color:${C.cal}">${hdr(2,3)}
+   <p class="p-lbl" style="margin-top:10cqw;color:#F6D7A8">Em números</p>
+   <div class="stat-l"><div><b>12</b><span>anos desenhando casas no Nordeste</span></div><div><b>140+</b><span>projetos residenciais e de interiores entregues</span></div><div><b>1</b><span>obsessão: luz natural em todos os cômodos</span></div></div>${foot(2,3)}</div>`),
+  ()=>T.lista({bg:C.areia,n:3,t:3,lbl:'Por aqui você vai ver',titulo:'O que tem neste perfil',itens:[['01','Projetos','Casas e interiores do escritório, do croqui à entrega.'],['02','Dicas','O que eu diria se estivesse na sua obra.'],['03','Bastidores','Decisões de projeto, visitas e canteiro.'],['04','Consultoria','Para quem quer reformar com método.']]})],
+ legenda:`Prazer, eu sou o Pedro. 👋
+Sou arquiteto no Recife e há 12 anos desenho casas que respiram: muita luz natural, sombra boa, ventilação cruzada e materiais que envelhecem bonito.
+Por aqui eu mostro projetos, bastidores de obra e dicas para quem quer reformar sem errar.
+Me conta nos comentários: você está construindo, reformando ou só sonhando? ☀️
+#arquiteturarecife #arquiteturatropical #cobogó`},
+{id:'jaqueira',curto:'Casa Jaqueira',pin:1,tipo:'carrossel',pilar:'projeto',curtidas:1284,coment:97,data:'9 de outubro',local:'Casa Jaqueira · Recife',
+ alt:'Carrossel do projeto Casa Jaqueira: fachada com três arcos e uma jaqueira',
+ slides:[COVER.jaqueira,tagged(ILL.luz,'Sala · luz pelo cobogó'),tagged(ILL.croqui,'O primeiro croqui'),
+  ()=>P(C.cal,`<div class="ov">${hdr(4,4)}
+   <p class="p-lbl" style="margin-top:9cqw;color:${C.terracota}">Ficha técnica</p>
+   <h3 class="p-ttl" style="font-size:11cqw;margin-top:2.4cqw">Casa <em>Jaqueira</em></h3>
+   <dl class="dl"><div><dt>Local</dt><dd>Recife, Pernambuco</dd></div><div><dt>Área</dt><dd>420 m² · 4 suítes</dd></div><div><dt>Partido</dt><dd>Três arcos abertos para o jardim e a jaqueira preservada</dd></div><div><dt>Conforto</dt><dd>Banda de cobogó contra o sol da tarde e ventilação cruzada</dd></div><div><dt>Ano</dt><dd>2026</dd></div></dl>${foot(4,4)}</div>`)],
+ legenda:`Casa Jaqueira — Recife, PE.
+A jaqueira já estava lá antes de qualquer desenho. Então o projeto começou por ela: a casa se abre em três arcos para o jardim, e a banda de cobogó filtra o sol da tarde sem fechar a ventilação.
+📐 420 m² · 4 suítes · 2026
+Arraste para ver a sala e o primeiro croqui. →
+#casajaqueira #arquiteturacontemporanea #arquiteturatropical #recife`},
+{id:'consultoria',curto:'Consultoria',pin:1,tipo:'carrossel',pilar:'conversao',curtidas:403,coment:58,data:'3 de novembro',local:'Online · todo o Brasil',
+ alt:'Carrossel da consultoria online de 90 minutos',
+ slides:[COVER.consultoria,
+  ()=>T.lista({bg:C.mata,fg:C.cal,ac:C.sol,lc:'rgba(251,247,240,.22)',n:2,t:4,lbl:'Como funciona',titulo:'Três passos, zero enrolação',itens:[['01','Você envia','Planta, fotos e um áudio contando a rotina da casa.'],['02','A gente conversa','Chamada de 90 minutos para decidir o que muda e em que ordem.'],['03','Você recebe','Um plano de ação em PDF, com referências, em até 5 dias.']]}),
+  ()=>T.lista({bg:C.cal,n:3,t:4,lbl:'Para quem é',titulo:'Você se <em>reconhece?</em>',itens:[['✓','Vai reformar','e não sabe por onde começar.'],['✓','Quer evitar erros caros','antes de chamar o pedreiro.'],['✓','Precisa de olhar profissional','mas não de um projeto completo.']]}),
+  ()=>T.cta({bg:C.sol,fg:C.grafite,ac:C.barro,n:4,t:4,lbl:'Vagas de novembro',titulo:'Vamos olhar a sua casa <em>juntos?</em>',texto:'Agenda aberta para 8 consultorias por mês.',botao:'Link na bio →',btnBg:C.grafite,btnFg:C.cal})],
+ legenda:`Você não precisa de um projeto completo para reformar com olhar de arquiteto.
+Na consultoria online, em 90 minutos a gente olha sua planta, suas fotos e sua rotina. Você sai com um plano claro: o que mudar, em que ordem e onde não gastar.
+📩 Vagas de novembro abertas pelo link da bio.
+#consultoriadearquitetura #reforma #arquiteturaonline`},
+{id:'luz',curto:'Reel · luz',tipo:'reel',pilar:'educa',curtidas:2906,coment:211,views:'41,2 mil',data:'4 de novembro',
+ alt:'Reel: luz do sol atravessa um cobogó e desenha estrelas na parede',
+ slides:[COVER.luz],
+ legenda:`A luz é o material mais barato da obra, e o que mais muda uma casa. ☀️
+Esse cobogó desenha um padrão diferente na parede a cada hora do dia. Nenhuma luminária faz isso.
+Salva para lembrar na hora de pensar a fachada.
+#luznatural #cobogó #arquiteturabioclimatica`},
+{id:'erros',curto:'5 erros',tipo:'carrossel',pilar:'educa',curtidas:1127,coment:164,data:'1 de novembro',
+ alt:'Carrossel: 5 erros que deixam sua sala escura',
+ slides:[COVER.erros,
+  ...[['Teto escuro','O teto é o maior rebatedor de luz da sala. Pintado de escuro, ele engole a claridade que entra pela janela.'],
+      ['Cortina pesada e sempre fechada','Prefira tecidos leves, como linho e voil, e um trilho mais largo que a janela: aberta, a cortina não cobre o vidro.'],
+      ['Uma luz só, no meio do teto','O plafon sozinho achata o ambiente. Combine luz geral, luz de apoio (abajur, arandela) e luz de destaque.'],
+      ['Móvel alto na frente da janela','Estante e sofá de encosto alto bloqueiam a luz que entra baixa. Deixe a frente da janela livre.'],
+      ['Lâmpada branca e fria','Luz de 6500&nbsp;K deixa a sala com cara de consultório. Para estar e relaxar, use 2700&nbsp;K a 3000&nbsp;K.']]
+   .map(([t,x],k)=>()=>T.dica({bg:k%2?C.areia:C.cal,n:k+2,t:7,num:pad(k+1),titulo:t,texto:x})),
+  ()=>T.cta({bg:C.terracota,fg:C.cal,ac:'#F6D7A8',n:7,t:7,lbl:'Antes de reformar',titulo:'Salve este post para a sua <em>obra.</em>',texto:'E mande para aquela pessoa que vive dizendo que a sala dela é escura.',botao:'Salvar ✦',btnBg:C.cal,btnFg:C.barro})],
+ legenda:`Sala escura quase nunca é falta de janela. Quase sempre é um desses 5 erros. 👇
+Qual deles acontece aí na sua casa? Me conta que eu respondo com uma solução.
+#dicasdearquitetura #iluminacao #decoracao #reforma`},
+{id:'varanda',curto:'Varanda',tipo:'foto',pilar:'projeto',curtidas:688,coment:42,data:'29 de outubro',local:'Boa Viagem, Recife',
+ alt:'Varanda com parede de azulejo azul e branco e uma rede listrada',
+ slides:[COVER.varanda],
+ legenda:`Rede, azulejo e vento. Precisa de mais alguma coisa? 🌿
+Na varanda do Apto Boa Viagem, o azulejo azul e branco conversa com a tradição pernambucana, e os ganchos da rede foram previstos no projeto estrutural, um detalhe que muita gente esquece.
+#varanda #azulejo #boaviagem #arquiteturarecife`},
+{id:'respira',curto:'Manifesto',tipo:'foto',pilar:'conexao',curtidas:541,coment:37,data:'27 de outubro',
+ alt:'Citação: Casa boa é a que respira',
+ slides:[COVER.respira],
+ legenda:`Casa boa é a que respira.
+Antes de pensar em ar-condicionado, eu penso em vento cruzado, sombra e pé-direito. O conforto começa no desenho.
+#arquiteturabioclimatica #arquiteturatropical`},
+{id:'antes',curto:'Antes × depois',tipo:'carrossel',pilar:'projeto',curtidas:1503,coment:129,data:'24 de outubro',local:'Boa Viagem, Recife',
+ alt:'Antes e depois de uma sala: de cinza e fechada para clara, com arco aberto para o jardim',
+ slides:[COVER.antes,tagged(ILL.antes.bind(ILL),'Antes'),tagged(ILL.depois.bind(ILL),'Depois'),
+  ()=>T.lista({bg:C.cal,n:4,t:4,lbl:'O que mudou',titulo:'Pouca obra, <em>outra casa</em>',itens:[['01','Parede abaixo','A parede cega virou um arco para o jardim.'],['02','Piso quente','Madeira no lugar do cerâmico cinza.'],['03','Luz em camadas','Pendente, luz indireta e 2700&nbsp;K.'],['04','Menos móveis','Sai o armário, entram poltrona e planta.']]})],
+ legenda:`Antes × depois — Apto Boa Viagem.
+Tiramos uma parede, abrimos um arco para o jardim e trocamos a luz fria por luz quente e indireta. A planta mudou pouco; a sensação mudou tudo.
+Arraste para ver o antes e o depois inteiros. →
+#antesedepois #reforma #arquiteturadeinteriores`},
+{id:'croqui',curto:'Reel · croqui',fit:'meet',tipo:'reel',pilar:'bastidor',curtidas:774,coment:51,views:'18,7 mil',data:'21 de outubro',
+ alt:'Reel: croqui da fachada da Casa Jaqueira desenhado à mão',
+ slides:[COVER.croqui],
+ legenda:`Do croqui à obra. ✏️
+Todo projeto meu começa assim: papel, caneta e o caminho do sol no terreno. Só depois vai para o computador.
+#processocriativo #croqui #arquitetura`},
+{id:'cobogo',curto:'Guia cobogó',tipo:'carrossel',pilar:'educa',curtidas:1966,coment:143,data:'17 de outubro',
+ alt:'Carrossel-guia: cobogó, 3 jeitos de usar em casa',
+ slides:[COVER.cobogo,
+  ()=>P(C.mata,`<div class="ov" style="color:${C.cal}">${hdr(2,6)}
+   <p class="p-lbl" style="margin-top:9cqw;color:${C.sol}">Você sabia?</p>
+   <div style="font:400 34cqw/.85 var(--serif);color:${C.sol};margin-top:3cqw;letter-spacing:-.03em">1929</div>
+   <p class="p-ttl" style="font-size:7.2cqw;line-height:1.08;margin-top:4cqw">O cobogó nasceu no <em>Recife.</em></p>
+   <p class="p-txt" style="margin-top:4cqw;opacity:.86;max-width:90%">O nome junta as sílabas iniciais dos sobrenomes dos três criadores: <b>Co</b>imbra, <b>Bo</b>eckmann e <b>Gó</b>is.</p>${foot(2,6)}</div>`),
+  ...[['Fachada que respira','Filtra o sol forte e a vista da rua sem bloquear o vento. Funciona melhor nas faces oeste e norte.'],
+      ['Divisória com luz','Separa sala e cozinha, ou entrada e estar, sem criar cantos escuros nem paredes cegas.'],
+      ['Muro de varanda','Privacidade para a varanda e para o jardim com ventilação cruzada o dia inteiro.']]
+   .map(([t,x],k)=>()=>T.dica({bg:k%2?C.areia:C.cal,n:k+3,t:6,num:pad(k+1),titulo:t,texto:x,ac:C.mata})),
+  ()=>T.cta({bg:C.terracota,fg:C.cal,ac:'#F6D7A8',n:6,t:6,lbl:'Patrimônio nosso',titulo:'Quase 100 anos e ainda <em>moderno.</em>',texto:'Salve este guia e mande para quem está desenhando a fachada.',botao:'Salvar ✦',btnBg:C.cal,btnFg:C.barro})],
+ legenda:`Você sabia que o cobogó nasceu aqui no Recife, em 1929? 🧱
+O nome vem das iniciais dos três criadores: Coimbra, Boeckmann e Góis. Quase 100 anos depois, ele continua sendo uma das soluções mais inteligentes para luz e ventilação.
+Arraste para ver 3 jeitos de usar na sua casa. →
+#cobogó #arquiteturapernambucana #designbrasileiro`},
+{id:'escada',curto:'Reel · escada',tipo:'reel',pilar:'projeto',curtidas:1211,coment:88,views:'27,4 mil',data:'14 de outubro',
+ alt:'Reel: escada de degraus soltos presos a uma parede de concreto',
+ slides:[COVER.escada],
+ legenda:`Escada também pode ser escultura.
+Na Casa Maracaípe, os degraus saem direto da parede de concreto, e a luz do zenital desenha a sombra de cada um ao longo do dia.
+#escada #concretoaparente #arquiteturacontemporanea`},
+{id:'depoimento',curto:'Depoimento',tipo:'foto',pilar:'conversao',curtidas:389,coment:46,data:'10 de outubro',
+ alt:'Depoimento de clientes: o Pedro entendeu a nossa rotina antes de desenhar a primeira parede',
+ slides:[COVER.depoimento],
+ legenda:`Nada me deixa mais feliz do que isso. 🤍
+Obrigado, Marina e Rafael, por confiarem a Casa Jaqueira a mim. Ver vocês morando nela é a melhor parte do trabalho.
+#depoimento #casajaqueira`},
+];
+/* capa de reel 9:16: o croqui entra inteiro (meet); as demais ilustrações são recortadas no centro */
+const reelHTML=i=>{const h=POSTS[i].slides[0]();return `<div class="reel-box">${POSTS[i].fit==='meet'?h.replace('xMidYMid slice','xMidYMid meet'):h}</div>`;};
+const fileName=(i,j,reel)=>`${pad(i+1)}-${POSTS[i].id}-${reel?'capa-reel':j+1}.jpg`;
+
+/* ============ conteúdo do perfil ============ */
+const BIO=['Arquitetura com luz, sombra e cobogó ☀️','Casas tropicais · Recife ⇄ Brasil','Projetos residenciais e interiores','↓ Consultoria online: vagas abertas'];
+const LINK='pedroalbuquerque.arq.br/consultoria';
+const HL=[
+ {n:'Projetos',d:'Um destaque por casa: antes, obra e entrega.',i:'<path d="M4 11 12 4l8 7v9H4z"/><path d="M10 20v-4a2 2 0 0 1 4 0v4"/>'},
+ {n:'Obras',d:'Bastidores semanais de canteiro: mostram método e geram confiança.',i:'<path d="M3.5 18h17"/><path d="M5.5 18a6.5 6.5 0 0 1 13 0"/><path d="M10 11.8V8.5h4v3.3"/>'},
+ {n:'Antes/Depois',d:'A prova mais rápida de resultado.',i:'<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/>'},
+ {n:'Cobogó',d:'Conteúdo-assinatura: história, modelos e onde usar.',i:`<path d="${cobogo(4,4,16)}" fill="currentColor" fill-rule="evenodd" stroke="none"/>`},
+ {n:'Clientes',d:'Depoimentos em vídeo e mensagens, sempre com autorização.',i:'<path d="M4 5h16v11h-9l-4.5 3.5V16H4z"/><path d="M12 13.2s-3-1.7-3-3.6a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 1.9-3 3.6-3 3.6z"/>'},
+ {n:'Consultoria',d:'Como funciona, investimento e link. É o destaque que vende.',i:'<rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M9 3.5v4M15 3.5v4"/><path d="m9.5 14.6 1.8 1.8 3.4-3.6"/>'},
+];
+const hlIcon=h=>S(h.i,1.6);
+
+function hashtagify(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/(#[\wÀ-ú]+)/g,'<span class="h">$1</span>');}
+
+/* ---------- monta o perfil ---------- */
+const $=s=>document.querySelector(s);
+function build(){
+  $('#avatar').innerHTML=MARK();$('#me').innerHTML=MARK();
+  $('#marcaTopo').insertAdjacentHTML('afterbegin',MARK());
+  $('#markBig').innerHTML=MARK();
+  $('#bio').innerHTML=`<div class="cat">Arquiteto(a)</div>${BIO.map(l=>`<div>${l}</div>`).join('')}<a class="lk" href="#" onclick="return false">${IC.link}${LINK}</a>`;
+  $('#hls').innerHTML=HL.map(h=>`<div class="hl"><i><span>${hlIcon(h)}</span></i>${h.n}</div>`).join('');
+  $('#grid').innerHTML=POSTS.map((p,i)=>{
+    const b=p.pin?IC.pin:p.tipo==='reel'?IC.reelW:p.slides.length>1?IC.carW:'';
+    return `<div class="thumb" data-i="${i}" role="button" tabindex="0" aria-label="${p.alt}">${p.slides[0]()}${b?`<span class="badge">${b}</span>`:''}<span class="pil" style="--c:${PIL[p.pilar].cor}">${PIL[p.pilar].nome}</span><span class="nchip">${pad(i+1)}</span></div>`;}).join('');
+  $('#rgrid').innerHTML=POSTS.map((p,i)=>p.tipo!=='reel'?'':reelHTML(i).replace('class="reel-box">',`class="rthumb reel-box" data-i="${i}" role="button" tabindex="0" aria-label="${p.alt}">`).replace(/<\/div>$/,`<span class="views">${IC.play}${p.views}</span></div>`)).join('');
+
+  /* visualizador */
+  $('#vb').innerHTML=POSTS.map((p,i)=>{const n=p.slides.length;return `<article class="fi" id="fi-${i}">
+    <header class="fi-h"><span class="av">${MARK()}</span><div><b>${HANDLE}</b><small>${p.tipo==='reel'?'♫ Áudio original':(p.local||'Recife, Pernambuco')}</small></div><button class="ic" aria-label="Mais opções">${IC.more}</button></header>
+    <div class="fi-m"><div class="track">${p.slides.map((s,j)=>`<div class="sl">${s()}${p.id==='antes'&&j===0?'<input class="ba-range" type="range" min="4" max="96" value="50" aria-label="Comparar antes e depois">':''}</div>`).join('')}</div>
+      ${n>1?`<span class="cnt">1/${n}</span><button class="navb prev" aria-label="Anterior" disabled>${IC.prev}</button><button class="navb next" aria-label="Próximo">${IC.next}</button>`:''}
+      ${p.tipo==='reel'?`<span class="mute">${IC.mute}</span>`:''}<span class="bigh">${IC.heartF}</span></div>
+    <div class="fi-a"><div class="l"><button class="ic like" aria-label="Curtir">${IC.heart}</button><button class="ic" aria-label="Comentar">${IC.comment}</button><button class="ic" aria-label="Compartilhar">${IC.send}</button></div>
+      ${n>1?`<div class="dots">${p.slides.map((_,j)=>`<i class="${j?'':'on'}"></i>`).join('')}</div>`:''}<button class="ic" aria-label="Salvar">${IC.save}</button></div>
+    <p class="likes"><b data-n="${p.curtidas}">${fmt(p.curtidas)}</b> curtidas</p>
+    <p class="cap"><b>${HANDLE}</b> ${hashtagify(p.legenda)}</p>
+    <p class="more-c">Ver todos os ${p.coment} comentários</p>
+    <p class="dt">${p.data}</p></article>`;}).join('');
+
+  /* documento */
+  $('#legend').innerHTML=Object.values(PIL).map(p=>`<span style="--c:${p.cor}">${p.nome}</span>`).join('');
+  const SW=[['Cal','#FBF7F0','fundos e respiro'],['Areia','#F1E7D7','base dos posts'],['Terracota','#C0603A','cor-assinatura'],['Barro','#7E3A20','títulos sobre claro'],['Sol','#E4A84A','destaques e botões'],['Mata','#2E4636','fundo de oferta'],['Azulejo','#285A87','acento raro'],['Grafite','#23201D','croquis e texto']];
+  $('#swatches').innerHTML=SW.map(([n,h,u])=>`<div class="sw"><i style="background:${h}"></i><div><b>${n}</b><code>${h}</code><br>${u}</div></div>`).join('');
+  const pg=uid();
+  $('#patterns').innerHTML=[
+    ['Bloco: estrela e círculo',`<svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#F1E7D7"/><path d="${cobogo(20,20,160)}" fill="#C0603A" fill-rule="evenodd"/></svg>`],
+    ['Parede de cobogó',`<svg viewBox="0 0 200 200"><defs>${blocks(pg+'a',0,0,50,'#EFE4D2',3)}</defs><rect width="200" height="200" fill="#2E4636"/><rect width="200" height="200" fill="url(#${pg}a)"/></svg>`],
+    ['Luz projetada',`<svg viewBox="0 0 200 200"><defs><pattern id="${pg}b" width="50" height="50" patternUnits="userSpaceOnUse" patternTransform="skewX(-20)"><path d="${cobogoHoles(50)}" fill="#FFE6B6"/></pattern></defs><rect width="200" height="200" fill="#9B5E3D"/><rect width="200" height="200" fill="url(#${pg}b)"/></svg>`],
+  ].map(([c,s])=>`<figure>${s}<figcaption>${c}</figcaption></figure>`).join('');
+  $('#bioCard').innerHTML=[
+    `<b>Pedro Albuquerque | Arquiteto</b>`,`<span class="cat">Arquiteto(a)</span>`,...BIO,`<span class="lk">${LINK}</span>`
+  ].map((l,k)=>`<div class="r"><span class="n">${k+1}</span><span>${l}</span></div>`).join('')+`<div class="bcount">Bio: ${[...BIO.join('\n')].length} de 150 caracteres</div>`;
+  $('#hlDoc').innerHTML=HL.map(h=>`<div><i>${hlIcon(h)}</i><p><b>${h.n}</b><span>${h.d}</span></p></div>`).join('');
+  const cnt={};POSTS.forEach(p=>cnt[p.pilar]=(cnt[p.pilar]||0)+1);
+  const ord=Object.keys(PIL).filter(k=>cnt[k]).sort((a,b)=>cnt[b]-cnt[a]);
+  $('#mix').innerHTML=ord.map(k=>`<span style="--c:${PIL[k].cor};flex:${cnt[k]}" title="${PIL[k].nome}">${Math.round(cnt[k]/12*100)}%</span>`).join('');
+  $('#mixL').innerHTML=ord.map(k=>`<span><b>${PIL[k].nome}</b> · ${PIL[k].desc}</span>`).join('');
+  const seq=[...POSTS.keys()].filter(i=>!POSTS[i].pin).reverse().concat([2,1,0]);
+  $('#order').innerHTML=seq.map((i,k)=>`<div><b>${pad(i+1)}</b>${k+1}º · ${POSTS[i].curto}</div>`).join('');
+  $('#files').innerHTML=POSTS.map((p,i)=>`<div class="file-g"><h4>${pad(i+1)} · ${p.curto} <small>${p.tipo==='reel'?'Reel':p.slides.length>1?p.slides.length+' lâminas':'Post único'}</small></h4><div class="file-row">
+    ${p.slides.map((_,j)=>{const f='posts/'+fileName(i,j);return `<a href="${f}" target="_blank" rel="noopener"><img src="${f}" alt="${p.alt}, lâmina ${j+1}" loading="lazy">${j+1}</a>`}).join('')}
+    ${p.tipo==='reel'?(()=>{const f='posts/'+fileName(i,0,1);return `<a class="reel" href="${f}" target="_blank" rel="noopener"><img src="${f}" alt="Capa do reel" loading="lazy">capa 9:16</a>`})():''}</div></div>`).join('');
+}
+
+/* ---------- interações ---------- */
+function wire(){
+  const phone=$('#phone'),viewer=$('#viewer'),vb=$('#vb');
+  $('#tgPil').addEventListener('change',e=>phone.classList.toggle('show-pil',e.target.checked));
+  $('#follow').addEventListener('click',e=>{const b=e.currentTarget,on=b.classList.toggle('blue');b.textContent=on?'Seguir':'Seguindo';});
+  document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+    document.querySelectorAll('.pane').forEach(p=>p.hidden=p.dataset.pane!==b.dataset.tab);}));
+  const open=i=>{viewer.classList.add('open');viewer.setAttribute('aria-hidden','false');
+    const el=$('#fi-'+i);vb.scrollTop=el.offsetTop;
+    el.querySelectorAll('.croqui').forEach(c=>{c.classList.remove('anim');void c.offsetWidth;c.classList.add('anim');});
+    setTimeout(()=>$('#vclose').focus({preventScroll:true}),50);};
+  document.querySelectorAll('.thumb,.rthumb').forEach(t=>{
+    t.addEventListener('click',()=>open(t.dataset.i));
+    t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(t.dataset.i);}});});
+  const close=()=>{viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true');};
+  $('#vclose').addEventListener('click',close);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&viewer.classList.contains('open'))close();});
+  document.querySelectorAll('.fi').forEach(fi=>{
+    const tr=fi.querySelector('.track'),n=tr.children.length,cnt=fi.querySelector('.cnt'),dots=fi.querySelectorAll('.dots i'),pv=fi.querySelector('.prev'),nx=fi.querySelector('.next');
+    const upd=()=>{const k=Math.round(tr.scrollLeft/tr.clientWidth);if(cnt)cnt.textContent=`${k+1}/${n}`;dots.forEach((d,j)=>d.classList.toggle('on',j===k));if(pv){pv.disabled=k===0;nx.disabled=k===n-1;}};
+    tr.addEventListener('scroll',upd,{passive:true});
+    pv&&pv.addEventListener('click',()=>tr.scrollBy({left:-tr.clientWidth,behavior:'smooth'}));
+    nx&&nx.addEventListener('click',()=>tr.scrollBy({left:tr.clientWidth,behavior:'smooth'}));
+    const like=fi.querySelector('.like'),num=fi.querySelector('.likes b');
+    const setLike=v=>{like.classList.toggle('on',v);num.textContent=fmt(+num.dataset.n+(v?1:0));};
+    like.addEventListener('click',()=>setLike(!like.classList.contains('on')));
+    const big=fi.querySelector('.bigh');
+    fi.querySelector('.fi-m').addEventListener('dblclick',e=>{if(e.target.classList.contains('ba-range'))return;setLike(true);big.classList.remove('pop');void big.offsetWidth;big.classList.add('pop');});
+    const cap=fi.querySelector('.cap');cap.addEventListener('click',()=>cap.classList.toggle('open'));
+    const rg=fi.querySelector('.ba-range');
+    if(rg)rg.addEventListener('input',()=>rg.parentElement.querySelector('.post').style.setProperty('--p',rg.value+'%'));
+  });
+}
+
+/* ---------- modo exportação: ?export ---------- */
+window.renderSlide=(i,j,reel)=>{const st=$('#stage');
+  st.style.width='1080px';st.style.height=(reel?1920:1350)+'px';
+  st.innerHTML=reel?reelHTML(i):POSTS[i].slides[j]();};
+window.POSTS=POSTS;window.fileName=fileName;window.BIO=BIO;window.LINK=LINK;window.HL=HL;window.PIL=PIL;
+
+build();wire();
+if(new URLSearchParams(location.search).has('export')){document.body.classList.add('export');document.body.insertAdjacentHTML('beforeend','<div id="stage"></div>');}
+</script>
+</body>
+</html>
